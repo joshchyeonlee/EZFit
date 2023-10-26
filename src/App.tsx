@@ -1,6 +1,8 @@
-import Button from "@mui/material/Button";
+import Button from '@mui/material/Button'
+import NewWorkout from './workout/NewWorkout'
+import React from 'react'
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       EZFIT
@@ -19,8 +21,9 @@ function App() {
       <Button color="info" variant="outlined">
         Info
       </Button>
+      <NewWorkout />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
