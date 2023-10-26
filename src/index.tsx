@@ -11,8 +11,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {/* <App /> */}
-      <UncondensedDashboard open/>
+      <App />
+      {/* <UncondensedDashboard open/> */}
     </ThemeProvider>
   </React.StrictMode>
 );
