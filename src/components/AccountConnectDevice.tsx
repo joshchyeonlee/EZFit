@@ -147,7 +147,7 @@ function AccountConnectDevice(){
                 <Box padding={1} display="flex" justifyContent="center" flexDirection="column" alignItems="center">
                     <Typography textAlign="center" padding={2} variant="h6">Registered Devices</Typography>
                     <Box padding={4} minWidth={500} maxWidth={500} minHeight={200} maxHeight={200}
-                        sx={{ border: 1, borderColor: "ActiveBorder", overflow: "hidden", overflowY: "scroll" }}>
+                        sx={{ border: 1, borderRadius: 3, margin: 1, borderColor: "ActiveBorder", overflow: "hidden", overflowY: "scroll" }}>
                             {registeredDevices.length > 0 ? registeredDevices.map((device) =>
                             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" padding={1}>
                                 <Typography>{device}</Typography>
