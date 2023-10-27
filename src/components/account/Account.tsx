@@ -1,5 +1,7 @@
+import AccountManagementMenu from "./AccountManagementMenu/AccountManagementMenu";
+
 function Account() {
-  return <div>Account</div>;
+  return <AccountManagementMenu></AccountManagementMenu>;
 }
 
 export default Account;
