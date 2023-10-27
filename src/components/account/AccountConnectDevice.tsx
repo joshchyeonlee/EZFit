@@ -1,6 +1,6 @@
 import { Typography, Box, IconButton, Button, Modal, Snackbar, Divider } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import devicesList from "../mockData/DevicesList";
+import devicesList from "../../mockData/DevicesList";
 import { useState } from "react";
 
 function AccountConnectDevice(){

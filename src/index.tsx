@@ -4,7 +4,6 @@ import App from "./App";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./themes/theme";
-import AccountConnectDevice from "./components/AccountConnectDevice";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
