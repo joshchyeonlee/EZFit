@@ -1,29 +1,25 @@
-import Button from '@mui/material/Button'
-import NewWorkout from './workout/NewWorkout'
-import React from 'react'
+import { NavigationBar } from "./components/navigation/NavigationBar";
+import { Grid } from "@mui/material";
+import "./App.css";
+import { Routes, Route } from "react-router";
+import Dashboard from "./components/dashboard/Dashboard";
+import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
+import Nutrition from "./components/nutrition/NutritionDashboard";
+import Account from "./components/account/Account";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      EZFIT
-      <Button color="primary" variant="outlined">
-        Primary
-      </Button>
-      <Button color="secondary" variant="outlined">
-        Secondary
-      </Button>
-      <Button color="error" variant="outlined">
-        Error
-      </Button>
-      <Button color="warning" variant="outlined">
-        Warning
-      </Button>
-      <Button color="info" variant="outlined">
-        Info
-      </Button>
-      <NewWorkout />
-    </div>
-  )
+    <Grid height={"100vh"} className="App">
+      <Routes>
+        <Route path="/" element={<div>HOME</div>} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Workouts" element={<WorkoutsDashboard />} />
+        <Route path="/Nutrition" element={<Nutrition />} />
+        <Route path="/Account" element={<Account />} />
+      </Routes>
+      <NavigationBar />
+    </Grid>
+  );
 }
 
 export default App
