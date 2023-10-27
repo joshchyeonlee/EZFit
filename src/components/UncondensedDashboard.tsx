@@ -2,6 +2,7 @@ import { Box, Button, Card, Grid, IconButton, Modal, Typography } from "@mui/mat
 import { CalendarMonth, Close } from '@mui/icons-material';
 import { useEffect, useState } from "react";
 import UncondensedDashboardGrid from "./UncondensedDashboardGraph";
+import steps from "../mockData/Steps";
 
 function UncondensedDashboard(props: { open: boolean; }) {
     //need to set this to false first
@@ -9,11 +10,14 @@ function UncondensedDashboard(props: { open: boolean; }) {
     const [date, setDate] = useState(new Date());
     const [dateString, setDateString] = useState(getDate(new Date()));
     const [stepIndex, setStepIndex] = useState(6);
-
+    const [avgSteps, setAvgSteps] = useState(() => { 
+        const initVal = 0;
+        const sum = steps.reduce((acc, curr) => acc + curr, initVal);
+        return Math.round(sum/steps.length)
+    })
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const height = 300;
 
     function getDate(date:Date){
         const month = date.toLocaleString('default',{month: 'short'});
@@ -21,8 +25,6 @@ function UncondensedDashboard(props: { open: boolean; }) {
         const day = date.getDate();
         return `${month} ${day} ${year}`;
     }
-    
-    let steps = [3203, 1230, 4920, 3049, 2203, 5903, 2034];
     
     function handleSetDate(daysAway: number){
         const currentDate = date;
@@ -61,8 +63,9 @@ function UncondensedDashboard(props: { open: boolean; }) {
                 </Box>
                 <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
                     <Typography>Step Count</Typography>
+                    <Typography variant="subtitle2" sx={{paddingTop:1}}>Average: {avgSteps}</Typography>
                     <Box padding={2}>
-                        <UncondensedDashboardGrid steps={steps} height={height} handleSetDate={handleSetDate}/>
+                        <UncondensedDashboardGrid steps={steps} handleSetDate={handleSetDate}/>
                     </Box>
                     <Box display="flex" alignItems="center">
                         <Typography>{dateString}</Typography>
