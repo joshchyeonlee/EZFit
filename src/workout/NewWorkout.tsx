@@ -1,18 +1,16 @@
 import * as React from 'react'
 import { useState } from 'react'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import Divider from '@mui/material/Divider'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import HomeIcon from '@mui/icons-material/Home'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
-import { Box, Typography } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Typography, Button, TextField, List, ListItem, ListItemText, Divider, BottomNavigation, BottomNavigationAction, IconButton } from '@mui/material'
+import { SwapHoriz } from '@mui/icons-material'
 
+interface Workout {
+    name: string;
+    index: number;
+}
 
 const categories: { name: string; exercises: string[] }[] = [
     { name: 'Abs', exercises: ['Crunches', 'Planks', 'Sit-ups'] },
@@ -23,7 +21,7 @@ const categories: { name: string; exercises: string[] }[] = [
 
 const NewWorkout = (): JSX.Element => {
     const [search, setSearch] = useState<string>('')
-    const [workout, setWorkout] = useState<string[]>([])
+    const [workout, setWorkout] = useState<Workout[]>([]);
     const [value, setValue] = useState<number>(0)
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -31,7 +29,17 @@ const NewWorkout = (): JSX.Element => {
     }
 
     const handleAddExercise = (exercise: string): void => {
-        setWorkout([...workout, exercise])
+        const nextIndex = Math.max(...workout.map((item) => item.index), -1) + 1;
+        setWorkout([...workout, { name: exercise, index: nextIndex }]);
+        console.log({ name: exercise, index: nextIndex })
+        console.log(workout)
+
+    }
+
+    const handleRemoveExercise = (exerciseToRemove: string, indexToRemove: number): void => {
+        setWorkout(workout.filter((exercise) => !(exercise.name === exerciseToRemove && exercise.index === indexToRemove))
+            .map((exercise, index) => ({ ...exercise, index })));
+        console.log(exerciseToRemove, indexToRemove)
     }
 
     const handleSaveWorkout = (): void => {
@@ -56,13 +64,11 @@ const NewWorkout = (): JSX.Element => {
                     marginLeft: '20%',
                     marginRight: '20%'
                 }}>
-                <div style={{ marginTop: '2%', marginLeft: '40%', height: '5vh' }}>
-                    <Typography style={{ color: 'white' }} >New Workout</Typography>
-                </div>
+                <Typography style={{ textAlign: "center", color: 'white' }} >New Workout</Typography>
             </Box>
 
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
-                <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginLeft: '5%' }}>
+                <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginLeft: '5%', marginRight: '5%', maxWidth: '40.5%' }}>
                     <TextField
                         label="Search"
                         variant="outlined"
@@ -83,7 +89,7 @@ const NewWorkout = (): JSX.Element => {
                                         <Typography variant="h6">{category.name}</Typography>
                                         <List>
                                             {category.exercises.map((exercise, index) => (
-                                                <React.Fragment key={exercise}>
+                                                <React.Fragment key={index}>
                                                     <ListItem key={exercise} button onClick={() => handleAddExercise(exercise)}>
                                                         <ListItemText primary={`${exercise}`} />
                                                     </ListItem>
@@ -97,39 +103,41 @@ const NewWorkout = (): JSX.Element => {
                     </List>
 
                 </div>
-                <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginTop: '2%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div>
+                        <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', bottom: 0, left: '50%' }}></div> {/* Vertical Divider */}
+                        <SwapHoriz fontSize="large" color="action" style={{ fontSize: '5rem', position: 'absolute', top: '50%', left: '47.3%' }} />
+                    </div>
+                </div>
+
+                <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginTop: '1.3%', marginLeft: '2%' }}>
                     <Box
                         sx={{
                             bgcolor: '#2B2D42',
                             border: '2px solid #2B2D42',
                             padding: 2,
                             marginLeft: '30%',
-                            marginRight: '5%',
-                            width: '30%',
+                            width: '25%',
                             display: 'flex',
                             alignContent: 'center',
                             alignItems: 'center',
-                            height: '5%'
+                            height: '5%',
+                            paddingLeft: '10%'
                         }}>
-                        <div style={{
-                            marginTop: '2%',
-                            display: 'flex',
-                            marginLeft: '27%',
-                            alignContent: 'center',
-                            alignItems: 'center',
-                            height: '5vh'
-                        }}>
-                            <Typography style={{ color: 'white' }} >Your Workout</Typography>
-                        </div>
+                        <Typography style={{ textAlign: 'center', color: 'white' }} >Your Workout</Typography>
                     </Box>
-                    <List>
+                    <List style={{ marginTop: '6.2%' }}>
                         {workout.map((exercise, index) => (
-                            <React.Fragment key={exercise}>
-                                <ListItem>
+                            <React.Fragment key={(exercise.name, exercise.index)}>
+                                <ListItem sx={{ padding: '0.6%', height: '1%' }}>
                                     <ListItemText
-                                        primary={`${index + 1}: ${exercise}`} // add index as a prefix
+                                        primary={`${exercise.index + 1}: ${exercise.name}`} // add index as a prefix
                                     />
+                                    <IconButton onClick={() => handleRemoveExercise(exercise.name, exercise.index)}>
+                                        <DeleteIcon style={{ marginLeft: 'auto' }} />
+                                    </IconButton>
                                 </ListItem>
+                                <Divider />
                             </React.Fragment>
                         ))}
                     </List>
