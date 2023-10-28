@@ -7,7 +7,7 @@ export default function AccountManagementMenu() {
         <Box padding={5}>
             
             <Box paddingBottom={4}>
-                <Typography variant="h5" textAlign="center" fontWeight="800">
+                <Typography variant="h5" textAlign="center">
                 Account Management
                 </Typography>
             </Box>
