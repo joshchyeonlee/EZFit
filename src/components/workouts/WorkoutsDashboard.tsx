@@ -3,23 +3,12 @@ import SearchBar from "../utils/SearchBar";
 import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
 import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
+import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 
-const WorkoutMenuButton = ({ text }: { text: string }) => {
-  return (
-    <Box textAlign={"center"} width={"25%"} padding={"0px 8px"}>
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        sx={{ minHeight: "70px" }}
-      >
-        <Typography color={"white"}>{text}</Typography>
-      </Button>
-    </Box>
-  );
-};
+const moment = require("moment");
 
 function WorkoutsDashboard() {
+  const [manualLogOpen, setManualLogOpen] = useState(false);
   const [workoutSearchResults, setWorkoutSearchResults] =
     useState(workoutRowMockData);
 
@@ -32,8 +21,20 @@ function WorkoutsDashboard() {
     setWorkoutSearchResults(results);
   };
 
+  const handleManualLogOpen = () => {
+    setManualLogOpen(true);
+  };
+  const handleManualLogClose = () => {
+    setManualLogOpen(false);
+  };
+
   return (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
+      <ManualLoggingOverlay
+        isOpen={manualLogOpen}
+        handleClose={handleManualLogClose}
+      />
+
       <Box textAlign={"center"} padding={"40px 30px"}>
         <Typography variant="h5">Workouts</Typography>
       </Box>
@@ -49,10 +50,10 @@ function WorkoutsDashboard() {
         padding={"20px 50px"}
         width={"60%"}
       >
-        <WorkoutMenuButton text={"Create"} />
-        <WorkoutMenuButton text={"Manual Log"} />
-        <WorkoutMenuButton text={"History"} />
-        <WorkoutMenuButton text={"Exercise Library"} />
+        <WorkoutMenuButton title={"Create"} />
+        <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
+        <WorkoutMenuButton title={"History"} />
+        <WorkoutMenuButton title={"Exercise Library"} />
       </Box>
       <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
       <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
@@ -67,5 +68,26 @@ function WorkoutsDashboard() {
     </Grid>
   );
 }
+
+interface WorkoutMenuButtonProps {
+  title: string;
+  onClick?: () => void;
+}
+
+const WorkoutMenuButton = ({ title, onClick }: WorkoutMenuButtonProps) => {
+  return (
+    <Box textAlign={"center"} width={"25%"} padding={"0px 8px"}>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        sx={{ minHeight: "70px" }}
+        onClick={onClick}
+      >
+        <Typography color={"primaryBkg"}>{title}</Typography>
+      </Button>
+    </Box>
+  );
+};
 
 export default WorkoutsDashboard;
