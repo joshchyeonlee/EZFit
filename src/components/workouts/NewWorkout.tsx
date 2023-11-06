@@ -149,9 +149,10 @@ const NewWorkout = (): JSX.Element => {
                             margin: 16,
                             position: 'fixed',
                             bottom: '6%',
-                            left: '70%',
+                            left: '75%',
                             transform: 'translateX(-50%)',
-                            zIndex: 1
+                            zIndex: 1,
+                            width:'45%'
                         }}
                     >
                         Save Workout
