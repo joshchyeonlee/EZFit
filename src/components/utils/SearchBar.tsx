@@ -1,6 +1,5 @@
 import { InputAdornment, TextField } from "@mui/material";
 import Search from "@mui/icons-material/Search";
-import { KeyboardEventHandler, useState } from "react";
 
 interface SearchBarProps {
   placeholder: string;
@@ -27,7 +26,7 @@ function SearchBar({ placeholder, onSearch }: SearchBarProps) {
         ),
       }}
       fullWidth
-      onChange={(e) => onSearch(e.target.value)}
+      onChange={(e) => onSearch(e.target.value.toLowerCase())}
     />
   );
 }

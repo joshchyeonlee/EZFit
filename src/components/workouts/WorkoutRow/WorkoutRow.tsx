@@ -1,5 +1,5 @@
 import { Delete, Edit, PlayArrow } from "@mui/icons-material";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
 
 export interface WorkoutRowProps {
   title: string;
@@ -41,8 +41,12 @@ function WorkoutRow({ title, lastRun }: WorkoutRowProps) {
             <Grid />
           )}
           <Box>
-            <Edit color="primary" fontSize="large" />
-            <Delete color="primary" fontSize="large" />
+            <IconButton color="primary" aria-label="edit">
+              <Edit fontSize="large" />
+            </IconButton>
+            <IconButton color="primary" aria-label="delete">
+              <Delete fontSize="large" />
+            </IconButton>
           </Box>
         </Grid>
       </Grid>
