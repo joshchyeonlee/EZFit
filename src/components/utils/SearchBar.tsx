@@ -9,8 +9,6 @@ interface SearchBarProps {
 function SearchBar({ placeholder, onSearch }: SearchBarProps) {
   return (
     <TextField
-      id="outlined-search"
-      className="searchBar"
       sx={{
         backgroundColor: (theme) => theme.palette.textFieldBkg,
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
