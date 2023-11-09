@@ -33,7 +33,7 @@ export default function AccountManagementMenu() {
             </Box>
 
             <Box textAlign="center" justifyContent="center">
-                <Button variant="contained" size='large' color="secondary" disableElevation>
+                <Button variant="contained" size='large' color="primary" disableElevation>
                     <Typography textAlign="center" fontWeight="300" color="white">
                         Log Out
                     </Typography>
