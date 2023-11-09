@@ -1,8 +1,7 @@
-import { ArrowBack } from "@mui/icons-material";
-import { Box, Button, Select, Typography, MenuItem, FormControl, InputLabel, SelectChangeEvent, IconButton, Icon } from "@mui/material";
+import { Box, Select, Typography, MenuItem, FormControl, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 
-function Preferences()
+function UnitsOfMeasurementForm()
 {
     const [preferences, setPreferences] = useState({
         distanceUOM : 1,
@@ -17,20 +16,9 @@ function Preferences()
     };
 
     return (
-        <Box padding={5}>
-            <Box textAlign="left" justifyContent="center">
-                <IconButton>
-                    <ArrowBack></ArrowBack>
-                </IconButton>
-            </Box>
+        <Box>
 
-            <Box paddingBottom={4}>
-                <Typography variant="h5" textAlign="center" fontWeight="800">
-                    Preferences
-                </Typography>
-            </Box>
-
-            <Box textAlign="center" justifyContent="center" marginLeft="20%" marginRight="20%">
+            <Box textAlign="center" justifyContent="center">
                 <Box textAlign="center" justifyContent="center" padding={2}>
                     <Box paddingBottom={2}>
                         <Typography variant="h6" textAlign="left" fontWeight="800">
@@ -72,20 +60,9 @@ function Preferences()
                 </Box>
             </Box>
 
-            <br/>
-            <br/>
-            <br/>
-            <Box textAlign="center" justifyContent="center">
-                <Button variant="contained" size='large' sx={{width:"50%"}} color="primary" disableElevation>
-                    <Typography textAlign="center" fontWeight="300" color="white">
-                        Save Changes
-                    </Typography>
-                </Button>
-            </Box>
-
         </Box>
     )
 }
   
-export default Preferences;
+export default UnitsOfMeasurementForm;
   
