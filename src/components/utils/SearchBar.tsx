@@ -24,7 +24,7 @@ function SearchBar({ placeholder, onSearch }: SearchBarProps) {
         ),
       }}
       fullWidth
-      onChange={(e) => onSearch(e.target.value)}
+      onChange={(e) => onSearch(e.target.value.toLowerCase())}
     />
   );
 }
