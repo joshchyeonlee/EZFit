@@ -1,4 +1,4 @@
-export interface fieldTypeProps {
+export interface FieldTypeProps {
   fieldTitle: string;
   type: "text" | "dropdown" | "date" | "time";
   defaultData?: string | Date;
@@ -12,7 +12,7 @@ export interface OverlayProps {
 
 export interface BaseLoggingOverlayProps extends OverlayProps {
   title: string;
-  fields: fieldTypeProps[];
+  fields: FieldTypeProps[];
   submitText: string;
   confirmationText: string;
 }

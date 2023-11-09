@@ -13,7 +13,7 @@ import { useState } from "react";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import {
   BaseLoggingOverlayProps,
-  fieldTypeProps,
+  FieldTypeProps,
 } from "./BaseLoggingOverlay.types";
 
 const moment = require("moment");
@@ -23,7 +23,7 @@ const LoggingField = ({
   type,
   defaultData,
   placeholder,
-}: fieldTypeProps) => {
+}: FieldTypeProps) => {
   return (
     <Grid
       display={"flex"}

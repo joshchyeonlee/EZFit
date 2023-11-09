@@ -1,8 +1,8 @@
-import { fieldTypeProps } from "./BaseLoggingOverlay.types";
+import { FieldTypeProps } from "./BaseLoggingOverlay.types";
 
 const moment = require("moment");
 
-export const manualLoggingFields: fieldTypeProps[] = [
+export const manualLoggingFields: FieldTypeProps[] = [
   {
     fieldTitle: "Workout Title",
     type: "text",
@@ -16,10 +16,10 @@ export const manualLoggingFields: fieldTypeProps[] = [
   { fieldTitle: "Duration", type: "time" },
 ];
 
-export const foodLoggingFields: fieldTypeProps[] = [
+export const foodLoggingFields: FieldTypeProps[] = [
   //TODO
 ];
 
-export const editHistoryFields: fieldTypeProps[] = [
+export const editHistoryFields: FieldTypeProps[] = [
   //TODO
 ];
