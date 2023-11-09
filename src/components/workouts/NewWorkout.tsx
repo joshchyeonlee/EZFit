@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuIcon from '@mui/icons-material/Menu'; // Import the hamburger icon
+import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Typography, Button, TextField, List, ListItem, ListItemText, Divider, BottomNavigation, BottomNavigationAction, IconButton, InputAdornment } from '@mui/material'
 import { SwapHoriz } from '@mui/icons-material'
 
@@ -145,8 +145,7 @@ const NewWorkout = (): JSX.Element => {
                         }}>Workout Name: </Typography>
                         <TextField
                             id="workout-name"
-                            label="Enter Workout Name"
-                            variant="outlined"
+                            variant="standard"
                             value={workoutName}
                             onChange={handleWorkoutNameChange}
                             style={{ marginLeft: '5rem', width: '50%' }}
