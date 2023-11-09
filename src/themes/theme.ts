@@ -3,11 +3,13 @@ import { createTheme } from '@mui/material/styles'
 declare module "@mui/material/styles" {
   interface Palette {
     textFieldBkg: string;
+    primaryBkg: string;
     secondaryBkg: string;
     tertiaryBkg: string;
   }
   interface PaletteOptions {
     textFieldBkg: string;
+    primaryBkg: string;
     secondaryBkg: string;
     tertiaryBkg: string;
   }
@@ -25,13 +27,23 @@ const theme = createTheme({
       main: "#FF233C",
     },
     textFieldBkg: "#E9ECF3",
+    primaryBkg: "#FFFFFF",
     secondaryBkg: "#EEEEEE",
     tertiaryBkg: "#D6D2D2",
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: 14
-  }
-})
+    fontFamily: "Inter, sans-serif",
+    fontSize: 14,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          borderRadius: "25px",
+        },
+      },
+    },
+  },
+});
 
 export default theme

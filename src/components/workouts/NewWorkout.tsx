@@ -4,7 +4,10 @@ import HomeIcon from '@mui/icons-material/Home'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Typography, Button, TextField, List, ListItem, ListItemText, Divider, BottomNavigation, BottomNavigationAction, IconButton } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuIcon from '@mui/icons-material/Menu'; // Import the hamburger icon
+import { Box, Typography, Button, TextField, List, ListItem, ListItemText, Divider, BottomNavigation, BottomNavigationAction, IconButton, InputAdornment } from '@mui/material'
 import { SwapHoriz } from '@mui/icons-material'
 
 interface Workout {
@@ -23,6 +26,11 @@ const NewWorkout = (): JSX.Element => {
     const [search, setSearch] = useState<string>('')
     const [workout, setWorkout] = useState<Workout[]>([]);
     const [value, setValue] = useState<number>(0)
+    const [workoutName, setWorkoutName] = useState('');
+
+    const handleWorkoutNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setWorkoutName(event.target.value);
+    };
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setSearch(event.target.value)
@@ -58,24 +66,30 @@ const NewWorkout = (): JSX.Element => {
         <div>
             <Box
                 sx={{
-                    bgcolor: '#2B2D42',
-                    border: '2px solid #2B2D42',
                     padding: 2,
                     marginLeft: '20%',
-                    marginRight: '20%'
+                    marginRight: '20%',
+                    marginTop: '2%'
                 }}>
-                <Typography style={{ textAlign: "center", color: 'white' }} >New Workout</Typography>
+                <Typography style={{ textAlign: "center", color: 'black', fontWeight: 'bold' }} >Create Workout</Typography>
             </Box>
 
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
                 <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginLeft: '5%', marginRight: '5%', maxWidth: '40.5%' }}>
+                    <Typography style={{ marginLeft: '2%' }}>Find, Drag, and Drop Exercises</Typography>
                     <TextField
                         label="Search"
                         variant="outlined"
                         value={search}
                         onChange={handleSearchChange}
-                        style={{ height: '5%', margin: '2%', marginTop: '5%', width: 'calc(100% - 32px)' }}
-                    />
+                        style={{ height: '5%', marginLeft: '2%', marginBottom: '2%', marginTop: '2%', width: 'calc(100% - 32px)' }}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }} />
                     <List style={{ marginTop: '1%', marginBottom: '2%' }}>
                         {categories
                             .filter((category) =>
@@ -91,7 +105,9 @@ const NewWorkout = (): JSX.Element => {
                                             {category.exercises.map((exercise, index) => (
                                                 <React.Fragment key={index}>
                                                     <ListItem key={exercise} button onClick={() => handleAddExercise(exercise)}>
-                                                        <ListItemText primary={`${exercise}`} />
+                                                        <ListItemIcon>
+                                                            <MenuIcon />
+                                                        </ListItemIcon><ListItemText primary={`${exercise}`} />
                                                     </ListItem>
                                                     <Divider />
                                                 </React.Fragment>
@@ -105,37 +121,54 @@ const NewWorkout = (): JSX.Element => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <div>
-                        <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', bottom: 0, left: '50%' }}></div> {/* Vertical Divider */}
-                        <SwapHoriz fontSize="large" color="action" style={{ fontSize: '5rem', position: 'absolute', top: '50%', left: '47.3%' }} />
+                        <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', bottom: 0, left: '50%' }}></div>
+                        <SwapHoriz fontSize="large" style={{ fontSize: '5rem', position: 'absolute', top: '50%', left: '47.3%', fontWeight: 'bold', textShadow: '0 0 4px black' }} />
                     </div>
                 </div>
 
                 <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginTop: '1.3%', marginLeft: '2%' }}>
                     <Box
                         sx={{
-                            bgcolor: '#2B2D42',
-                            border: '2px solid #2B2D42',
                             padding: 2,
-                            marginLeft: '30%',
-                            width: '25%',
+                            marginLeft: '5%',
+                            width: '80%',
                             display: 'flex',
-                            alignContent: 'center',
                             alignItems: 'center',
                             height: '5%',
-                            paddingLeft: '10%'
-                        }}>
-                        <Typography style={{ textAlign: 'center', color: 'white' }} >Your Workout</Typography>
+                            paddingLeft: '5%',
+                        }}
+                    >
+                        <Typography style={{
+                            textAlign: 'center',
+                            color: 'black',
+                            whiteSpace: 'nowrap',
+                        }}>Workout Name: </Typography>
+                        <TextField
+                            id="workout-name"
+                            label="Enter Workout Name"
+                            variant="outlined"
+                            value={workoutName}
+                            onChange={handleWorkoutNameChange}
+                            style={{ marginLeft: '5rem', width: '50%' }}
+                        />
                     </Box>
                     <List style={{ marginTop: '6.2%' }}>
                         {workout.map((exercise, index) => (
                             <React.Fragment key={(exercise.name, exercise.index)}>
-                                <ListItem sx={{ padding: '0.6%', height: '1%' }}>
+                                <ListItem sx={{ padding: '0.6%', height: '1%', display: 'flex', alignItems: 'center' }}>
                                     <ListItemText
-                                        primary={`${exercise.index + 1}: ${exercise.name}`} // add index as a prefix
+                                        primary={`${exercise.index + 1}:`}
+                                        sx={{ flex: 'none' }}
                                     />
-                                    <IconButton onClick={() => handleRemoveExercise(exercise.name, exercise.index)}>
-                                        <DeleteIcon style={{ marginLeft: 'auto' }} />
-                                    </IconButton>
+                                    <ListItemText
+                                        primary={exercise.name}
+                                        sx={{ flex: 1, textAlign: 'center' }}
+                                    />
+                                    <div style={{ marginLeft: 'auto' }}>
+                                        <IconButton onClick={() => handleRemoveExercise(exercise.name, exercise.index)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </div>
                                 </ListItem>
                                 <Divider />
                             </React.Fragment>
@@ -152,7 +185,7 @@ const NewWorkout = (): JSX.Element => {
                             left: '75%',
                             transform: 'translateX(-50%)',
                             zIndex: 1,
-                            width:'45%'
+                            width: '45%'
                         }}
                     >
                         Save Workout
