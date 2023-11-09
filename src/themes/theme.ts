@@ -32,6 +32,15 @@ const theme = createTheme({
     fontFamily: "Roboto, sans-serif",
     fontSize: 14,
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          borderRadius: "25px",
+        },
+      },
+    },
+  },
 });
 
 export default theme;
