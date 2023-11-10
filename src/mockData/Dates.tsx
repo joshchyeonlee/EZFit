@@ -1,14 +1,9 @@
-// https://stackoverflow.com/questions/22850929/most-efficient-way-to-get-the-dates-for-the-past-7-days
+const moment = require("moment");
 
-const sevenDaysArray: string[] = [];
+const sevenDaysArray: moment.Moment[] = [];
 for (var i = 6; i >= 0; i--) {
-    var d = new Date();
-    d.setDate(d.getDate() - i);
-    const month = d.toLocaleString('default', {month: 'short'});
-    const date = d.getDate();
-    const formattedDate = `${month} ${date}`
-    sevenDaysArray.push(formattedDate);
-    console.log(formattedDate);
+    sevenDaysArray.push(moment().subtract(i, "days"));
 }
+console.log(sevenDaysArray);
 
 export default sevenDaysArray;

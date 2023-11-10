@@ -8,6 +8,7 @@ import Nutrition from "./components/nutrition/NutritionDashboard";
 import Account from "./components/account/Account";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import React from "react";
 
 function App() {
   return (
