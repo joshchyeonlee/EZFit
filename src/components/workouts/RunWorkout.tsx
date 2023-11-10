@@ -83,7 +83,7 @@ const RunWorkout = () => {
                 Workout #{workout + 1}
             </Typography>
 
-            <Button variant="contained" color="secondary" onClick={handleEndWorkout} style={{ position: 'absolute', top: '4%', left: '85%' }}>
+            <Button variant="contained" color="error" onClick={handleEndWorkout} style={{ position: 'absolute', top: '4%', left: '85%' }}>
                 End Workout
             </Button>
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
@@ -118,9 +118,9 @@ const RunWorkout = () => {
                             variant="contained"
                             color="primary"
                             onClick={handlePreviousExercise}
-                            style={{ position: 'absolute', top: '85%', left: '5%' }}
+                            style={{ position: 'absolute', top: '83%', left: '5%', width: '20%', height: '8%' }}
                         >
-                            Previous Exercise
+                            {'<'}- Previous Exercise
                         </Button>
                     </Grid>
 
@@ -166,7 +166,6 @@ const RunWorkout = () => {
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
-                        <Typography variant="h6" style={{ textAlign: 'center' }}>Instruction</Typography>
                         <div style={{
                             textAlign: 'center',
                             overflowY: 'auto',
@@ -178,8 +177,8 @@ const RunWorkout = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Button variant="contained" color="primary" onClick={handleNextExercise}
-                            style={{ position: 'absolute', top: '85%', left: '83%' }} >
-                            Next Exercise
+                            style={{ position: 'absolute', top: '83%', left: '77%', width: '20%', height: '8%' }} >
+                            Next Exercise -{'>'}
                         </Button>
                     </Grid>
                 </div>
