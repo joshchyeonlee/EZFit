@@ -1,6 +1,5 @@
 import { Edit } from "@mui/icons-material";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
-import { textAlign } from "@mui/system";
 import { useRef, useState } from "react";
 
 function PersonalInformationForm()
