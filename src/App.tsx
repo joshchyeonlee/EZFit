@@ -6,19 +6,23 @@ import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import Nutrition from "./components/nutrition/NutritionDashboard";
 import Account from "./components/account/Account";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const App: React.FC = () => {
   return (
-    <Grid height={"100vh"} className="App">
-      <Routes>
-        <Route path="/" element={<div>HOME</div>} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Workouts" element={<WorkoutsDashboard />} />
-        <Route path="/Nutrition" element={<Nutrition />} />
-        <Route path="/Account" element={<Account />} />
-      </Routes>
-      <NavigationBar />
-    </Grid>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <Grid height={"100vh"} className="App">
+        <Routes>
+          <Route path="/" element={<div>HOME</div>} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Workouts" element={<WorkoutsDashboard />} />
+          <Route path="/Nutrition" element={<Nutrition />} />
+          <Route path="/Account" element={<Account />} />
+        </Routes>
+        <NavigationBar />
+      </Grid>
+    </LocalizationProvider>
   );
 }
 
