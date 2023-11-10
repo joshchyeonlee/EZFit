@@ -40,8 +40,9 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        bgcolor: 'background.paper',
+        bgcolor: 'primaryBkg',
         border: '2px solid #000',
+        borderRadius: "50px",
         boxShadow: 24,
         p: 4,
         display: 'flex',
@@ -55,7 +56,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
             aria-describedby="uncondensed-dashboard-modal"
         >
             <Box sx={style} justifyContent="center">
-                <Box position="absolute" display="flex" justifyContent="flex-end" right="10px" top="10px">
+                <Box position="absolute" display="flex" justifyContent="flex-end" right="10px" top="10px" padding="10px">
                     <IconButton onClick={() => handleClose()}><Close/></IconButton>
                 </Box>
                 <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
