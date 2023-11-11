@@ -60,13 +60,14 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                     <IconButton onClick={() => handleClose()}><Close/></IconButton>
                 </Box>
                 <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
-                    <Typography>Step Count</Typography>
-                    <Typography variant="subtitle2" sx={{paddingTop:1}}>Average: {avgSteps}</Typography>
+                    <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Step Count</Typography>
+                    <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} steps</Typography>
                     <Box padding={2}>
                         <UncondensedDashboardGraph steps={steps} handleSetDate={handleSetDate} currentIndex={stepIndex} setCurrentIndex={setStepIndex}/>
                     </Box>
-                    <Box display="flex" alignItems="center">
+                    <Box display="flex" alignItems="center" padding={1}>
                         <DatePicker
+                            format="MMM DD, YYYY"
                             value={date}
                             disableFuture
                             onChange={(newDate) => handleSetDate(newDate)}
@@ -85,8 +86,8 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                             }}
                         />
                     </Box>
-                    <Box paddingBottom={2}>
-                        <Typography>{getSteps(stepIndex)} steps</Typography>
+                    <Box paddingTop={1} paddingBottom={4}>
+                        <Typography variant="h6">{getSteps(stepIndex)} steps</Typography>
                     </Box>
                     <Button variant="contained">Update Manually</Button>
                 </Box>

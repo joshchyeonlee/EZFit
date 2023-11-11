@@ -30,7 +30,7 @@ function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; 
                             style={{maxWidth: 3, maxHeight: step/35, minWidth: 3, minHeight: step/35, borderRadius:5}}
                             onClick={() => {handleGridClick(index)}}
                         />
-                    <Typography variant="caption" noWrap paddingTop={"5px"}>
+                    <Typography variant="body2" noWrap paddingTop={"5px"}>
                     {sevenDaysArray[index].format("MMM DD")}
                     </Typography>
                 </Box>
