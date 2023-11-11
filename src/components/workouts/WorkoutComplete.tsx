@@ -1,84 +1,66 @@
-import { Box, Button } from '@mui/material';
+import React from 'react';
+import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const OverlayBox = styled(Box)({
-  position: 'absolute',
-  top: 0,
-  left: 0,
+const OverlayBox = styled(Box)(({ theme }) => ({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '30%', 
+  maxHeight: '90vh',
+  backgroundColor: theme.palette.background.paper,
+  borderRadius: '20px',
+  boxShadow: theme.shadows[5],
+  padding: theme.spacing(4),
+  zIndex: theme.zIndex.modal + 1,
+}));
+
+const ExerciseList = styled(Box)(({ theme }) => ({
   width: '100%',
-  height: '100%',
-  backgroundColor: 'rgba(255, 192, 203, 0.5)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-});
+  backgroundColor: theme.palette.background.paper,
+  marginTop: theme.spacing(2),
+  padding: theme.spacing(2),
+}));
 
-const Header = styled(Box)({
-  backgroundColor: 'gray',
-  color: 'white',
-  padding: '10px',
-  borderRadius: '5px',
-  marginBottom: '10px',
-});
-
-const ExerciseList = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-});
-
-const ExerciseItem = styled(Box)({
+const ExerciseItem = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(1),
+  borderBottom: `1px solid ${theme.palette.divider}`,
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '5px',
-});
+}));
 
-const ExerciseBullet = styled(Box)({
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-  backgroundColor: 'black',
-  marginRight: '5px',
-});
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.error.contrastText,
+  marginTop: theme.spacing(4),
+  padding: theme.spacing(1),
+  marginLeft: '12%',
+  borderRadius: '10px',
+  '&:hover': {
+    backgroundColor: theme.palette.error.dark,
+  },
+}));
 
-const ExerciseText = styled(Box)({
-  fontSize: '16px',
-});
-
-function WorkoutComplete() {
+function WorkoutComplete({ onClose }: any) {
   return (
     <OverlayBox>
-      <Header>
-        Congratulations You made it!
-      </Header>
+      <Typography variant="h6" align="center">
+        Congratulations🎉
+      </Typography>
+      <Typography variant="h6" align="center">
+        You made it!
+      </Typography>
       <ExerciseList>
-        <ExerciseItem>
-          <ExerciseBullet />
-          <ExerciseText>Leg Press</ExerciseText>
-        </ExerciseItem>
-        <ExerciseItem>
-          <ExerciseBullet />
-          <ExerciseText>Push-Ups</ExerciseText>
-        </ExerciseItem>
-        <ExerciseItem>
-          <ExerciseBullet />
-          <ExerciseText>Inclined Dumbbell Chest Press</ExerciseText>
-        </ExerciseItem>
-        <ExerciseItem>
-          <ExerciseBullet />
-          <ExerciseText>Dumbbell Shoulder Press</ExerciseText>
-        </ExerciseItem>
-        <ExerciseItem>
-          <ExerciseBullet />
-          <ExerciseText>Burpees</ExerciseText>
-        </ExerciseItem>
+        {['Leg Press', 'Push-Ups', 'Inclined Dumbbell Chest Press', 'Dumbbell Shoulder Press', 'Burpees'].map((exercise, index) => (
+          <ExerciseItem key={index}>
+            <Typography variant="subtitle1">{exercise}</Typography>
+          </ExerciseItem>
+        ))}
       </ExerciseList>
-      <Box>
-        <Button style={{ backgroundColor: 'primary', padding: '10px', borderRadius: '5px', border: 'none' }}>
-          Log Exercise and Return to Workouts
-        </Button>
-      </Box>
+      <StyledButton variant="contained" onClick={onClose}>
+        Log Exercise and Return to Workouts
+      </StyledButton>
     </OverlayBox>
   );
 }
