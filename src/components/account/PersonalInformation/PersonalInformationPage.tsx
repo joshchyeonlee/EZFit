@@ -9,7 +9,7 @@ function PersonalInformationPage()
 
             <Box textAlign="left" justifyContent="center">
                 <IconButton>
-                    <ArrowBack></ArrowBack>
+                    <ArrowBack fontSize="large" color="primary"></ArrowBack>
                 </IconButton>
             </Box>
 
@@ -36,7 +36,7 @@ function PersonalInformationPage()
             </Box>
 
             <Box textAlign="center" justifyContent="center" marginTop={3} marginBottom={3}>
-                <Button variant="contained" size='large' sx={{width:"50%"}} color="warning" disableElevation>
+                <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation>
                     <Typography textAlign="center" fontWeight="300" color="white">
                         Delete Account
                     </Typography>

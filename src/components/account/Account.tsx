@@ -1,6 +1,7 @@
+import PersonalInformationPage from "./PersonalInformation/PersonalInformationPage";
 
 function Account() {
-  return <div></div>;
+  return <PersonalInformationPage></PersonalInformationPage>;
 }
 
 export default Account;

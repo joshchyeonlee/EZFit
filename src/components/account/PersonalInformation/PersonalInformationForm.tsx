@@ -1,20 +1,37 @@
-import { Edit } from "@mui/icons-material";
+import { CheckCircle, Edit } from "@mui/icons-material";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function PersonalInformationForm()
 {
     const emailAddress = "email@address.com";
 
     const [name, setName] = useState("Susanna Martinez");
-    const handleNameChange = (e: any) => {
+    const handleNameInput = (e: any) => {
         setName(e.target.value);
     };
 
+    const [canEditName, setCanEditName] = useState(false);
     const editNameRef : any = useRef(null)
-    const handleEditFocusClick = () => {
+    const OnClickEditName = () => {
+        setCanEditName(true);
         editNameRef.current.focus();
+        editNameRef.current.readOnly = false;
     }
+    const OnClickEditSaveName = () => {
+        setCanEditName(false);
+        
+    }
+    useEffect(() => {
+        if (canEditName)
+        {
+            editNameRef.current.readOnly = false;
+        }
+        else
+        {
+            editNameRef.current.readOnly = true;
+        }
+    }, [canEditName])
 
     return (
         <Box justifyContent="center">
@@ -30,14 +47,24 @@ function PersonalInformationForm()
 
             <Box padding={2} marginLeft={3} display="flex" flexDirection="row" justifyContent="center">
                 <Typography textAlign="right" fontWeight="600" paddingTop="5px" paddingRight="5px">
-                Name:
+                    Name:
                 </Typography>
-                <TextField inputRef={editNameRef} InputProps={{ inputProps: {style: { textAlign: 'center'} }}} value={name} variant="standard" onInput={handleNameChange}>
-                    {name}
-                </TextField>
-                <IconButton onClick={ handleEditFocusClick }>
-                    <Edit></Edit>
-                </IconButton>
+                <div>
+                    <TextField value={name} inputRef={editNameRef} InputProps={{ inputProps: {style: { textAlign: 'center'} } }} variant="standard" onInput={handleNameInput} onBlur={OnClickEditSaveName} >
+                        {name}
+                    </TextField>
+                </div>
+                <div>
+                    {!canEditName
+                        ? <IconButton color="primary" onClick={ OnClickEditName }>
+                            <Edit></Edit>
+                        </IconButton>
+                        :
+                        <IconButton color="success" onClick={ OnClickEditSaveName }>
+                            <CheckCircle></CheckCircle>
+                        </IconButton>
+                    }
+                </div>
             </Box>
 
         </Box>
