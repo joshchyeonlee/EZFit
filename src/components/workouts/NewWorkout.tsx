@@ -164,12 +164,12 @@ const NewWorkout = (): JSX.Element => {
                     <List style={{ marginTop: '6.2%' }}>
                         {exercises.map((exercise, index) => (
                             <React.Fragment key={(exercise.name, exercise.index)}>
-                                <ListItem sx={{ padding: '0.6%', height: '1%', display: 'flex', alignItems: 'center' }}>
+                                <ListItem sx={{ padding: '1%', paddingRight: '3%', height: '1%', display: 'flex', alignItems: 'center' }}>
                                     <ListItemText
                                         primary={`${exercise.index + 1}:`}
                                         sx={{ width: '5%', flex: 'none' }} // Adjust the width as needed
                                     />
-                                    <div style={{ display: 'flex', marginLeft: '4%', alignItems: 'center', border: '2px solid #8F2D56', flex: 1 }}>
+                                    <div style={{ display: 'flex', marginLeft: '4%', alignItems: 'center', border: '2px solid #8F2D56', flex: 1, paddingRight: '2%' }}>
                                         <ListItemText
                                             primary={exercise.name}
                                             sx={{ textAlign: 'center', flex: 1 }}
