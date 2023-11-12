@@ -2,8 +2,21 @@ import { ArrowBack } from "@mui/icons-material";
 import { Box, Button, IconButton, Typography} from "@mui/material";
 import PersonalInformationForm from "./PersonalInformationForm";
 
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import DeleteAccountPopUp from "./DeleteAccountPopUp";
+
 function PersonalInformationPage()
-{
+{    
+    const navigate = useNavigate();
+
+    const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false);
+
+    const onAccountDeleted = () =>
+    {
+        navigate("/");
+    }
+
     return (
         <Box padding={5}>
 
@@ -36,12 +49,14 @@ function PersonalInformationPage()
             </Box>
 
             <Box textAlign="center" justifyContent="center" marginTop={3} marginBottom={3}>
-                <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation>
+                <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation onClick={() =>setDeleteAccountModalOpen(true)}>
                     <Typography textAlign="center" fontWeight="300" color="white">
                         Delete Account
                     </Typography>
                 </Button>
             </Box>
+
+            <DeleteAccountPopUp open={deleteAccountModalOpen} setOpen={setDeleteAccountModalOpen} onAccountDeleted={onAccountDeleted}></DeleteAccountPopUp>
 
         </Box>
     )
