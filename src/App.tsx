@@ -4,6 +4,7 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
+import NewWorkout from "./components/workouts/NewWorkout";
 import Nutrition from "./components/nutrition/NutritionDashboard";
 import Account from "./components/account/Account";
 import RunWorkout from "./components/workouts/RunWorkout";
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
           <Route path="/RunWorkout" element={<RunWorkout />} />
+          <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<Account />} />
         </Routes>
