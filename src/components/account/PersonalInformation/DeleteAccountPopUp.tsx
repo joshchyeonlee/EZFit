@@ -46,11 +46,6 @@ function DeleteAccountPopUp(props : {open : boolean, setOpen : any, onAccountDel
                             </Typography>
                         </Box>
                     </Box>
-                    <Button size='large' sx={{width:"50%"}} color="error" disableElevation>
-                        <Typography textAlign="center" fontWeight="300" color="white">
-                            Delete Account
-                        </Typography>
-                    </Button>
                     <Button fullWidth size="large" variant="contained" color="error" onClick={ () => {handleClose(true)} } sx={{marginBottom:2}} disableElevation>
                         <Typography color="white">
                             Delete Account
