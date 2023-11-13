@@ -8,6 +8,7 @@ import NewWorkout from "./components/workouts/NewWorkout";
 import Nutrition from "./components/nutrition/NutritionDashboard";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import React from "react";
 import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
 
 const App: React.FC = () => {
