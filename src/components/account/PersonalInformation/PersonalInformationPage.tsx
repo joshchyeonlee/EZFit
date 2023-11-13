@@ -14,18 +14,14 @@ function PersonalInformationPage()
             </Box>
 
             <Box paddingBottom={6}>
-                <Typography variant="h5" textAlign="center" fontWeight="800">
+                <Typography variant="h5" textAlign="center" fontWeight="bold">
                     Personal Information
                 </Typography>
             </Box>
 
-            <Box>
+            <Box paddingBottom={12}>
                 <PersonalInformationForm></PersonalInformationForm>
             </Box>
-
-            <br/>
-            <br/>
-            <br/>
 
             <Box textAlign="center" justifyContent="center" marginTop={3} marginBottom={3}>
                 <Button variant="contained" size='large' sx={{width:"50%"}} color="primary" disableElevation>
@@ -35,7 +31,7 @@ function PersonalInformationPage()
                 </Button>
             </Box>
 
-            <Box textAlign="center" justifyContent="center" marginTop={3} marginBottom={3}>
+            <Box textAlign="center" justifyContent="center" marginTop={4} marginBottom={3}>
                 <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation>
                     <Typography textAlign="center" fontWeight="300" color="white">
                         Delete Account
