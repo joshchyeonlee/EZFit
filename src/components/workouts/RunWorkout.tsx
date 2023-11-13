@@ -121,7 +121,7 @@ const RunWorkout = () => {
                         zIndex: 1, 
                     }}
                 >
-                    <WorkoutComplete onClose={handleClose}/>
+                    <WorkoutComplete onClose={handleClose} exercises={exercises}/>
                 </div>
             )}
 

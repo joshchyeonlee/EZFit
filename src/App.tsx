@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import WorkoutComplete from "./components/workouts/WorkoutComplete"
+import NewWorkout from "./components/workouts/NewWorkout";
 import Nutrition from "./components/nutrition/NutritionDashboard";
 import Account from "./components/account/Account";
 import RunWorkout from "./components/workouts/RunWorkout";
@@ -19,7 +20,7 @@ const App: React.FC = () => {
           <Route path="/" element={<div>HOME</div>} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
-          <Route path="/WorkoutComplete" element={<WorkoutComplete />} />
+          <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/RunWorkout" element={<RunWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<Account />} />

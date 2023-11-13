@@ -7,7 +7,7 @@ const OverlayBox = styled(Box)(({ theme }) => ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '30%', 
+  width: '30%',
   maxHeight: '90vh',
   backgroundColor: theme.palette.background.paper,
   borderRadius: '20px',
@@ -25,9 +25,11 @@ const ExerciseList = styled(Box)(({ theme }) => ({
 
 const ExerciseItem = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
-  borderBottom: `1px solid ${theme.palette.divider}`,
+  borderRadius: '20px',
   display: 'flex',
   alignItems: 'center',
+  backgroundColor: 'lightgrey',
+  margin: '2%'
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -42,7 +44,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-function WorkoutComplete({ onClose }: any) {
+function WorkoutComplete(props: { onClose: any, exercises: any }) {
   return (
     <OverlayBox>
       <Typography variant="h6" align="center">
@@ -52,16 +54,21 @@ function WorkoutComplete({ onClose }: any) {
         You made it!
       </Typography>
       <ExerciseList>
-        {['Leg Press', 'Push-Ups', 'Inclined Dumbbell Chest Press', 'Dumbbell Shoulder Press', 'Burpees'].map((exercise, index) => (
+        {props.exercises.map((exercise: any, index: any) => (
           <ExerciseItem key={index}>
-            <Typography variant="subtitle1">{exercise}</Typography>
+            <Typography variant="subtitle1" sx={{ width: '3%', flex: 'none' }}>{`${index + 1}:`}</Typography>
+            <div style={{ display: 'flex', alignItems: 'center', flex: 1, paddingRight: '2%' }}>
+              <Typography style={{ textAlign: 'center', flex: 1 }}>
+                {exercise.name}
+              </Typography>
+            </div>
           </ExerciseItem>
         ))}
       </ExerciseList>
-      <StyledButton variant="contained" onClick={onClose}>
+      <StyledButton variant="contained" onClick={props.onClose}>
         Log Exercise and Return to Workouts
       </StyledButton>
-    </OverlayBox>
+    </OverlayBox >
   );
 }
 
