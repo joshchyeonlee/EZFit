@@ -300,7 +300,7 @@ const FoodEntry = ({
       id: id,
       foodName: data["Food"],
       servingSize: data["Servings Eaten"],
-      calories: data["Servings Eaten"] * data["Calories/Serving"],
+      calories: Math.floor(data["Servings Eaten"] * data["Calories/Serving"]),
     };
 
     handleEdit(entry, meal, findIndex());
