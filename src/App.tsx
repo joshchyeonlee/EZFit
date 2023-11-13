@@ -8,6 +8,7 @@ import Nutrition from "./components/nutrition/NutritionDashboard";
 import Account from "./components/account/Account";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import WorkoutsHistory from "./components/workouts/WorkoutsHistory/WorkoutsHistory";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<div>HOME</div>} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Workouts" element={<WorkoutsDashboard />} />
+          <Route path="/Workouts" element={<WorkoutsHistory />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<Account />} />
         </Routes>
