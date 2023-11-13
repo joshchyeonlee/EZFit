@@ -40,7 +40,7 @@ function PersonalInformationForm()
                 <Typography textAlign="right" fontWeight="600" paddingRight="5px">
                     Email Address:
                 </Typography>
-                <Typography textAlign="left" fontWeight="500">
+                <Typography textAlign="left">
                     {emailAddress}
                 </Typography>
             </Box>
