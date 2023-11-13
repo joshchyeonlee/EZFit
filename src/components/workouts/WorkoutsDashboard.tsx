@@ -4,6 +4,7 @@ import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
 import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
+import { useNavigate } from "react-router-dom";
 
 const moment = require("moment");
 
@@ -11,6 +12,12 @@ function WorkoutsDashboard() {
   const [manualLogOpen, setManualLogOpen] = useState(false);
   const [workoutSearchResults, setWorkoutSearchResults] =
     useState(workoutRowMockData);
+
+  const navigate = useNavigate();
+
+  const handleCreateClick = () => {
+    navigate('/NewWorkout');
+  };
 
   const handleSearch = (query: string) => {
     let results: WorkoutRowProps[] = [];
@@ -52,7 +59,7 @@ function WorkoutsDashboard() {
         padding={"20px 50px"}
         width={"60%"}
       >
-        <WorkoutMenuButton title={"Create"} />
+        <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
         <WorkoutMenuButton title={"History"} />
         <WorkoutMenuButton title={"Exercise Library"} />
