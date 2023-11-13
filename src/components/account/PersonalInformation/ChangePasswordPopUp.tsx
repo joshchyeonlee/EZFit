@@ -82,13 +82,13 @@ function ChangePasswordPopUp(props : {open : boolean, setOpen : any}) {
                         </Typography>
                     </Box>
                         <Box id="Content" textAlign="center" justifyContent="center" height="60%">
-                            <Box id="Content" textAlign="center" justifyContent="start" paddingTop="8%" paddingBottom="20%">
+                            <Box textAlign="center" justifyContent="start" paddingTop="8%" paddingBottom="20%">
                                 <Box paddingBottom={2}>
-                                    <TextField label="Current Password" value={currentPasswordInput} onInput={handleCurrentPasswordInput} required error={ (currentPasswordInput !== "" || validationError) && !IsCurrentPassword() }>
+                                    <TextField fullWidth label="Current Password" value={currentPasswordInput} onInput={handleCurrentPasswordInput} required error={ (currentPasswordInput !== "" || validationError) && !IsCurrentPassword() }>
                                     </TextField>
                                 </Box>
                                 <Box paddingBottom={2}>
-                                    <TextField value={newPassword} onInput={handleChangeNewPassword} label="New Password" required error={(newPassword === "" && validationError)}>
+                                    <TextField fullWidth value={newPassword} onInput={handleChangeNewPassword} label="New Password" required error={(newPassword === "" && validationError)}>
                                     </TextField>
                                 </Box>
                             </Box>
