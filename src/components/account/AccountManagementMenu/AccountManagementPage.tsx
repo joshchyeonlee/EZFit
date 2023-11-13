@@ -5,14 +5,8 @@ import AccountManagementMenu from './AccountManagementMenu';
 export default function AccountManagementPage() {
     return (
         <Box padding={5}>
-            
-            <Box>
-                <IconButton>
-                    <ArrowBack></ArrowBack>
-                </IconButton>
-            </Box>
 
-            <Box paddingBottom={6}>
+            <Box paddingTop={6} paddingBottom={6}>
                 <Typography variant="h5" textAlign="center" fontWeight={700}>
                     Account Management
                 </Typography>

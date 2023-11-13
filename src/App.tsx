@@ -5,9 +5,9 @@ import { Routes, Route } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import Nutrition from "./components/nutrition/NutritionDashboard";
-import Account from "./components/account/Account";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
           <Route path="/Nutrition" element={<Nutrition />} />
-          <Route path="/Account" element={<Account />} />
+          <Route path="/Account" element={<AccountManagementPage />} />
         </Routes>
         <NavigationBar />
       </Grid>
