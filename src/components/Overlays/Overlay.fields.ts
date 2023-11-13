@@ -17,7 +17,19 @@ export const manualLoggingFields: FieldTypeProps[] = [
 ];
 
 export const foodLoggingFields: FieldTypeProps[] = [
-  //TODO
+  {
+    fieldTitle: "Food",
+    type: "text",
+    placeholder: "Enter Food Name...",
+  },
+  {
+    fieldTitle: "Meal",
+    type: "dropdown",
+    dropdownFields: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+    defaultData: "Breakfast",
+  },
+  { fieldTitle: "Calories/Serving", type: "integer", defaultData: 100 },
+  { fieldTitle: "Servings Eaten", type: "decimal", defaultData: 1 },
 ];
 
 export const editHistoryFields: FieldTypeProps[] = [
