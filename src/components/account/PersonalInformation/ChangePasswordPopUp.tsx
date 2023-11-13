@@ -82,13 +82,19 @@ function ChangePasswordPopUp(props : {open : boolean, setOpen : any}) {
                         </Typography>
                     </Box>
                         <Box id="Content" textAlign="center" justifyContent="center" height="60%">
-                            <Box textAlign="center" justifyContent="start" paddingTop="8%" paddingBottom="20%">
+                            <Box textAlign="center" justifyContent="start" paddingTop="4%" paddingBottom="20%">
                                 <Box paddingBottom={2}>
-                                    <TextField fullWidth label="Current Password" value={currentPasswordInput} onInput={handleCurrentPasswordInput} required error={ (currentPasswordInput !== "" || validationError) && !IsCurrentPassword() }>
+                                    <Typography textAlign="start" fontSize="12px" fontWeight="500" paddingBottom={1}>
+                                        Current Password
+                                    </Typography>
+                                    <TextField fullWidth value={currentPasswordInput} onInput={handleCurrentPasswordInput} required error={ (currentPasswordInput !== "" || validationError) && !IsCurrentPassword() } InputProps={{style:{background:"#E9ECF3", borderRadius:"4px"}}}>
                                     </TextField>
                                 </Box>
                                 <Box paddingBottom={2}>
-                                    <TextField fullWidth value={newPassword} onInput={handleChangeNewPassword} label="New Password" required error={(newPassword === "" && validationError)}>
+                                    <Typography textAlign="start" fontSize="12px" fontWeight="500" paddingBottom={1}>
+                                        New Password
+                                    </Typography>
+                                    <TextField fullWidth value={newPassword} onInput={handleChangeNewPassword} required error={(newPassword === "" && validationError)} InputProps={{style:{background:"#E9ECF3", borderRadius:"4px"}}}>
                                     </TextField>
                                 </Box>
                             </Box>
@@ -99,7 +105,7 @@ function ChangePasswordPopUp(props : {open : boolean, setOpen : any}) {
                         </Typography>
                     </Button>
                     <Button fullWidth size="large" variant="contained" color="secondary" onClick={ () => {handleClose()} } sx={{marginBottom:2}} disableElevation>
-                        <Typography color="white">
+                        <Typography color="black">
                             Cancel
                         </Typography>
                     </Button>
