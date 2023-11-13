@@ -1,11 +1,15 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Button, IconButton, Typography} from "@mui/material";
 import PersonalInformationForm from "./PersonalInformationForm";
+import ChangePasswordPopUp from "./ChangePasswordPopUp";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 function PersonalInformationPage()
 {
     const navigate = useNavigate();
+
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
 
     return (
         <Box padding={5}>
@@ -28,7 +32,7 @@ function PersonalInformationPage()
 
             <Box textAlign="center" justifyContent="center" marginTop={3} marginBottom={3}>
                 <Button variant="contained" size='large' sx={{width:"50%"}} color="primary" disableElevation>
-                    <Typography textAlign="center" fontWeight="300" color="white">
+                    <Typography textAlign="center" fontWeight="300" color="white" onClick={ () => setChangePasswordModalOpen(true) }>
                         Change Password
                     </Typography>
                 </Button>
@@ -41,6 +45,8 @@ function PersonalInformationPage()
                     </Typography>
                 </Button>
             </Box>
+
+            <ChangePasswordPopUp open={changePasswordModalOpen} setOpen={setChangePasswordModalOpen}></ChangePasswordPopUp>
 
         </Box>
     )
