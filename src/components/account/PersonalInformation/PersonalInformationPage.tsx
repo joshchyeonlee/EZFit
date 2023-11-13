@@ -1,14 +1,17 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Button, IconButton, Typography} from "@mui/material";
 import PersonalInformationForm from "./PersonalInformationForm";
+import { useNavigate } from "react-router";
 
 function PersonalInformationPage()
 {
+    const navigate = useNavigate();
+
     return (
         <Box padding={5}>
 
             <Box textAlign="left" justifyContent="center">
-                <IconButton>
+                <IconButton onClick={() => navigate("/Account/")}>
                     <ArrowBack fontSize="large" color="primary"></ArrowBack>
                 </IconButton>
             </Box>

@@ -9,6 +9,7 @@ import Nutrition from "./components/nutrition/NutritionDashboard";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
+import PersonalInformationPage from "./components/account/PersonalInformation/PersonalInformationPage";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<AccountManagementPage />} />
+          <Route path="/Account/PersonalInformation" element={<PersonalInformationPage />} />
         </Routes>
         <NavigationBar />
       </Grid>
