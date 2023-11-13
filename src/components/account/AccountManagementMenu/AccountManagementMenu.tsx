@@ -14,12 +14,12 @@ export default function AccountManagementMenu() {
                     </AccountManagementMenuItem>
                 </Box>   
                 <Box sx={{ borderBottom: 2, borderColor: '#808080'}}>
-                    <AccountManagementMenuItem buttonLink={"./"}>
+                    <AccountManagementMenuItem buttonLink="./">
                         Connected Devices
                     </AccountManagementMenuItem>
                 </Box>   
                 <Box sx={{ borderBottom: 2, borderColor: '#808080'}}>
-                    <AccountManagementMenuItem buttonLink={"./"}>
+                    <AccountManagementMenuItem buttonLink="/Account/Preferences">
                         Preferences
                     </AccountManagementMenuItem>
                 </Box>
