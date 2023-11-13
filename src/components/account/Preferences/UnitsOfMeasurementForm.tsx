@@ -34,7 +34,7 @@ function UnitsOfMeasurementForm()
                         </Box>
                         <Box width="40%" minWidth={200}>
                             <FormControl fullWidth>
-                                <Select name="distanceUOM" value={preferences.distanceUOM} sx={{textAlign: "center"}} onChange={ handleChanges }>
+                                <Select name="distanceUOM" value={preferences.distanceUOM} sx={{textAlign: "center",  background: "#E9ECF3"}} onChange={ handleChanges }>
                                     <MenuItem value={1}>Kilometers</MenuItem>
                                     <MenuItem value={2}>Miles</MenuItem>
                                 </Select>
@@ -50,7 +50,7 @@ function UnitsOfMeasurementForm()
                         </Box>
                         <Box width="40%" minWidth={200}>
                             <FormControl fullWidth>
-                                <Select name="weightUOM" value={preferences.weightUOM} sx={{textAlign: "center"}} onChange={ handleChanges }>
+                                <Select name="weightUOM" value={preferences.weightUOM} sx={{textAlign: "center", background: "#E9ECF3"}} onChange={ handleChanges }>
                                     <MenuItem value={1}>Pounds</MenuItem>
                                     <MenuItem value={2}>Kilograms</MenuItem>
                                 </Select>

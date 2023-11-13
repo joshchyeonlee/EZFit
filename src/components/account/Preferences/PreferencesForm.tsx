@@ -18,14 +18,6 @@ function PreferencesForm()
                 </Box>
             </Box>
 
-            {/* <Box textAlign="center" justifyContent="center">
-                <Button variant="contained" size='large' sx={{width:"50%"}} color="primary" disableElevation>
-                    <Typography textAlign="center" fontWeight="300" color="white">
-                        Save Changes
-                    </Typography>
-                </Button>
-            </Box> */}
-
         </Box>
     )
 }
