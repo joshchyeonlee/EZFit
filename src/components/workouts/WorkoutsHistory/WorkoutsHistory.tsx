@@ -45,8 +45,10 @@ function WorkoutsHistory() {
     useEffect( () =>
     {
         var newWeekWorkouts = new Array();
+        console.log(currentWeek.filter(date => date.getDate() <= new Date(currentDayIndex).getDate() && date.getDate() > new Date(currentDayIndex).getDate() - 7));
         newWeekWorkouts = activeWorkouts.filter(workout => workout.date.getDate() <= new Date(currentDayIndex).getDate() && workout.date.getDate() > new Date(currentDayIndex).getDate() - 7);
         setCurrentWeekWorkouts(newWeekWorkouts);
+        console.log(newWeekWorkouts);
     }, [currentWeek, activeWorkouts]);
 
     return (

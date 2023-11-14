@@ -14,18 +14,13 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
             d1.getDate() === d2.getDate();
     }
 
-    function getWorkoutDuration (day : Date) : number {
-        var found = props.workouts.find( (workout) => workout.date === day );
+    const getDayWorkoutAmount = (day : Date) : number => {
+        var found = props.workouts.filter( (workout) => isSameDay(workout.date, day) );
+        var amount = 0;
 
-        if (found != null)
-        {
-            console.log(found.duration.getSeconds());
-            return found.duration.getSeconds();
-        }
-        else
-        {
-            return 0;
-        }
+        found.forEach ( (workout) => { amount += workout.duration.getSeconds() });
+
+        return amount;
     }
 
     return(
@@ -41,13 +36,13 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
                         props.daysOfWeek.map(function(day, i){
                             return (
                                 <Box key={i} width="100%" justifyContent="center">
-                                    <Box height="90%" marginLeft="30%" marginRight="30%" display="flex" justifyContent="center">
-                                        <Box width="100%" maxWidth="50px" height="100%" bgcolor={ isSameDay(new Date(), day) ? "#8F2D56" : "#C3C5CD"}>
+                                    <Box height="90%" marginLeft="30%" marginRight="30%" display="flex" justifyContent="center" position="relative">
+                                        <Box width="100%" maxWidth="50px" position="absolute" bottom={0} height={getDayWorkoutAmount(day) / 75} maxHeight="100%" bgcolor={ isSameDay(new Date(), day) ? "#8F2D56" : "#C3C5CD"}>
                                         </Box>
                                     </Box>
                                     <Box height="10%" textAlign="center" borderTop={2} paddingTop={1} borderColor="#808080">
                                         <Typography fontSize="12px" fontWeight="600">
-                                            {day.toLocaleDateString()}
+                                            {day.toLocaleDateString('en-us', { weekday:"short", month:"short", day: "numeric"})}
                                         </Typography> 
                                     </Box>
                                 </Box>
