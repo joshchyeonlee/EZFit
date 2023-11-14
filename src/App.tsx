@@ -17,9 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<div>HOME</div>} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Workouts" element={<WorkoutsHistory />} />
+          <Route path="/Workouts" element={<WorkoutsDashboard />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<Account />} />
+          <Route path="/Workouts/History" element={<WorkoutsHistory />} />
         </Routes>
         <NavigationBar />
       </Grid>

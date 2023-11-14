@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import workouts from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
+import { useNavigate } from "react-router-dom";
 
 function WorkoutsHistory() {
     
@@ -50,11 +51,17 @@ function WorkoutsHistory() {
         setCurrentWeekWorkouts(newWeekWorkouts);
         console.log(newWeekWorkouts);
     }, [currentWeek, activeWorkouts]);
+    
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+      navigate("/Workouts/");
+    };
 
     return (
         <Box justifyContent="center" padding={3}>
             <Box textAlign="left" justifyContent="center">
-                <IconButton>
+                <IconButton onClick={handleBackClick}>
                     <ArrowBack fontSize="large" color="primary"></ArrowBack>
                 </IconButton>
             </Box>
