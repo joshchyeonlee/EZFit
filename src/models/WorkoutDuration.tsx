@@ -1,8 +1,8 @@
-class Duration
+class WorkoutDuration
 {
-    hours = 1;
-    minutes = 46;
-    seconds = 40;
+    hours : number = 1;
+    minutes : number  = 46;
+    seconds : number  = 40;
 
     constructor(hours : number, minutes : number, seconds : number)
     {
@@ -15,6 +15,11 @@ class Duration
     {
         return "" + String(this.hours).padStart(2, '0') + ":" + String(this.minutes).padStart(2, '0') + ":" +  String(this.seconds).padStart(2, '0');
     }
+
+    getSeconds() : number
+    {
+        return this.hours * 3600 + this.minutes * 60 + this.seconds;
+    }
 };
 
-export default Duration;
+export default WorkoutDuration;
