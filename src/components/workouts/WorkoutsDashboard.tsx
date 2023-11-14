@@ -19,6 +19,10 @@ function WorkoutsDashboard() {
     navigate('/NewWorkout');
   };
 
+  const handleHistoryClick = () => {
+    navigate("/Workouts/History");
+  };
+
   const handleSearch = (query: string) => {
     let results: WorkoutRowProps[] = [];
 
@@ -33,12 +37,6 @@ function WorkoutsDashboard() {
   };
   const handleManualLogClose = () => {
     setManualLogOpen(false);
-  };
-
-  const navigate = useNavigate();
-
-  const handleHistoryClick = () => {
-    navigate("/Workouts/History");
   };
 
   return (
