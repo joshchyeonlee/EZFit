@@ -13,6 +13,12 @@ function WorkoutsDashboard() {
   const [workoutSearchResults, setWorkoutSearchResults] =
     useState(workoutRowMockData);
 
+  const navigate = useNavigate();
+
+  const handleCreateClick = () => {
+    navigate('/NewWorkout');
+  };
+
   const handleSearch = (query: string) => {
     let results: WorkoutRowProps[] = [];
 
@@ -57,7 +63,7 @@ function WorkoutsDashboard() {
         padding={"20px 50px"}
         width={"60%"}
       >
-        <WorkoutMenuButton title={"Create"} />
+        <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
         <WorkoutMenuButton title={"History"} onClick={handleHistoryClick} />
         <WorkoutMenuButton title={"Exercise Library"} />
