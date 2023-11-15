@@ -1,10 +1,10 @@
-import { Box, Button, IconButton, Modal, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from "@mui/material";
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Close } from '@mui/icons-material';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UncondensedDashboardGraph from "./UncondensedDashboardGraph";
 import steps from "../../mockData/Steps";
 import sevenDaysArray from "../../mockData/Dates";
-import React from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 
 const moment = require("moment");
@@ -13,26 +13,57 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
     // need to set this to false first
     const [date, setDate] = useState(moment());
     const [stepIndex, setStepIndex] = useState(6);
-    const [avgSteps, setAvgSteps] = useState(() => { 
-        const initVal = 0;
-        const sum = steps.reduce((acc, curr) => acc + curr, initVal);
-        return Math.round(sum/steps.length)
-    })
+    const [avgSteps, setAvgSteps] = useState(0)
+    const [isUpdateManually, setIsUpdateManually] = useState((false));
+    const [step, setStep] = useState(steps[stepIndex])
+    const [isTyped, setIsTyped] = useState(false);
+    const [inputValue, setInputValue] = useState(0);
+    const [openUpdateConfirmation, setOpenUpdateConfirmation] = useState(false);
 
     const handleClose = () => {
         setStepIndex(6);
         setDate(sevenDaysArray[6]);
         props.setOpen(false);
     }
+
+    const calculateAverage = () => {
+        const initVal = 0;
+        const sum = steps.reduce((acc, curr) => acc + curr, initVal);
+        setAvgSteps(Math.round(sum/steps.length))
+    }
     
     function handleSetDate(newDate: moment.Moment){
         const nextStepIndex = stepIndex + newDate.diff(date, "days")
         setStepIndex(nextStepIndex);
         setDate(newDate);
+        setStep(steps[nextStepIndex]);
+        setIsTyped(false);
+        setInputValue(steps[nextStepIndex]);
     }
 
     function getSteps(index: number){
         return steps[index];
+    }
+
+    const handleChevronClick = (setDiff : number) => {
+        const nextIndex = stepIndex + setDiff;
+        handleSetDate(sevenDaysArray[nextIndex]);
+        var currInd = stepIndex + setDiff;
+        setStepIndex(currInd);
+        setStep(steps[stepIndex])
+    }
+
+    const handleTextFieldUpdate = (val: number) => {
+        if(isNaN(val)) val = 0;
+        setIsTyped(true);
+        setInputValue(val);
+    }
+
+    const handleUpdateValue = () => {
+        steps[stepIndex] = inputValue;
+        setIsUpdateManually(false);
+        calculateAverage();
+        setOpenUpdateConfirmation(true);
     }
 
     const style = {
@@ -46,9 +77,27 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         boxShadow: 24,
         p: 4,
         display: 'flex',
+        width: 700,
+        height: 500,
     };
 
+    const handleConfirmationClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') return;
+        setOpenUpdateConfirmation(false);
+    };
+
+    useEffect(() => {
+        calculateAverage();
+    }, [])
+
     return(
+        <div>
+        <Snackbar
+            open={openUpdateConfirmation}
+            autoHideDuration={3000}
+            onClose={handleConfirmationClose}
+            message="Updated Steps!"
+        />
         <Modal
             open={props.open}
             onClose={handleClose}
@@ -56,43 +105,98 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
             aria-describedby="uncondensed-dashboard-modal"
         >
             <Box sx={style} justifyContent="center">
-                <Box position="absolute" display="flex" justifyContent="flex-end" right="10px" top="10px" padding="10px">
-                    <IconButton onClick={() => handleClose()}><Close/></IconButton>
-                </Box>
-                <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
-                    <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Step Count</Typography>
-                    <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} steps</Typography>
-                    <Box padding={2}>
-                        <UncondensedDashboardGraph steps={steps} handleSetDate={handleSetDate} currentIndex={stepIndex} setCurrentIndex={setStepIndex}/>
+                    <Box position="absolute" display="flex" justifyContent="flex-end" right="10px" top="10px" padding="10px">
+                        <IconButton onClick={() => handleClose()}><Close/></IconButton>
                     </Box>
-                    <Box display="flex" alignItems="center" padding={1}>
-                        <DatePicker
-                            format="MMM DD, YYYY"
-                            value={date}
-                            disableFuture
-                            onChange={(newDate) => handleSetDate(newDate)}
-                            slotProps={{ openPickerButton: { color: "primary" } }}
-                            sx={{
-                            backgroundColor: (theme) => theme.palette.textFieldBkg,
-                            borderRadius: "10px",
-                            width: "100%",
-                            "& .MuiInputBase-input": {
-                                padding: "5px",
-                                textAlign: "center",
-                            },
-                            "& .MuiInputBase-root": {
+                    
+                    {isUpdateManually ?
+                    <div>
+                        <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+                            <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
+                        </Box>
+                        <Box padding={2} display="flex" justifyContent="center" alignItems="center">
+                            <IconButton onClick={() => {handleChevronClick(-1)}} disabled={stepIndex === 0}>
+                                <ChevronLeft/>
+                            </IconButton>
+                                <DatePicker
+                                    format="MMM DD, YYYY"
+                                    value={date}
+                                    disableFuture
+                                    onChange={(newDate) => handleSetDate(newDate)}
+                                    slotProps={{ openPickerButton: { color: "primary" } }}
+                                    sx={{
+                                    backgroundColor: (theme) => theme.palette.textFieldBkg,
+                                    borderRadius: "10px",
+                                    width: "100%",
+                                    "& .MuiInputBase-input": {
+                                        padding: "5px",
+                                        textAlign: "center",
+                                    },
+                                    "& .MuiInputBase-root": {
+                                        borderRadius: "10px",
+                                    },
+                                    }}
+                                />
+                            <IconButton onClick={() => {handleChevronClick(1)}} disabled={stepIndex === 6}>
+                                <ChevronRight/>
+                            </IconButton>
+                        </Box>
+                        <Box display="flex" justifyContent="center" alignItems="center">
+                            <TextField 
+                                variant="standard"
+                                InputProps={{ endAdornment:"steps" }}
+                                value={!isTyped ? step : inputValue}
+                                onChange={(e) => {handleTextFieldUpdate(parseInt(e.target.value))}}
+                                />
+                        </Box>
+                        <Box padding={2} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                            <Button variant="contained" onClick={() => {handleUpdateValue()}}>
+                                Confirm
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={() => { setIsUpdateManually(false) }}>
+                                Cancel
+                            </Button>
+                        </Box>
+                    </div>
+                    :
+                    <div>
+                    <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+                        <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Step Count</Typography>
+                        <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} steps</Typography>
+                        <Box padding={2}>
+                            <UncondensedDashboardGraph steps={steps} handleSetDate={handleSetDate} currentIndex={stepIndex} setCurrentIndex={setStepIndex}/>
+                        </Box>
+                        <Box display="flex" alignItems="center" padding={1}>
+                            <DatePicker
+                                format="MMM DD, YYYY"
+                                value={date}
+                                disableFuture
+                                onChange={(newDate) => handleSetDate(newDate)}
+                                slotProps={{ openPickerButton: { color: "primary" } }}
+                                sx={{
+                                backgroundColor: (theme) => theme.palette.textFieldBkg,
                                 borderRadius: "10px",
-                            },
-                            }}
-                        />
+                                width: "100%",
+                                "& .MuiInputBase-input": {
+                                    padding: "5px",
+                                    textAlign: "center",
+                                },
+                                "& .MuiInputBase-root": {
+                                    borderRadius: "10px",
+                                },
+                                }}
+                            />
+                        </Box>
+                        <Box paddingTop={1} paddingBottom={4}>
+                            <Typography variant="h6">{getSteps(stepIndex)} steps</Typography>
+                        </Box>
+                        <Button variant="contained" onClick={() => {setIsUpdateManually(true)}}>Update Manually</Button>
                     </Box>
-                    <Box paddingTop={1} paddingBottom={4}>
-                        <Typography variant="h6">{getSteps(stepIndex)} steps</Typography>
-                    </Box>
-                    <Button variant="contained">Update Manually</Button>
-                </Box>
+                </div>
+                    }
             </Box>
         </Modal>
+        </div>
     );
 }
 
