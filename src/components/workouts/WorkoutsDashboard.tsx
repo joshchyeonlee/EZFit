@@ -16,14 +16,16 @@ function WorkoutsDashboard() {
   const navigate = useNavigate();
 
   const handleCreateClick = () => {
-    navigate('/NewWorkout');
+    navigate("/NewWorkout");
+  };
+
+  const handleNavExerciseLibrary = () => {
+    navigate("/Exercise-Library");
   };
 
   const handleSearch = (query: string) => {
-    let results: WorkoutRowProps[] = [];
-
-    workoutRowMockData.forEach((workout) =>
-      workout.title.toLowerCase().includes(query) ? results.push(workout) : null
+    const results = workoutRowMockData.filter((workout) =>
+      workout.title.toLowerCase().includes(query)
     );
     setWorkoutSearchResults(results);
   };
@@ -43,7 +45,9 @@ function WorkoutsDashboard() {
       />
 
       <Box textAlign={"center"} padding={"40px 30px"}>
-        <Typography variant="h5">Workouts</Typography>
+        <Typography variant="h5" fontWeight={"bold"}>
+          Workouts
+        </Typography>
       </Box>
       <Box textAlign={"center"} padding={"20px 200px"} width={"60%"}>
         <SearchBar
@@ -60,7 +64,10 @@ function WorkoutsDashboard() {
         <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
         <WorkoutMenuButton title={"History"} />
-        <WorkoutMenuButton title={"Exercise Library"} />
+        <WorkoutMenuButton
+          title={"Exercise Library"}
+          onClick={handleNavExerciseLibrary}
+        />
       </Box>
       <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
       <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
