@@ -170,7 +170,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                         <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Step Count</Typography>
                         <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} steps</Typography>
                         <Box padding={2}>
-                            <UncondensedDashboardGraph steps={steps} handleSetDate={handleSetDate} currentIndex={stepIndex} setCurrentIndex={setStepIndex}/>
+                            <UncondensedDashboardGraph steps={steps} handleSetDate={handleSetDate} currentIndex={stepIndex} setCurrentIndex={setStepIndex} handleChevronClick={handleChevronClick} setStep={setStep}/>
                         </Box>
                         <Box display="flex" alignItems="center" padding={1}>
                             <DatePicker

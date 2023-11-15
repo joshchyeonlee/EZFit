@@ -3,22 +3,16 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import sevenDaysArray from "../../mockData/Dates";
 import React from "react";
 
-function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; }){
+function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; handleChevronClick: any; setStep: any; }){
     const handleGridClick = (i: number) => {
         props.setCurrentIndex(i);
         props.handleSetDate(sevenDaysArray[i]);
-    }
-
-    const handleChevronClick = (setDiff : number) => {
-        const nextIndex = props.currentIndex + setDiff;
-        props.handleSetDate(sevenDaysArray[nextIndex]);
-        var currInd = props.currentIndex + setDiff;
-        props.setCurrentIndex(currInd);
+        props.setStep(props.steps[i]);
     }
 
     return (
         <Box display="flex" bgcolor="ButtonShadow">
-            <IconButton onClick={() => handleChevronClick(-1)} disabled={props.currentIndex === 0}>
+            <IconButton onClick={() => props.handleChevronClick(-1)} disabled={props.currentIndex === 0}>
                 <ChevronLeft/>
             </IconButton>
             <Box display="flex">
@@ -36,7 +30,7 @@ function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; 
                 </Box>
                 )}
             </Box>
-            <IconButton onClick={() => handleChevronClick(1)} disabled={props.currentIndex === props.steps.length-1}>
+            <IconButton onClick={() => props.handleChevronClick(1)} disabled={props.currentIndex === props.steps.length-1}>
                 <ChevronRight/>
             </IconButton>
         </Box>
