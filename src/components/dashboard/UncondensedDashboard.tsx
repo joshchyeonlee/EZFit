@@ -24,6 +24,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         setStepIndex(6);
         setDate(sevenDaysArray[6]);
         props.setOpen(false);
+        setIsUpdateManually(false);
     }
 
     const calculateAverage = () => {
@@ -114,7 +115,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                         <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
                             <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
                         </Box>
-                        <Box padding={2} display="flex" justifyContent="center" alignItems="center">
+                        <Box padding={4} display="flex" justifyContent="center" alignItems="center">
                             <IconButton onClick={() => {handleChevronClick(-1)}} disabled={stepIndex === 0}>
                                 <ChevronLeft/>
                             </IconButton>
@@ -141,7 +142,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 <ChevronRight/>
                             </IconButton>
                         </Box>
-                        <Box display="flex" justifyContent="center" alignItems="center">
+                        <Box display="flex" justifyContent="center" alignItems="center" padding={8}>
                             <TextField 
                                 variant="standard"
                                 InputProps={{ endAdornment:"steps" }}
@@ -149,13 +150,17 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 onChange={(e) => {handleTextFieldUpdate(parseInt(e.target.value))}}
                                 />
                         </Box>
-                        <Box padding={2} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                            <Button variant="contained" onClick={() => {handleUpdateValue()}}>
-                                Confirm
-                            </Button>
-                            <Button variant="contained" color="secondary" onClick={() => { setIsUpdateManually(false) }}>
-                                Cancel
-                            </Button>
+                        <Box padding={8} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                            <Box padding={1} width={250} display="flex" justifyContent="center" alignItems="center">
+                                <Button fullWidth variant="contained" onClick={() => {handleUpdateValue()}}>
+                                    Confirm
+                                </Button>
+                            </Box>
+                            <Box padding={1} width={250} display="flex" justifyContent="center" alignItems="center">
+                                <Button fullWidth variant="contained" color="secondary" onClick={() => { setIsUpdateManually(false) }}>
+                                    Cancel
+                                </Button>
+                            </Box>
                         </Box>
                     </div>
                     :
