@@ -39,7 +39,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         setDate(newDate);
         setStep(steps[nextStepIndex]);
         setIsTyped(false);
-        setInputValue(steps[nextStepIndex]);
+        if(isTyped) setInputValue(steps[nextStepIndex]);
     }
 
     function getSteps(index: number){
@@ -51,7 +51,8 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         handleSetDate(sevenDaysArray[nextIndex]);
         var currInd = stepIndex + setDiff;
         setStepIndex(currInd);
-        setStep(steps[stepIndex])
+        setStep(steps[nextIndex])
+        setIsTyped(false);
     }
 
     const handleTextFieldUpdate = (val: number) => {
