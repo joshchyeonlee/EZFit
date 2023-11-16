@@ -97,49 +97,83 @@ function Nutrition() {
   };
 
   return (
-    <Grid display={"flex"} flexDirection={"column"} alignItems={"center"}>
+    <Grid
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      paddingBottom={"100px"}
+    >
       <FoodLogging
         isOpen={foodLogOpen}
         handleClose={() => setFoodLogOpen(false)}
         handleSubmit={handleNutritionLogging}
         title="Log Food"
       />
-      <Grid padding={"40px 0px 20px"}>
-        <IconButton onClick={() => setDate(moment(date).subtract(1, "days"))}>
-          <ArrowBackIos />
-        </IconButton>
-        <DatePicker
-          value={moment(date)}
-          format="MMMM DD, YYYY"
-          sx={{
-            ".MuiInputBase-root:before, .MuiInputBase-root:after": {
-              borderBottom: "none",
-            },
-
-            ".MuiInputBase-root:hover:not(.Mui-disabled, .Mui-error)::before": {
-              borderBottom: "none",
-            },
-            ".MuiInputBase-input": {
-              fontWeight: "bold",
-              textAlign: "right",
-              fontSize: "18px",
-            },
-            padding: "0px 50px 0px 25px",
-          }}
-          slotProps={{
-            textField: { variant: "standard" },
-            openPickerButton: { color: "primary" },
-          }}
-          maxDate={moment()}
-          onChange={(value) => setDate(value)}
-        />
-        {formattedDate !== moment().format("DD/MM/YYYY") ? (
-          <IconButton onClick={() => setDate(moment(date).add(1, "days"))}>
-            <ArrowForwardIos />
+      <Grid
+        padding={"40px 0px 20px"}
+        display={"flex"}
+        justifyContent={"center"}
+        width={"500px"}
+      >
+        <Grid justifyContent={"right"} width={"10%"}>
+          <IconButton onClick={() => setDate(moment(date).subtract(1, "days"))}>
+            <ArrowBackIos />
           </IconButton>
-        ) : null}
+        </Grid>
+        <Grid>
+          <DatePicker
+            value={moment(date)}
+            format="MMMM DD, YYYY"
+            sx={{
+              ".MuiInputBase-root:before, .MuiInputBase-root:after": {
+                borderBottom: "none",
+              },
+
+              ".MuiInputBase-root:hover:not(.Mui-disabled, .Mui-error)::before":
+                {
+                  borderBottom: "none",
+                },
+
+              ".MuiInputBase-input": {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: "22px",
+                width: "80%",
+              },
+              ".MuiInputBase-root": {
+                justifyContent: "center",
+              },
+              ".MuiInputAdornment-root": {
+                width: "fit-content",
+                justifyContent: "left",
+              },
+              padding: "0px 16px 0px 0px",
+            }}
+            slotProps={{
+              textField: { variant: "standard" },
+              openPickerButton: { color: "primary" },
+            }}
+            maxDate={moment()}
+            onChange={(value) => setDate(value)}
+          />
+        </Grid>
+        <Grid width={"10%"} justifyContent={"right"}>
+          {formattedDate !== moment().format("DD/MM/YYYY") ? (
+            <IconButton
+              onClick={() => setDate(moment(date).add(1, "days"))}
+              sx={{ paddingRight: "0" }}
+            >
+              <ArrowForwardIos />
+            </IconButton>
+          ) : null}
+        </Grid>
       </Grid>
-      <Grid display={"flex"} flexDirection={"column"} padding={"20px 0px"}>
+      <Grid
+        display={"flex"}
+        flexDirection={"column"}
+        padding={"20px 0px"}
+        width={"450px"}
+      >
         <Grid display={"flex"} justifyContent={"space-evenly"}>
           <Typography fontSize={"18px"} padding={"0px 30px"}>
             Calories In: {caloriesIn.toLocaleString()}
