@@ -17,6 +17,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 const initialFilterState: muscleGroup[] = [
   "Back",
   "Biceps",
+  "Cardio",
   "Chest",
   "Core",
   "Glutes",
@@ -60,9 +61,11 @@ function ExerciseLibrary() {
     setFilters(updatedFilters);
   };
 
+  const handleFilterToggle = (state: "all" | "none") => {
+    state === "all" ? setFilters(initialFilterState) : setFilters([]);
+  };
+
   useEffect(() => {
-    console.log({ filters });
-    console.log(exerciseSearchResults);
     const results = exerciseSearchResults.filter((exercise) =>
       exercise.muscles.some((muscle) => filters.includes(muscle))
     );
@@ -71,7 +74,7 @@ function ExerciseLibrary() {
   }, [filters, exerciseSearchResults]);
 
   return (
-    <Grid>
+    <Grid paddingBottom={"100px"}>
       <IconButton
         color="primary"
         onClick={() => navigate("/Workouts")}
@@ -93,7 +96,10 @@ function ExerciseLibrary() {
             placeholder="Search For Exercise..."
             onSearch={handleSearch}
           />
-          <ExerciseFilters handleFilterChange={handleFilterChange} />
+          <ExerciseFilters
+            handleFilterChange={handleFilterChange}
+            handleFilterToggle={handleFilterToggle}
+          />
         </Grid>
       </Grid>
       <Grid display={"flex"} justifyContent={"center"}>
@@ -118,33 +124,71 @@ function ExerciseLibrary() {
   );
 }
 
-const ExerciseFilters = ({
-  handleFilterChange,
-}: {
+interface ExerciseFiltersProps {
   handleFilterChange: (
     event: ChangeEvent<HTMLInputElement>,
     label: muscleGroup
   ) => void;
-}) => {
+  handleFilterToggle: (state: "all" | "none") => void;
+}
+
+const ExerciseFilters = ({
+  handleFilterChange,
+  handleFilterToggle,
+}: ExerciseFiltersProps) => {
+  const [checkedState, setCheckedState] = useState<"all" | "some" | "none">(
+    "some"
+  );
+
+  const handleCheckboxChange = (event: any, label: any) => {
+    handleFilterChange(event, label);
+    setCheckedState("some");
+  };
+
   return (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
       <Grid display={"flex"}>
-        {initialFilterState.slice(0, 4).map((category) => (
+        {initialFilterState.slice(0, 5).map((category) => (
           <ExerciseCheckbox
             label={category}
-            handleChange={handleFilterChange}
+            handleChange={handleCheckboxChange}
             key={category}
+            checkedState={checkedState}
           />
         ))}
       </Grid>
       <Grid display={"flex"}>
-        {initialFilterState.slice(4, 9).map((category) => (
+        {initialFilterState.slice(5, 10).map((category) => (
           <ExerciseCheckbox
             label={category}
-            handleChange={handleFilterChange}
+            handleChange={handleCheckboxChange}
             key={category}
+            checkedState={checkedState}
           />
         ))}
+      </Grid>
+      <Grid
+        paddingTop={"16px"}
+        justifyContent={"space-evenly"}
+        width={"100%"}
+        display={"flex"}
+      >
+        <Button
+          onClick={() => {
+            handleFilterToggle("none");
+            setCheckedState("none");
+          }}
+        >
+          Clear All Filters
+        </Button>
+        <Button
+          onClick={() => {
+            handleFilterToggle("all");
+            setCheckedState("all");
+          }}
+        >
+          Select All Filters
+        </Button>
       </Grid>
     </Grid>
   );
@@ -156,10 +200,23 @@ interface ExerciseCheckboxProps {
     event: ChangeEvent<HTMLInputElement>,
     label: muscleGroup
   ) => void;
+  checkedState: "all" | "some" | "none";
 }
-
-const ExerciseCheckbox = ({ label, handleChange }: ExerciseCheckboxProps) => {
+const ExerciseCheckbox = ({
+  label,
+  handleChange,
+  checkedState,
+}: ExerciseCheckboxProps) => {
   const [checked, setChecked] = useState(true);
+
+  useEffect(() => {
+    if (checkedState === "none") {
+      setChecked(false);
+    } else if (checkedState === "all") {
+      setChecked(true);
+    }
+  }, [checkedState]);
+
   return (
     <Grid display={"flex"} padding={"8px"}>
       <FormControlLabel

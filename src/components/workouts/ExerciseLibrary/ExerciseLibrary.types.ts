@@ -11,6 +11,7 @@ export interface Exercise {
 export type muscleGroup =
   | "Back"
   | "Biceps"
+  | "Cardio"
   | "Chest"
   | "Core"
   | "Glutes"
