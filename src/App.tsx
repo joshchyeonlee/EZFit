@@ -11,6 +11,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import React from "react";
 import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
 import PersonalInformationPage from "./components/account/PersonalInformation/PersonalInformationPage";
+import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import ExerciseLibrary from "./components/workouts/ExerciseLibrary/ExerciseLibrary";
 import { Exercise } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.types";
 import { exerciseLibraryMockData } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.mockData";
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             path="/Account/PersonalInformation"
             element={<PersonalInformationPage />}
           />
+          <Route path="/Account/Preferences" element={<PreferencesPage />} />
           {(exerciseLibraryMockData as any).map((exercise: Exercise) => (
             <Route
               path={generatePath(exercise.name)}
