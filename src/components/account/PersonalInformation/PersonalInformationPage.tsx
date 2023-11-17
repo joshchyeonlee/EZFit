@@ -4,7 +4,6 @@ import PersonalInformationForm from "./PersonalInformationForm";
 import ChangePasswordPopUp from "./ChangePasswordPopUp";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useState } from "react";
 import DeleteAccountPopUp from "./DeleteAccountPopUp";
 
 function PersonalInformationPage()
