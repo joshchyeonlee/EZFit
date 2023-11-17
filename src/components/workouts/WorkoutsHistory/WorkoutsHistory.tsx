@@ -6,6 +6,7 @@ import workouts from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
 import { useNavigate } from "react-router-dom";
+import { ManualLoggingOverlay } from "../../Overlays/LoggingOverlays";
 
 function WorkoutsHistory() {
     
@@ -46,11 +47,22 @@ function WorkoutsHistory() {
     useEffect( () =>
     {
         var newWeekWorkouts = new Array();
-        console.log(currentWeek.filter(date => date.getDate() <= new Date(currentDayIndex).getDate() && date.getDate() > new Date(currentDayIndex).getDate() - 7));
         newWeekWorkouts = activeWorkouts.filter(workout => workout.date.getDate() <= new Date(currentDayIndex).getDate() && workout.date.getDate() > new Date(currentDayIndex).getDate() - 7);
         setCurrentWeekWorkouts(newWeekWorkouts);
-        console.log(newWeekWorkouts);
     }, [currentWeek, activeWorkouts]);
+
+    const [currentEditedWorkout, setCurrentEditedWorkout] = useState(new Workout());
+
+    const [editWorkoutOpen, setEditWorkoutOpen] = useState(false);
+
+    const handleEditWorkoutOpen = (workout : Workout) => {
+        setCurrentEditedWorkout(workout);
+        setEditWorkoutOpen(true);
+    };
+
+    const handleEditWorkoutClose = () => {
+        setEditWorkoutOpen(false);
+    };
     
     const navigate = useNavigate();
 
@@ -72,10 +84,11 @@ function WorkoutsHistory() {
                         <WorkoutsHistoryGrid workouts={currentWeekWorkouts} daysOfWeek={currentWeek} handleWeekShift={handleWeekShift}/>
                     </Box>
                     <Box padding={2} width="97%" height="150px" maxHeight="20%" sx={{overflow: "hidden", overflowY: "scroll"}}>
-                        <WorkoutHistoryList workouts={currentWeekWorkouts} removeWorkout={removeWorkout}/>
+                        <WorkoutHistoryList workouts={currentWeekWorkouts} editWorkout={handleEditWorkoutOpen} removeWorkout={removeWorkout}/>
                     </Box>
                 </Box>
             </Box>
+            <ManualLoggingOverlay isOpen={editWorkoutOpen} handleClose={handleEditWorkoutClose} />
         </Box>
     );
 }

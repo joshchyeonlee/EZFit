@@ -7,11 +7,13 @@ class Workout
     duration: WorkoutDuration;
     exercises: any;
 
-    constructor(title: string, date: Date, duration: WorkoutDuration)
+    constructor();
+    constructor(title: string, date: Date, duration: WorkoutDuration);
+    constructor(title?: string, date?: Date, duration?: WorkoutDuration)
     {
-        this.title = title;
-        this.date = date;
-        this.duration = duration;
+        this.title = title ?? "";
+        this.date = date ?? new Date();
+        this.duration = duration ?? new WorkoutDuration();
     }
 
     toString()

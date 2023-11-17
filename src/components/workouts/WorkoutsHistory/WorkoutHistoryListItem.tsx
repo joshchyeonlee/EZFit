@@ -2,8 +2,13 @@ import { Box, IconButton, Typography } from "@mui/material";
 import Workout from "../../../models/Workout";
 import { Delete, Edit } from "@mui/icons-material";
 
-function WorkoutHistoryListItem( props: {workout: Workout, removeWorkout: any} ) {
+function WorkoutHistoryListItem( props: {workout: Workout, editWorkout: any, removeWorkout: any} ) {
     
+    const handleOnClickEdit = () =>
+    {
+        props.editWorkout(props.workout)
+    }
+
     const handleOnClickDelete = () =>
     {
         props.removeWorkout(props.workout)
@@ -30,7 +35,7 @@ function WorkoutHistoryListItem( props: {workout: Workout, removeWorkout: any} )
             </Box>
             <Box display="block" id="buttons" textAlign="end" justifyContent="end">
                 <Box position="absolute" right="45px" top="20%">
-                    <IconButton color="primary">
+                    <IconButton color="primary" onClick={handleOnClickEdit}>
                         <Edit></Edit>
                     </IconButton>
                 </Box>
