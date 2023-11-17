@@ -4,10 +4,17 @@ import PersonalInformationForm from "./PersonalInformationForm";
 import ChangePasswordPopUp from "./ChangePasswordPopUp";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import DeleteAccountPopUp from "./DeleteAccountPopUp";
 
 function PersonalInformationPage()
-{
+{    
     const navigate = useNavigate();
+
+    const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false);
+    const onAccountDeleted = () =>
+    {
+        navigate("/");
+    }
 
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
 
@@ -39,7 +46,7 @@ function PersonalInformationPage()
             </Box>
 
             <Box textAlign="center" justifyContent="center" marginTop={4} marginBottom={3}>
-                <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation>
+                <Button variant="contained" size='large' sx={{width:"50%"}} color="error" disableElevation onClick={() =>setDeleteAccountModalOpen(true)}>
                     <Typography textAlign="center" fontWeight="300" color="white">
                         Delete Account
                     </Typography>
@@ -47,6 +54,8 @@ function PersonalInformationPage()
             </Box>
 
             <ChangePasswordPopUp open={changePasswordModalOpen} setOpen={setChangePasswordModalOpen}></ChangePasswordPopUp>
+
+            <DeleteAccountPopUp open={deleteAccountModalOpen} setOpen={setDeleteAccountModalOpen} onAccountDeleted={onAccountDeleted}></DeleteAccountPopUp>
 
         </Box>
     )
