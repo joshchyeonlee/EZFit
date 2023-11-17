@@ -14,5 +14,6 @@ const workouts = [
     new Workout("Cycling", new Date("2023-11-14"), new WorkoutDuration(2, 0, 0)),
     new Workout("Cycling", new Date("2023-11-15"), new WorkoutDuration(2, 0, 0)),
     new Workout("Stretching", new Date("2023-11-15"), new WorkoutDuration(0, 40, 0)),
+    new Workout("Stretching", new Date("2023-11-17"), new WorkoutDuration(2, 40, 0)),
 ];
 export default workouts;

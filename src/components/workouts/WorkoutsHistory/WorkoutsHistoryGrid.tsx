@@ -37,12 +37,12 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
                             return (
                                 <Box key={i} width="100%" justifyContent="center">
                                     <Box height="90%" marginLeft="30%" marginRight="30%" display="flex" justifyContent="center" position="relative">
-                                        <Box width="100%" maxWidth="50px" position="absolute" bottom={0} height={getDayWorkoutAmount(day) / 75} maxHeight="100%" bgcolor={ isSameDay(new Date(), day) ? "#8F2D56" : "#C3C5CD"}>
+                                        <Box width="100%" maxWidth="50px" position="absolute" bottom={0} height={getDayWorkoutAmount(day) / 75} boxShadow={3} borderRadius="5px" maxHeight="100%" bgcolor={ isSameDay(new Date(), day) ? "#8F2D56" : "#C3C5CD"}>
                                         </Box>
                                     </Box>
-                                    <Box height="10%" textAlign="center" borderTop={2} paddingTop={1} borderColor="#808080">
-                                        <Typography fontSize="12px" fontWeight="600">
-                                            {day.toLocaleDateString('en-us', { weekday:"short", month:"short", day: "numeric"})}
+                                    <Box height="10%" textAlign="center" paddingTop={1}>
+                                        <Typography fontSize="0.875rem" fontWeight="400">
+                                            {day.toLocaleDateString('en-us', { month:"short", day: "numeric"})}
                                         </Typography> 
                                     </Box>
                                 </Box>
