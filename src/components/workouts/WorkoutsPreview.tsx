@@ -93,10 +93,8 @@ const WorkoutsPreview = () => {
             <Button variant="text" color="primary" startIcon={<ArrowBackIcon />}>
               Back
             </Button>
-            <Typography variant="h4" sx={{ marginTop: '5%' }}>Workout #{workout + 1}</Typography>
-            <Button variant="text" color="primary" endIcon={<InfoIcon />}>
-              Info
-            </Button>
+            <Typography variant="h4" sx={{ marginTop: '3%', marginLeft: '-5%' }}>Workout #{workout + 1}</Typography>
+            <div />
           </Box>
         </Grid>
         <Grid item xs={12} sx={{ marginTop: '3%' }}>
@@ -111,17 +109,20 @@ const WorkoutsPreview = () => {
                   padding: '10px',
                   marginTop: '7%',
                   display: 'flex',
-                  alignItems: 'center',        
+                  alignItems: 'center',
                 }}
               >
-                <ListItemText
-                  primary={`${index + 1}.    ${exercise.name}`}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" color="primary" sx={{ marginTop: '75%' }}>
-                    <InfoIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
+                <Typography variant="subtitle1" sx={{ width: '3%', flex: 'none' }}>{`${index + 1}:`}</Typography>
+                <div style={{ display: 'flex', alignItems: 'center', flex: 1, paddingRight: '2%' }}>
+                  <Typography style={{ textAlign: 'center', flex: 1 }}>
+                    {exercise.name}
+                  </Typography>
+                  </div>
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" color="primary" sx={{ marginTop: '85%' }}>
+                      <InfoIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
               </ListItem>
             ))}
           </List>
