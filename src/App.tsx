@@ -6,9 +6,12 @@ import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import NewWorkout from "./components/workouts/NewWorkout";
 import Nutrition from "./components/nutrition/NutritionDashboard";
-import Account from "./components/account/Account";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import React from "react";
+import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
+import PersonalInformationPage from "./components/account/PersonalInformation/PersonalInformationPage";
+import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import WorkoutsPreview from "./components/workouts/WorkoutsPreview";
 
 const App: React.FC = () => {
@@ -21,9 +24,9 @@ const App: React.FC = () => {
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
           <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
-          <Route path="/Account" element={<Account />} />
-          <Route path="/WorkoutsPreview" element={<WorkoutsPreview />} />
-
+          <Route path="/Account" element={<AccountManagementPage />} />
+          <Route path="/Account/PersonalInformation" element={<PersonalInformationPage />} />
+          <Route path="/Account/Preferences" element={<PreferencesPage />} />
         </Routes>
         <NavigationBar />
       </Grid>
