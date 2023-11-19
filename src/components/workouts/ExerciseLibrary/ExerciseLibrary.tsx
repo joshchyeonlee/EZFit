@@ -91,7 +91,7 @@ function ExerciseLibrary() {
         Exercise Library
       </Typography>
       <Grid justifyContent={"center"} display={"flex"}>
-        <Grid width={"40%"}>
+        <Grid>
           <SearchBar
             placeholder="Search For Exercise..."
             onSearch={handleSearch}
@@ -147,7 +147,7 @@ const ExerciseFilters = ({
 
   return (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
-      <Grid display={"flex"}>
+      <Grid display={"flex"} width={"100%"}>
         {initialFilterState.slice(0, 5).map((category) => (
           <ExerciseCheckbox
             label={category}
@@ -157,7 +157,7 @@ const ExerciseFilters = ({
           />
         ))}
       </Grid>
-      <Grid display={"flex"}>
+      <Grid display={"flex"} width={"100%"}>
         {initialFilterState.slice(5, 10).map((category) => (
           <ExerciseCheckbox
             label={category}
@@ -218,7 +218,12 @@ const ExerciseCheckbox = ({
   }, [checkedState]);
 
   return (
-    <Grid display={"flex"} padding={"8px"}>
+    <Grid
+      display={"flex"}
+      padding={"10px"}
+      justifyContent={"left"}
+      width={"20%"}
+    >
       <FormControlLabel
         control={
           <Checkbox
