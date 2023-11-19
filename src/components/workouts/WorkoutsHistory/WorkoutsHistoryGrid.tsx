@@ -24,7 +24,7 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
     }
 
     return(
-        <Box bgcolor="ButtonShadow" width="100%" height="100%" borderRadius={4} position="relative" justifyContent="center">
+        <Box bgcolor="ButtonShadow" width="100%" maxWidth="700px" height="100%" borderRadius={4} position="relative" justifyContent="center">
             <Box width="90%" height="90%" padding={2} paddingLeft="5%" paddingRight="5%" justifyContent="center">
                 <Box position="absolute" left={0} top="125px">
                     <IconButton onClick={() => handleChevronClick(-1)}>

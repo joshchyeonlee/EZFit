@@ -80,7 +80,7 @@ function WorkoutsHistory() {
             <Box width="100%" display="flex" justifyContent="center" flexDirection="column" alignItems="center">
                 <Typography variant="h5" sx={{ fontWeight: 'bold' , height:"30%"}} >Workout History</Typography>
                 <Box width="100%" height="70%">
-                    <Box padding={2} width="97%" height="300px" maxHeight="70%" >
+                    <Box padding={2} display="flex" justifyContent="center" width="97%" height="300px" maxHeight="70%" >
                         <WorkoutsHistoryGrid workouts={currentWeekWorkouts} daysOfWeek={currentWeek} handleWeekShift={handleWeekShift}/>
                     </Box>
                     <Box padding={2} width="97%" height="150px" maxHeight="20%" sx={{overflow: "hidden", overflowY: "scroll"}}>
