@@ -6,6 +6,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import NewWorkout from "./components/workouts/NewWorkout";
 import Nutrition from "./components/nutrition/NutritionDashboard";
+import RunWorkout from "./components/workouts/RunWorkout";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import React from "react";
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path="/" element={<div>HOME</div>} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
+          <Route path="/RunWorkout" element={<RunWorkout />} />
           <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<AccountManagementPage />} />
