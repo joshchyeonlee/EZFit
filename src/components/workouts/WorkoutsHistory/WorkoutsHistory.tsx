@@ -39,7 +39,7 @@ function WorkoutsHistory() {
     const removeWorkout = (workout : Workout) =>
     {
         var newWorkoutList = activeWorkouts.filter(e => e != workout);
-        setActiveWorkouts(newWorkoutList);
+        setActiveWorkouts(newWorkoutList.sort( (a, b) => a.date.getTime() - b.date.getTime() ));
     }
 
     const [currentWeekWorkouts, setCurrentWeekWorkouts] = useState(new Array());
