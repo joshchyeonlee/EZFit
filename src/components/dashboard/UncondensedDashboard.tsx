@@ -123,8 +123,9 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 <DatePicker
                                     format="MMM DD, YYYY"
                                     value={date}
-                                    disableFuture
                                     onChange={(newDate) => handleSetDate(newDate)}
+                                    minDate={sevenDaysArray[0]}
+                                    maxDate={sevenDaysArray[6]}
                                     slotProps={{ openPickerButton: { color: "primary" } }}
                                     sx={{
                                     backgroundColor: (theme) => theme.palette.textFieldBkg,
@@ -176,7 +177,8 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                             <DatePicker
                                 format="MMM DD, YYYY"
                                 value={date}
-                                disableFuture
+                                minDate={sevenDaysArray[0]}
+                                maxDate={sevenDaysArray[6]}
                                 onChange={(newDate) => handleSetDate(newDate)}
                                 slotProps={{ openPickerButton: { color: "primary" } }}
                                 sx={{
