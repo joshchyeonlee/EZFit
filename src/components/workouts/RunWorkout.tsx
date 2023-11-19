@@ -79,7 +79,7 @@ const RunWorkout = () => {
                 padding: 2,
             }}
         >
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" align="center" fontWeight="bold">
                 Workout #{workout + 1}
             </Typography>
 
