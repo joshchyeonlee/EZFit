@@ -7,8 +7,9 @@ const OverlayBox = styled(Box)(({ theme }) => ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '30%',
-  maxHeight: '90vh',
+  width: '60%',
+  height: '70%',
+  maxHeight: '100vh',
   backgroundColor: theme.palette.background.paper,
   borderRadius: '20px',
   boxShadow: theme.shadows[5],
@@ -17,10 +18,12 @@ const OverlayBox = styled(Box)(({ theme }) => ({
 }));
 
 const ExerciseList = styled(Box)(({ theme }) => ({
-  width: '100%',
   backgroundColor: theme.palette.background.paper,
   marginTop: theme.spacing(2),
   padding: theme.spacing(2),
+  marginLeft: theme.spacing(5),
+  marginRight: theme.spacing(5)
+
 }));
 
 const ExerciseItem = styled(Box)(({ theme }) => ({
@@ -37,7 +40,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.error.contrastText,
   marginTop: theme.spacing(4),
   padding: theme.spacing(1),
-  marginLeft: '12%',
+  marginLeft: '27%',
+  height: '12%',
+  width: '50%',
+
   borderRadius: '10px',
   '&:hover': {
     backgroundColor: theme.palette.error.dark,
@@ -47,10 +53,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
 function WorkoutComplete(props: { onClose: any, exercises: any }) {
   return (
     <OverlayBox>
-      <Typography variant="h6" align="center">
-        Congratulations🎉
+      <Typography variant="h5" align="center">
+        Congratulations 🎉
       </Typography>
-      <Typography variant="h6" align="center">
+      <Typography variant="h5" align="center">
         You made it!
       </Typography>
       <ExerciseList>

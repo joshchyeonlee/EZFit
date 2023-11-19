@@ -125,11 +125,11 @@ const RunWorkout = () => {
                 </div>
             )}
 
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" align="center" fontWeight="bold">
                 Workout #{workout + 1}
             </Typography>
 
-            <Button variant="contained" color="error" onClick={handleEndWorkout} style={{ position: 'absolute', top: '4%', left: '85%' }}>
+            <Button variant="contained" color="error" onClick={handleEndWorkout} style={{ position: 'absolute', top: '4%', left: '81%', width: '15%', height: '7%' }}>
                 End Workout
             </Button>
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
