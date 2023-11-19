@@ -1,13 +1,11 @@
 import { Button, Box, IconButton, Typography } from "@mui/material";
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import sevenDaysArray from "../../mockData/Dates";
-import React from "react";
 
 function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; handleChevronClick: any; setStep: any; }){
     const handleGridClick = (i: number) => {
-        props.setCurrentIndex(i);
-        props.handleSetDate(sevenDaysArray[i]);
-        props.setStep(props.steps[i]);
+        console.log(`handleGridClick i: ${i}`);
+        props.handleSetDate(i);
     }
 
     return (

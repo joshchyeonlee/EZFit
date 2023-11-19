@@ -33,13 +33,19 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         setAvgSteps(Math.round(sum/steps.length))
     }
     
-    function handleSetDate(newDate: moment.Moment){
-        const nextStepIndex = stepIndex + newDate.diff(date, "days")
-        setStepIndex(nextStepIndex);
+    function handleSetDate(index: number){
+        setDate(sevenDaysArray[index]);
+        setStepIndex(index);
+        setStep(steps[index]);
+    }
+
+    function handleSetCalendarDate(newDate: moment.Moment){
+        const nextStepIndex = stepIndex + newDate.diff(date, "days");
         setDate(newDate);
+        setStepIndex(nextStepIndex);
         setStep(steps[nextStepIndex]);
         setIsTyped(false);
-        if(isTyped) setInputValue(steps[nextStepIndex]);
+        setInputValue(steps[nextStepIndex]);
     }
 
     function getSteps(index: number){
@@ -47,18 +53,19 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
     }
 
     const handleChevronClick = (setDiff : number) => {
-        const nextIndex = stepIndex + setDiff;
-        handleSetDate(sevenDaysArray[stepIndex + setDiff]);
-        var currInd = stepIndex + setDiff;
-        setStepIndex(currInd);
-        setStep(steps[nextIndex])
+        const nextStepIndex = stepIndex + setDiff;
+        setDate(sevenDaysArray[nextStepIndex]);
+        setStepIndex(nextStepIndex);
+        setStep(steps[nextStepIndex]);
         setIsTyped(false);
+        setInputValue(steps[nextStepIndex]);
     }
 
     const handleTextFieldUpdate = (val: number) => {
         if(isNaN(val)) val = 0;
         setIsTyped(true);
         setInputValue(val);
+        console.log(val);
     }
 
     const handleUpdateValue = () => {
@@ -123,7 +130,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 <DatePicker
                                     format="MMM DD, YYYY"
                                     value={date}
-                                    onChange={(newDate) => handleSetDate(newDate)}
+                                    onChange={(newDate) => handleSetCalendarDate(newDate)}
                                     minDate={sevenDaysArray[0]}
                                     maxDate={sevenDaysArray[6]}
                                     slotProps={{ openPickerButton: { color: "primary" } }}
@@ -179,7 +186,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 value={date}
                                 minDate={sevenDaysArray[0]}
                                 maxDate={sevenDaysArray[6]}
-                                onChange={(newDate) => handleSetDate(newDate)}
+                                onChange={(newDate) => handleSetCalendarDate(newDate)}
                                 slotProps={{ openPickerButton: { color: "primary" } }}
                                 sx={{
                                 backgroundColor: (theme) => theme.palette.textFieldBkg,
