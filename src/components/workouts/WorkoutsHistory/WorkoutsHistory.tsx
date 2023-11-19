@@ -83,7 +83,10 @@ function WorkoutsHistory() {
                     <Box padding={2} display="flex" justifyContent="center" width="97%" height="300px" maxHeight="70%" >
                         <WorkoutsHistoryGrid workouts={currentWeekWorkouts} daysOfWeek={currentWeek} handleWeekShift={handleWeekShift}/>
                     </Box>
-                    <Box padding={2} width="97%" height="150px" maxHeight="20%" sx={{overflow: "hidden", overflowY: "scroll"}}>
+                    <Typography textAlign="center" fontWeight="bold" paddingTop={1}>
+                        {currentWeek.at(0).toLocaleDateString('en-us', { month:"short", day: "numeric"})} - {currentWeek.at(currentWeek.length-1).toLocaleDateString('en-us', { month:"short", day: "numeric"})}
+                    </Typography>
+                    <Box padding={2} width="97%" maxHeight="20%">
                         <WorkoutHistoryList workouts={currentWeekWorkouts} editWorkout={handleEditWorkoutOpen} removeWorkout={removeWorkout}/>
                     </Box>
                 </Box>
