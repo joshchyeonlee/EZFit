@@ -48,7 +48,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
 
     const handleChevronClick = (setDiff : number) => {
         const nextIndex = stepIndex + setDiff;
-        handleSetDate(sevenDaysArray[nextIndex]);
+        handleSetDate(sevenDaysArray[stepIndex + setDiff]);
         var currInd = stepIndex + setDiff;
         setStepIndex(currInd);
         setStep(steps[nextIndex])
