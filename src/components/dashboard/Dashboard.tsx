@@ -87,7 +87,7 @@ function Dashboard() {
             October 10, 2023
           </Typography>
         </Box>
-        <Box display={"flex"} justifyContent={"space-between"} width={"60%"}>
+        <Box display={"flex"} justifyContent={"center"} width={"70%"}>
           <DashboardButton title={"Edit Dashboard"} />
           <DashboardButton title={"Sync Device Data"} />
         </Box>
