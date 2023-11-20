@@ -27,7 +27,7 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
         <Box bgcolor="ButtonShadow" width="100%" maxWidth="700px" height="100%" borderRadius={4} position="relative" justifyContent="center">
             <Box width="90%" height="90%" padding={2} paddingLeft="5%" paddingRight="5%" justifyContent="center">
                 <Box position="absolute" left={0} top="125px">
-                    <IconButton onClick={() => handleChevronClick(-1)}>
+                    <IconButton onClick={() => handleChevronClick(-1)} color="primary">
                         <ChevronLeft/>
                     </IconButton>
                 </Box>
@@ -51,7 +51,7 @@ function WorkoutsHistoryGrid(props: { workouts: Workout[]; daysOfWeek: Date[]; h
                     }
                 </Box>
                 <Box position="absolute" right={0} top="125px">
-                    <IconButton onClick={() => handleChevronClick(1)}>
+                    <IconButton onClick={() => handleChevronClick(1)} color="primary">
                         <ChevronRight/>
                     </IconButton>
                 </Box>
