@@ -1,3 +1,5 @@
+import Workout from "../../models/Workout";
+
 export interface FieldTypeProps {
   fieldTitle: string;
   type: "text" | "dropdown" | "date" | "time";
@@ -8,6 +10,12 @@ export interface FieldTypeProps {
 export interface OverlayProps {
   isOpen: boolean;
   handleClose: () => void;
+}
+
+export interface EditHistoryOverlayProps {
+  isOpen: boolean;
+  handleClose: () => void;
+  workout: Workout;
 }
 
 export interface BaseLoggingOverlayProps extends OverlayProps {

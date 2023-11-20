@@ -6,7 +6,7 @@ import workouts from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
 import { useNavigate } from "react-router-dom";
-import { ManualLoggingOverlay } from "../../Overlays/LoggingOverlays";
+import { EditHistoryOverlay } from "../../Overlays/LoggingOverlays";
 
 function WorkoutsHistory() {
     
@@ -84,14 +84,14 @@ function WorkoutsHistory() {
                         <WorkoutsHistoryGrid workouts={currentWeekWorkouts} daysOfWeek={currentWeek} handleWeekShift={handleWeekShift}/>
                     </Box>
                     <Typography textAlign="center" fontWeight="bold" paddingTop={1}>
-                        {currentWeek.at(0).toLocaleDateString('en-us', { month:"short", day: "numeric"})} - {currentWeek.at(currentWeek.length-1).toLocaleDateString('en-us', { month:"short", day: "numeric"})}
+                        {currentWeek.at(0)?.toLocaleDateString('en-us', { month:"short", day: "numeric"})} - {currentWeek.at(currentWeek.length-1)?.toLocaleDateString('en-us', { month:"short", day: "numeric"})}
                     </Typography>
                     <Box padding={2} width="97%" maxHeight="20%">
                         <WorkoutHistoryList workouts={currentWeekWorkouts} editWorkout={handleEditWorkoutOpen} removeWorkout={removeWorkout}/>
                     </Box>
                 </Box>
             </Box>
-            <ManualLoggingOverlay isOpen={editWorkoutOpen} handleClose={handleEditWorkoutClose} />
+            <EditHistoryOverlay isOpen={editWorkoutOpen} handleClose={handleEditWorkoutClose} workout={currentEditedWorkout} />
         </Box>
     );
 }
