@@ -49,7 +49,7 @@ const DashboardCard = ({
       <Typography
         variant={"h4"}
         textAlign={"center"}
-        padding={"20px"}
+        padding={"30px"}
         color={"black"}
       >
         {middleText}
@@ -87,7 +87,7 @@ function Dashboard() {
             October 10, 2023
           </Typography>
         </Box>
-        <Box display={"flex"} justifyContent={"space-between"} width={"50%"}>
+        <Box display={"flex"} justifyContent={"space-between"} width={"60%"}>
           <DashboardButton title={"Edit Dashboard"} />
           <DashboardButton title={"Sync Device Data"} />
         </Box>
@@ -95,7 +95,7 @@ function Dashboard() {
           display={"flex"}
           alignItems={"center"}
           flexDirection={"column"}
-          width={"50%"}
+          width={"70%"}
           justifyContent={"space-between"}
           padding={"50px"}
         >
