@@ -13,6 +13,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
     const handleClose = () => {
         setSelectedModal("");
         props.setOpen(false);
+        setIndex(0);
     }
 
     const handleChevronClick = (i: number) => {
