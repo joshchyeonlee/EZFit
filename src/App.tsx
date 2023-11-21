@@ -13,6 +13,7 @@ import React from "react";
 import AccountManagementPage from "./components/account/AccountManagementMenu/AccountManagementPage";
 import PersonalInformationPage from "./components/account/PersonalInformation/PersonalInformationPage";
 import PreferencesPage from "./components/account/Preferences/PreferencesPage";
+import Landing from "./components/landing/Landing";
 
 const App: React.FC = () => {
   return (
@@ -26,13 +27,16 @@ const App: React.FC = () => {
           <Route path="/NewWorkout" element={<NewWorkout />} />
           <Route path="/Nutrition" element={<Nutrition />} />
           <Route path="/Account" element={<AccountManagementPage />} />
-          <Route path="/Account/PersonalInformation" element={<PersonalInformationPage />} />
+          <Route
+            path="/Account/PersonalInformation"
+            element={<PersonalInformationPage />}
+          />
           <Route path="/Account/Preferences" element={<PreferencesPage />} />
         </Routes>
         <NavigationBar />
       </Grid>
     </LocalizationProvider>
   );
-}
+};
 
-export default App
+export default App;
