@@ -30,6 +30,11 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
         (selectedModal === modal) ? setSelectedModal("") : setSelectedModal(modal);
     }
 
+    const handleConfirmClick = () => {
+        //need to handle selected modal here
+        handleClose();
+    }
+
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -94,7 +99,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
                     </IconButton>
                 </Box>
                 <Box padding={4}>
-                    <Button variant="contained">
+                    <Button variant="contained" onClick={() => handleConfirmClick()}>
                         Confirm
                     </Button>
                 </Box>
