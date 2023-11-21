@@ -99,7 +99,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
                     </IconButton>
                 </Box>
                 <Box padding={4}>
-                    <Button variant="contained" onClick={() => handleConfirmClick()}>
+                    <Button disabled={selectedModal===""} variant="contained" onClick={() => handleConfirmClick()}>
                         Confirm
                     </Button>
                 </Box>
