@@ -8,6 +8,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
     const availableModals = ["Active Minutes", "Today's Macros", "Distance Travelled", "Heart Rate", "Steps"];
     const [index, setIndex] = useState(0);
     const [selectedModal, setSelectedModal] = useState("");
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const handleClose = () => {
         setSelectedModal("");
@@ -17,11 +18,15 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
     const handleChevronClick = (i: number) => {
         const currentIndex = (i === 1) ? index + 4 : index - 4;
         setIndex(currentIndex);
+        setIsAnimating(true);
+
+        setTimeout(() => {
+            setIsAnimating(false);
+        }, 150);
     }
 
     const handleSelectModal = (modal: string) => {
-        console.log(`clicked ${modal}`);
-        setSelectedModal(modal);
+        (selectedModal === modal) ? setSelectedModal("") : setSelectedModal(modal);
     }
 
     const style = {
@@ -53,7 +58,14 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
                     <IconButton onClick={() => handleChevronClick(-1)} disabled={index - 4 < 0}>
                         <ChevronLeft/>
                     </IconButton>
-                    <Box padding={4} display="absolute" width={550} height={300}>    
+                    <Box    padding={4}
+                            display="absolute"
+                            width={550}
+                            height={300}
+                            sx = {{
+                                opacity: isAnimating ? 0 : 1,
+                                transition: 'opacity .15s ease-in-out',
+                            }}>    
                         <Grid container spacing={2}>
                             {availableModals.slice(index, index+4).map((val) => {return(
                             <Grid item xs={6}>
@@ -63,7 +75,8 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
                                                 boxShadow: 3,
                                                 minHeight: 150,
                                                 minWidth: 250,
-                                                transition: "all .5s ease",
+                                                transition: "bgcolor .15s ease opacity .15s ease-in-out",
+                                                opacity: isAnimating ? 0 : 1,
                                                 }}>
                                     <CardActionArea sx={{ minHeight: 150, minWidth: 250}} onClick={() => {handleSelectModal(val)}}>
                                         <Box display="flex" justifyContent="center">
