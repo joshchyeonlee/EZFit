@@ -1,3 +1,4 @@
+import moment from "moment";
 import Workout from "../../models/Workout";
 import BaseLoggingOverlay from "./BaseLoggingOverlay";
 import { EditHistoryOverlayProps, FieldTypeProps, OverlayProps } from "./BaseLoggingOverlay.types";
@@ -30,7 +31,7 @@ export function EditHistoryOverlay( { isOpen, handleClose, workout } : EditHisto
       },
       {
         fieldTitle: "Date",
-        defaultData: workout.date,
+        defaultData: moment(workout.date).toDate(),
         type: "date",
       },
       {
