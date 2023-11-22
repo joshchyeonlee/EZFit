@@ -6,7 +6,7 @@ export const manualLoggingFields: FieldTypeProps[] = [
   {
     fieldTitle: "Workout Title",
     type: "text",
-    placeholder: "Enter Workout Title...",
+    placeholder: "Enter Workout Title",
   },
   {
     fieldTitle: "Date",
@@ -20,7 +20,7 @@ export const foodLoggingFields: FieldTypeProps[] = [
   {
     fieldTitle: "Food",
     type: "text",
-    placeholder: "Enter Food Name...",
+    placeholder: "Enter Food Name",
   },
   {
     fieldTitle: "Meal",

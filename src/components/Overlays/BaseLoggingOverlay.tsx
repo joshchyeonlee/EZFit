@@ -84,7 +84,7 @@ const LoggingField = ({
         ) : null}
         {type === "date" ? (
           <DatePicker
-            value={moment()}
+            defaultValue={moment()}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
               backgroundColor: (theme) => theme.palette.textFieldBkg,
@@ -93,6 +93,7 @@ const LoggingField = ({
               "& .MuiInputBase-input": {
                 padding: "5px",
                 textAlign: "center",
+                paddingLeft: "42px",
               },
               "& .MuiInputBase-root": {
                 borderRadius: "10px",
@@ -106,7 +107,7 @@ const LoggingField = ({
         {type === "time" ? (
           <TimePicker
             views={["hours", "minutes", "seconds"]}
-            format="hh:mm:ss"
+            format="HH:mm:ss"
             ampm={false}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
@@ -115,7 +116,8 @@ const LoggingField = ({
               width: "100%",
               "& .MuiInputBase-input": {
                 padding: "5px",
-                textAlign: "center",
+                textAlign: "right",
+                paddingRight: "54px",
               },
               "& .MuiInputBase-root": {
                 borderRadius: "10px",
@@ -138,6 +140,10 @@ const LoggingField = ({
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderRadius: "10px",
                 },
+                "& .MuiOutlinedInput-input": {
+                  paddingRight: "5px !important",
+                },
+
                 borderRadius: "10px",
               }}
               onChange={(e) => handleFieldChange(fieldTitle, e.target.value)}
