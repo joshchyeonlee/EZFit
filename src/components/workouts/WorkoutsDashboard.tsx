@@ -42,6 +42,8 @@ function WorkoutsDashboard() {
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
+        handleSubmit={() => {}}
+        title="Manually Log Workout"
       />
 
       <Box textAlign={"center"} padding={"40px 30px"}>
