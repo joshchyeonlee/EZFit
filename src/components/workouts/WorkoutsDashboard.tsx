@@ -1,7 +1,7 @@
 import { Button, Box, Divider, Grid, Typography } from "@mui/material";
 import SearchBar from "../utils/SearchBar";
 import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
-import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
+import WorkoutRow from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,11 @@ function WorkoutsDashboard() {
   const navigate = useNavigate();
 
   const handleCreateClick = () => {
-    navigate('/NewWorkout');
+    navigate("/NewWorkout");
+  };
+
+  const handleNavExerciseLibrary = () => {
+    navigate("/Exercise-Library");
   };
 
   const handleHistoryClick = () => {
@@ -24,10 +28,8 @@ function WorkoutsDashboard() {
   };
 
   const handleSearch = (query: string) => {
-    let results: WorkoutRowProps[] = [];
-
-    workoutRowMockData.forEach((workout) =>
-      workout.title.toLowerCase().includes(query) ? results.push(workout) : null
+    const results = workoutRowMockData.filter((workout) =>
+      workout.title.toLowerCase().includes(query)
     );
     setWorkoutSearchResults(results);
   };
@@ -44,10 +46,14 @@ function WorkoutsDashboard() {
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
+        handleSubmit={() => {}}
+        title="Manually Log Workout"
       />
 
       <Box textAlign={"center"} padding={"40px 30px"}>
-        <Typography variant="h5">Workouts</Typography>
+        <Typography variant="h5" fontWeight={"bold"}>
+          Workouts
+        </Typography>
       </Box>
       <Box textAlign={"center"} padding={"20px 200px"} width={"60%"}>
         <SearchBar
@@ -64,7 +70,10 @@ function WorkoutsDashboard() {
         <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
         <WorkoutMenuButton title={"History"} onClick={handleHistoryClick} />
-        <WorkoutMenuButton title={"Exercise Library"} />
+        <WorkoutMenuButton
+          title={"Exercise Library"}
+          onClick={handleNavExerciseLibrary}
+        />
       </Box>
       <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
       <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
