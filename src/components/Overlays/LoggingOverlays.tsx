@@ -32,6 +32,7 @@ export function EditHistoryOverlay({
   workout,
 }: EditHistoryOverlayProps) {
   function getLoadedEditWorkoutFields(workout: Workout) {
+    console.log({ workout });
     const fieldProps: FieldTypeProps[] = [
       {
         fieldTitle: "Workout Title",
@@ -41,7 +42,7 @@ export function EditHistoryOverlay({
       },
       {
         fieldTitle: "Date",
-        defaultData: moment(workout.date).toDate(),
+        defaultData: workout.date,
         type: "date",
       },
       {

@@ -28,6 +28,7 @@ const LoggingField = ({
   placeholder,
   handleFieldChange,
 }: LoggingFieldProps) => {
+  console.log(defaultData);
   return (
     <Grid
       display={"flex"}
@@ -84,7 +85,7 @@ const LoggingField = ({
         ) : null}
         {type === "date" ? (
           <DatePicker
-            defaultValue={moment()}
+            defaultValue={defaultData ? moment(defaultData) : moment()}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
               backgroundColor: (theme) => theme.palette.textFieldBkg,

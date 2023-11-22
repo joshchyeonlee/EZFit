@@ -32,7 +32,7 @@ export const foodLoggingFields: FieldTypeProps[] = [
   { fieldTitle: "Servings Eaten", type: "decimal", defaultData: 1 },
 ];
 
-export const editHistoryFields: FieldTypeProps[] = [ 
+export const editHistoryFields: FieldTypeProps[] = [
   {
     fieldTitle: "Workout Title",
     type: "text",
@@ -41,7 +41,6 @@ export const editHistoryFields: FieldTypeProps[] = [
   {
     fieldTitle: "Date",
     type: "date",
-    defaultData: moment().format("MMMM DD, YYYY"),
   },
   { fieldTitle: "Duration", type: "time" },
 ];
