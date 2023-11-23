@@ -29,7 +29,14 @@ function Landing() {
       flexDirection={"column"}
       sx={{ mt: 7 }}
     >
-      <img src="/EZFitLogo.png" alt="EZFit Logo" />
+      <Box maxWidth={"300px"} minWidth={"200px"}>
+        <img
+          src="/EZFitLogo.png"
+          alt="EZFit Logo"
+          width={"100%"}
+          height={"auto"}
+        />
+      </Box>
       <Box
         display={"flex"}
         justifyContent={"center"}
@@ -47,7 +54,7 @@ function Landing() {
         <LandingButton title={"Log In"} />
       </Box>
       <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
-      <Divider sx={{ width: "70%", borderColor: "black", mt: 5 }} />
+      <Divider sx={{ width: "50%", borderColor: "black", mt: 5 }} />
       <Box
         display={"flex"}
         justifyContent={"center"}
