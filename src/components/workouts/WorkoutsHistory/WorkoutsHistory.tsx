@@ -60,7 +60,6 @@ function WorkoutsHistory() {
 
   const handleEditWorkoutOpen = (workout: Workout) => {
     setCurrentEditedWorkout(workout);
-    console.log(workout);
     setEditWorkoutOpen(true);
   };
 

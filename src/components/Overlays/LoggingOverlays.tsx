@@ -32,7 +32,6 @@ export function EditHistoryOverlay({
   workout,
 }: EditHistoryOverlayProps) {
   function getLoadedEditWorkoutFields(workout: Workout) {
-    console.log({ workout });
     const fieldProps: FieldTypeProps[] = [
       {
         fieldTitle: "Workout Title",
@@ -51,8 +50,6 @@ export function EditHistoryOverlay({
         type: "time",
       },
     ];
-
-    console.log(fieldProps);
 
     return fieldProps;
   }

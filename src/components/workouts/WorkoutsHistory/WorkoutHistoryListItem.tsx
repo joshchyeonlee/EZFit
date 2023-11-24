@@ -9,7 +9,6 @@ function WorkoutHistoryListItem(props: {
 }) {
   const handleOnClickEdit = () => {
     props.editWorkout(props.workout);
-    console.log({ props });
   };
 
   const handleOnClickDelete = () => {

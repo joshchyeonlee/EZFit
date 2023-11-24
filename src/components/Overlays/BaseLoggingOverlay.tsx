@@ -29,7 +29,6 @@ const LoggingField = ({
   placeholder,
   handleFieldChange,
 }: LoggingFieldProps) => {
-  console.log(defaultData);
   return (
     <Grid
       display={"flex"}
