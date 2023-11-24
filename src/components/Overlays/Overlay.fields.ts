@@ -33,5 +33,14 @@ export const foodLoggingFields: FieldTypeProps[] = [
 ];
 
 export const editHistoryFields: FieldTypeProps[] = [
-  //TODO
+  {
+    fieldTitle: "Workout Title",
+    type: "text",
+    placeholder: "Enter Workout Title...",
+  },
+  {
+    fieldTitle: "Date",
+    type: "date",
+  },
+  { fieldTitle: "Duration", type: "time" },
 ];

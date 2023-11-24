@@ -1,7 +1,7 @@
 import { Button, Box, Divider, Grid, Typography } from "@mui/material";
 import SearchBar from "../utils/SearchBar";
 import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
-import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
+import WorkoutRow from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,10 @@ function WorkoutsDashboard() {
 
   const handleNavExerciseLibrary = () => {
     navigate("/Exercise-Library");
+  };
+
+  const handleHistoryClick = () => {
+    navigate("/Workouts/History");
   };
 
   const handleSearch = (query: string) => {
@@ -65,7 +69,7 @@ function WorkoutsDashboard() {
       >
         <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
-        <WorkoutMenuButton title={"History"} />
+        <WorkoutMenuButton title={"History"} onClick={handleHistoryClick} />
         <WorkoutMenuButton
           title={"Exercise Library"}
           onClick={handleNavExerciseLibrary}

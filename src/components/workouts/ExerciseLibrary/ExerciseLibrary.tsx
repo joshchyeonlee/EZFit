@@ -251,7 +251,7 @@ const ExerciseList = ({
     (entry) => entry.name[0] === letter
   );
 
-  if (letterExercises.length > 0)
+  if (letterExercises.length > 0){
     return (
       <Grid>
         <Typography variant="h5" color={"primary"}>
@@ -270,6 +270,8 @@ const ExerciseList = ({
         </Grid>
       </Grid>
     );
+  }
+  return null;
 };
 
 const ExerciseEntry = ({ name }: { name: string }) => {
