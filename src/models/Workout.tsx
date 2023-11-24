@@ -20,6 +20,10 @@ class Workout
     {
         return this.title;
     }
+
+    getDurationAsDate(): Date {
+        return new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDay(), this.duration.hours, this.duration.minutes, this.duration.seconds);
+    }
 }
 
 export default Workout;

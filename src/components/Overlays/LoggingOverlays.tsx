@@ -47,7 +47,7 @@ export function EditHistoryOverlay({
       },
       {
         fieldTitle: "Duration",
-        defaultData: workout.duration?.toString(),
+        defaultData: workout.getDurationAsDate(),
         type: "time",
       },
     ];
