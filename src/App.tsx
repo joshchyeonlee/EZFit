@@ -1,5 +1,5 @@
 import { NavigationBar } from "./components/navigation/NavigationBar";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import "./App.css";
 import { Routes, Route } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -16,6 +16,7 @@ import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import ExerciseLibrary from "./components/workouts/ExerciseLibrary/ExerciseLibrary";
 import { Exercise } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.types";
 import { exerciseLibraryMockData } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.mockData";
+import ExerciseView from "./components/workouts/ExerciseLibrary/ExerciseView";
 
 const generatePath = (name: string) => {
   return `/${name.replace(" ", "-")}`;
@@ -42,7 +43,7 @@ const App: React.FC = () => {
           {(exerciseLibraryMockData as any).map((exercise: Exercise) => (
             <Route
               path={generatePath(exercise.name)}
-              element={<Typography>{exercise.name}</Typography>} //TODO: Change this to exercise view
+              element={<ExerciseView exercise={exercise} />}
               key={exercise.name}
             />
           ))}
