@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "//joshchyeonlee.github.io/EZFit/static/css/main.efdcdfa0.css",
+    "main.js": "//joshchyeonlee.github.io/EZFit/static/js/main.4deb6fb4.js",
+    "index.html": "//joshchyeonlee.github.io/EZFit/index.html",
+    "main.efdcdfa0.css.map": "//joshchyeonlee.github.io/EZFit/static/css/main.efdcdfa0.css.map",
+    "main.4deb6fb4.js.map": "//joshchyeonlee.github.io/EZFit/static/js/main.4deb6fb4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.efdcdfa0.css",
+    "static/js/main.4deb6fb4.js"
+  ]
+}
