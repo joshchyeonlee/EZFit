@@ -5,6 +5,9 @@ import WorkoutRow from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
+import workouts from "../../mockData/Workouts";
+import Workout from "../../models/Workout";
+import WorkoutDuration from "../../models/WorkoutDuration";
 
 const moment = require("moment");
 
@@ -40,13 +43,25 @@ function WorkoutsDashboard() {
   const handleManualLogClose = () => {
     setManualLogOpen(false);
   };
+  const handleManualLogSubmit = (data: any) => {
+    var title : string = data["Workout Title"];
+
+    var date : Date = new Date(data["Date"]);
+
+    var durationAsDate : Date = new Date(data["Duration"] ?? new Date());
+    var duration : WorkoutDuration = new WorkoutDuration(durationAsDate.getHours(), durationAsDate.getMinutes(), durationAsDate.getSeconds());
+    
+    var newWorkout : Workout = new Workout(title, date, duration);
+    
+    (workouts as any).push(newWorkout);
+  };
 
   return (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
-        handleSubmit={() => {}}
+        handleSubmit={handleManualLogSubmit}
         title="Manually Log Workout"
       />
 

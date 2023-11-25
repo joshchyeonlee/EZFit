@@ -7,6 +7,7 @@ import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
 import { useNavigate } from "react-router-dom";
 import { EditHistoryOverlay } from "../../Overlays/LoggingOverlays";
+import WorkoutDuration from "../../../models/WorkoutDuration";
 
 function WorkoutsHistory() {
   const [currentDayIndex, setCurrentDayIndex] = useState(
@@ -61,6 +62,19 @@ function WorkoutsHistory() {
   const handleEditWorkoutOpen = (workout: Workout) => {
     setCurrentEditedWorkout(workout);
     setEditWorkoutOpen(true);
+  };
+
+  const handleEditWorkoutSubmit = (data: any) => {
+    var title : string = data["Workout Title"];
+
+    var date : Date = new Date(data["Date"]);
+
+    var durationAsDate : Date = new Date(data["Duration"] ?? new Date());
+    var duration : WorkoutDuration = new WorkoutDuration(durationAsDate.getHours(), durationAsDate.getMinutes(), durationAsDate.getSeconds());
+    
+    currentEditedWorkout.title = title
+    currentEditedWorkout.date = date
+    currentEditedWorkout.duration = duration;
   };
 
   const handleEditWorkoutClose = () => {
@@ -129,6 +143,7 @@ function WorkoutsHistory() {
       <EditHistoryOverlay
         isOpen={editWorkoutOpen}
         handleClose={handleEditWorkoutClose}
+        handleSubmit={handleEditWorkoutSubmit}
         workout={currentEditedWorkout}
       />
     </Box>

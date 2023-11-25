@@ -23,6 +23,7 @@ export interface OverlayProps {
 export interface EditHistoryOverlayProps {
   isOpen: boolean;
   handleClose: () => void;
+  handleSubmit: (data: {}) => void;
   workout: Workout;
 }
 

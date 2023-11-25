@@ -2,6 +2,7 @@ import WorkoutDuration from "./WorkoutDuration";
 
 class Workout
 {
+    id: number;
     title: string;
     date: Date;
     duration: WorkoutDuration;
@@ -11,6 +12,7 @@ class Workout
     constructor(title: string, date: Date, duration: WorkoutDuration);
     constructor(title?: string, date?: Date, duration?: WorkoutDuration)
     {
+        this.id = Math.random() * 10;
         this.title = title ?? "";
         this.date = date ?? new Date();
         this.duration = duration ?? new WorkoutDuration();
