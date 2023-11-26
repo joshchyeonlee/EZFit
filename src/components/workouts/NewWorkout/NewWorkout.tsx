@@ -19,9 +19,6 @@ import {
 import { Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
 import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
-import { useLocation } from "react-router-dom";
-
-
 
 interface Workout {
   name: string;
