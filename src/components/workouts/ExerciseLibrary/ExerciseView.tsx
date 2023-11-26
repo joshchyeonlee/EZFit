@@ -36,10 +36,10 @@ const ExerciseView = (props: { exercise: Exercise }) => {
                 <Button variant="text" color="primary" startIcon={<ArrowBackIcon />} onClick={() => navigate(`/Exercise-Library`)}>
                     Back
                 </Button>
-                <Typography variant="h4" fontWeight="bold" sx={{marginLeft: '-5%'}}>
+                <Typography variant="h4" fontWeight="bold" sx={{ marginLeft: '-5%' }}>
                     {props.exercise.name}
-                </Typography>   
-                <div></div>       
+                </Typography>
+                <div></div>
             </Box>
 
 
@@ -68,15 +68,9 @@ const ExerciseView = (props: { exercise: Exercise }) => {
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Rest</Typography>
                         <Typography sx={{ textAlign: 'center' }}>{props.exercise.rest}</Typography>
                     </Grid>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', height: '20%', left: '50%' }}></div> {/* Vertical Divider */}
-                    </div>
-
-
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', bottom: 0, left: '50%' }}></div> {/* Vertical Divider */}
+                    <div style={{ width: '2px', backgroundColor: 'gray', position: 'absolute', top: '15%', bottom: '15%', left: '50%' }}></div> {/* Vertical Divider */}
                 </div>
 
                 <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0 }}>
