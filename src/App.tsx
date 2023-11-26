@@ -21,7 +21,6 @@ import WorkoutsHistory from "./components/workouts/WorkoutsHistory/WorkoutsHisto
 const generatePath = (name: string) => {
   return `/${name.replace(" ", "-")}`;
 };
-import WorkoutsPreview from "./components/workouts/WorkoutsPreview";
 
 const App: React.FC = () => {
   return (

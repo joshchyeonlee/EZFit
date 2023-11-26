@@ -8,10 +8,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoIcon from '@mui/icons-material/Info';
 import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import { WorkoutRowProps } from './WorkoutRow/WorkoutRow';
-
+// export interface WorkoutRowProps {
+//   title: string;
+//   lastRun?: string;
+//   onPlayClick?: (workoutData: any) => void;
+//   exercises?: Exercise[];
+// }
 interface WorkoutsPreviewProps extends WorkoutRowProps {
   onBackClick: () => void;
 }
+
 
 const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps) => {
   const [workout, setWorkout] = useState<number>(0);
