@@ -4,12 +4,7 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
-<<<<<<< HEAD
-import WorkoutComplete from "./components/workouts/WorkoutComplete"
-import NewWorkout from "./components/workouts/NewWorkout";
-=======
 import NewWorkout from "./components/workouts/NewWorkout/NewWorkout";
->>>>>>> main
 import Nutrition from "./components/nutrition/NutritionDashboard";
 import RunWorkout from "./components/workouts/RunWorkout";
 import { LocalizationProvider } from "@mui/x-date-pickers";
