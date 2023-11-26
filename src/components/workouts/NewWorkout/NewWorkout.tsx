@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -19,6 +18,10 @@ import {
 } from "@mui/material";
 import { Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
+import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
+import { useLocation } from "react-router-dom";
+
+
 
 interface Workout {
   name: string;
@@ -32,13 +35,44 @@ const categories: { name: string; exercises: string[] }[] = [
   { name: "Chest", exercises: ["Push-ups", "Bench press", "Flyes"] },
 ];
 
-const NewWorkout = (): JSX.Element => {
+interface NewWorkoutProps {
+  onSaveWorkout: (newWorkout: WorkoutRowProps) => void;
+  onBack: () => void
+}
+
+const NewWorkout = ({ onSaveWorkout, onBack }: NewWorkoutProps): JSX.Element => {
   const [search, setSearch] = useState<string>("");
   const [exercises, setExercises] = useState<Workout[]>([]);
   const [workoutName, setWorkoutName] = useState("");
   const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate();
+
+  const [snackBarMessage, setSnackBarMessage] = useState('');
+
+  const handleSaveWorkout = (): void => {
+    if (workoutName.trim() === '') {
+      setSnackBarMessage('Workout name is required.');
+      setOpen(true);
+      return;
+    }
+    if (exercises.length === 0) {
+      setSnackBarMessage('At least one exercise is required.');
+      setOpen(true);
+      return;
+    }
+
+    const newWorkout: WorkoutRowProps = {
+      title: workoutName,
+      exercises: exercises.map((e) => ({ name: e.name })),
+    };
+
+    onSaveWorkout(newWorkout);
+    setOpen(true);
+    setSnackBarMessage('Workout saved!');
+    setTimeout(() => {
+      onBack();
+    }, 2000);
+  };
 
   const handleWorkoutNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -74,13 +108,6 @@ const NewWorkout = (): JSX.Element => {
     );
   };
 
-  const handleSaveWorkout = (): void => {
-    setOpen(true); // Open the Snackbar
-    setTimeout(() => {
-      navigate("/Workouts");
-    }, 2000);
-  };
-
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -95,17 +122,21 @@ const NewWorkout = (): JSX.Element => {
     <div>
       <Box
         sx={{
-          padding: 2,
-          marginLeft: "20%",
-          marginRight: "20%",
-          marginTop: "2%",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '10%',
+          padding: '2%'
         }}
       >
+        <Button sx={{ marginLeft: '3%'}} onClick={onBack}>Back</Button>
+
         <Typography
-          style={{ textAlign: "center", color: "black", fontWeight: "bold" }}
+          style={{ textAlign: "center", color: "black", fontWeight: "bold", fontSize: 'large', marginLeft: '-8%' }}
         >
           Create Workout
         </Typography>
+        <div></div>
       </Box>
 
       <div style={{ display: "flex", overflowX: "hidden", height: "80vh" }}>
@@ -308,8 +339,8 @@ const NewWorkout = (): JSX.Element => {
         </div>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          Workout saved!
+        <Alert onClose={handleClose} severity={snackBarMessage === 'Workout saved!' ? "success" : "error"}>
+          {snackBarMessage}
         </Alert>
       </Snackbar>
     </div>
