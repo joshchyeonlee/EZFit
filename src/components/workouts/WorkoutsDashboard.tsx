@@ -1,7 +1,7 @@
 import { Button, Box, Divider, Grid, Typography } from "@mui/material";
 import SearchBar from "../utils/SearchBar";
 import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
-import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
+import WorkoutRow from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
@@ -29,14 +29,20 @@ function WorkoutsDashboard() {
   const navigate = useNavigate();
 
   const handleCreateClick = () => {
-    navigate('/NewWorkout');
+    navigate("/NewWorkout");
+  };
+
+  const handleNavExerciseLibrary = () => {
+    navigate("/Exercise-Library");
+  };
+
+  const handleHistoryClick = () => {
+    navigate("/Workouts/History");
   };
 
   const handleSearch = (query: string) => {
-    let results: WorkoutRowProps[] = [];
-
-    workoutRowMockData.forEach((workout) =>
-      workout.title.toLowerCase().includes(query) ? results.push(workout) : null
+    const results = workoutRowMockData.filter((workout) =>
+      workout.title.toLowerCase().includes(query)
     );
     setWorkoutSearchResults(results);
   };
@@ -49,45 +55,48 @@ function WorkoutsDashboard() {
   };
 
   return (
-    ((showPreview && selectedWorkout) ? <WorkoutsPreview title={selectedWorkout.title} exercises={selectedWorkout.exercises} onBackClick={handleBackClick} /> :
+    <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
+      <ManualLoggingOverlay
+        isOpen={manualLogOpen}
+        handleClose={handleManualLogClose}
+        handleSubmit={() => {}}
+        title="Manually Log Workout"
+      />
 
-      <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
-        <ManualLoggingOverlay
-          isOpen={manualLogOpen}
-          handleClose={handleManualLogClose}
+      <Box textAlign={"center"} padding={"40px 30px"}>
+        <Typography variant="h5" fontWeight={"bold"}>
+          Workouts
+        </Typography>
+      </Box>
+      <Box textAlign={"center"} padding={"20px 200px"} width={"60%"}>
+        <SearchBar
+          placeholder="Search For Workout..."
+          onSearch={handleSearch}
         />
-
-        <Box textAlign={"center"} padding={"40px 30px"}>
-          <Typography variant="h5">Workouts</Typography>
-        </Box>
-        <Box textAlign={"center"} padding={"20px 200px"} width={"60%"}>
-          <SearchBar
-            placeholder="Search For Workout..."
-            onSearch={handleSearch}
-          />
-        </Box>
-        <Box
-          display={"flex"}
-          justifyContent={"space-between"}
-          padding={"20px 50px"}
-          width={"60%"}
-        >
-          <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
-          <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
-          <WorkoutMenuButton title={"History"} />
-          <WorkoutMenuButton title={"Exercise Library"} />
-        </Box>
-        <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
-        <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
-          {workoutSearchResults.length !== 0 ? (
-            workoutSearchResults.map(({ title, lastRun, exercises }) => (
-              <WorkoutRow title={title} lastRun={lastRun} key={title} exercises={exercises} onPlayClick={handlePlayClick} />
-            ))
-          ) : (
-            <Typography fontSize={"18px"}>No Workouts Found</Typography>
-          )}
-
-        </Grid>
+      </Box>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        padding={"20px 50px"}
+        width={"60%"}
+      >
+        <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
+        <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
+        <WorkoutMenuButton title={"History"} onClick={handleHistoryClick} />
+        <WorkoutMenuButton
+          title={"Exercise Library"}
+          onClick={handleNavExerciseLibrary}
+        />
+      </Box>
+      <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
+      <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
+        {workoutSearchResults.length !== 0 ? (
+          workoutSearchResults.map(({ title, lastRun }) => (
+            <WorkoutRow title={title} lastRun={lastRun} key={title} />
+          ))
+        ) : (
+          <Typography fontSize={"18px"}>No Workouts Found</Typography>
+        )}
       </Grid>
     )
   );
