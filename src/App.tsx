@@ -17,6 +17,7 @@ import ExerciseLibrary from "./components/workouts/ExerciseLibrary/ExerciseLibra
 import { Exercise } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.types";
 import { exerciseLibraryMockData } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.mockData";
 import ExerciseView from "./components/workouts/ExerciseLibrary/ExerciseView";
+import WorkoutsHistory from "./components/workouts/WorkoutsHistory/WorkoutsHistory";
 
 const generatePath = (name: string) => {
   return `/${name.replace(" ", "-")}`;
@@ -47,6 +48,7 @@ const App: React.FC = () => {
               key={exercise.name}
             />
           ))}
+          <Route path="/Workouts/History" element={<WorkoutsHistory />} />
         </Routes>
         <NavigationBar />
       </Grid>

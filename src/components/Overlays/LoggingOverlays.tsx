@@ -1,5 +1,11 @@
+import moment from "moment";
+import Workout from "../../models/Workout";
 import BaseLoggingOverlay from "./BaseLoggingOverlay";
-import { OverlayProps } from "./BaseLoggingOverlay.types";
+import {
+  EditHistoryOverlayProps,
+  FieldTypeProps,
+  OverlayProps,
+} from "./BaseLoggingOverlay.types";
 import { foodLoggingFields, manualLoggingFields } from "./Overlay.fields";
 
 export function ManualLoggingOverlay({
@@ -20,8 +26,45 @@ export function ManualLoggingOverlay({
   );
 }
 
-export function EditHistoryOverlay({ isOpen, handleClose }: OverlayProps) {
-  // TODO
+export function EditHistoryOverlay({
+  isOpen,
+  handleClose,
+  workout,
+}: EditHistoryOverlayProps) {
+  function getLoadedEditWorkoutFields(workout: Workout) {
+    const fieldProps: FieldTypeProps[] = [
+      {
+        fieldTitle: "Workout Title",
+        defaultData: workout.title,
+        type: "text",
+        placeholder: "Enter Workout Title...",
+      },
+      {
+        fieldTitle: "Date",
+        defaultData: workout.date,
+        type: "date",
+      },
+      {
+        fieldTitle: "Duration",
+        defaultData: workout.getDurationAsDate(),
+        type: "time",
+      },
+    ];
+
+    return fieldProps;
+  }
+
+  return (
+    <BaseLoggingOverlay
+      isOpen={isOpen}
+      handleSubmit={() => {}}
+      handleClose={handleClose}
+      title={"Edit Workout"}
+      fields={getLoadedEditWorkoutFields(workout)}
+      submitText={"Save Changes"}
+      confirmationText={"Workout History Modified"}
+    />
+  );
 }
 
 export function FoodLogging({

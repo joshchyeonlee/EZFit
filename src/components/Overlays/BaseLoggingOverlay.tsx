@@ -17,6 +17,7 @@ import {
   BaseLoggingOverlayProps,
   LoggingFieldProps,
 } from "./BaseLoggingOverlay.types";
+import { string } from "prop-types";
 
 const moment = require("moment");
 
@@ -84,7 +85,7 @@ const LoggingField = ({
         ) : null}
         {type === "date" ? (
           <DatePicker
-            defaultValue={moment()}
+            defaultValue={defaultData ? moment(defaultData) : moment()}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
               backgroundColor: (theme) => theme.palette.textFieldBkg,
@@ -108,6 +109,7 @@ const LoggingField = ({
           <TimePicker
             views={["hours", "minutes", "seconds"]}
             format="HH:mm:ss"
+            defaultValue={moment(defaultData) ?? null}
             ampm={false}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
