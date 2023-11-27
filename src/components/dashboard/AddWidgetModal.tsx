@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Modal, Typography, Grid, Card, CardActionArea } from "@mui/material";
 import { Close } from '@mui/icons-material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import theme from "../../themes/theme";
 
 function AddWidgetModal(props: { open: boolean; setOpen: any; }){
@@ -9,6 +9,10 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
     const [index, setIndex] = useState(0);
     const [selectedModal, setSelectedModal] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);
+    const [containerW, setContainerW] = useState((window.innerWidth < 500) ? 200 : 550);
+    const [containerH, setContainerH] = useState(300);
+    const [itemW, setItemW] = useState((window.innerWidth < 500) ? 100 : 250);
+    const [itemH, setItemH] = useState((window.innerWidth < 500) ? 70 : 150);
 
     const handleClose = () => {
         setSelectedModal("");
@@ -35,6 +39,12 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
         handleClose();
     }
 
+    const handleUpdateWindow = () => {
+        setContainerW((window.innerWidth < 500) ? 200 : 550);
+        setItemH((window.innerWidth < 500) ? 70 : 150);
+        setItemW((window.innerWidth < 500) ? 100 : 250);
+    }
+
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -45,7 +55,13 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
         borderRadius: "50px",
         boxShadow: 24,
         p: 4,
+        maxWidth:"70%"
     };
+
+    useEffect(() => {
+        window.addEventListener("resize", handleUpdateWindow);
+        handleUpdateWindow();
+    })
 
     return(
     <Modal
@@ -54,7 +70,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
         aria-labelledby="add-widget"
         aria-describedby="add-widget-modal"
     >
-        <Box sx={style} justifyContent="center" width={700} height={500}>
+        <Box sx={style} justifyContent="center">
             <Box position="absolute" display="flex" justifyContent="flex-end" right="10px" top="10px" padding="10px">
                 <IconButton size="large" onClick={() => handleClose()}><Close/></IconButton>
             </Box>
@@ -64,27 +80,26 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
                     <IconButton onClick={() => handleChevronClick(-1)} disabled={index - 4 < 0}>
                         <ChevronLeft/>
                     </IconButton>
-                    <Box    padding={4}
+                    <Box
+                            padding={2}
                             display="absolute"
-                            width={550}
+                            width={containerW}
                             height={300}
                             sx = {{
                                 opacity: isAnimating ? 0 : 1,
                                 transition: 'opacity .15s ease-in-out',
                             }}>    
-                        <Grid container spacing={2}>
+                        <Grid container spacing={{xs: 1, md: 2}} columns={{md: 4, xs: 2}}>
                             {availableModals.slice(index, index+4).map((val) => {return(
-                            <Grid item xs={6}>
+                            <Grid item xs={2} md={2}>
                                 <Card variant="outlined"
                                         sx={{   bgcolor: (val === selectedModal) ? theme.palette.primary.main : "ButtonShadow",
                                                 borderRadius: 4,
                                                 boxShadow: 3,
-                                                minHeight: 150,
-                                                minWidth: 250,
                                                 transition: "bgcolor .15s ease opacity .15s ease-in-out",
                                                 opacity: isAnimating ? 0 : 1,
                                                 }}>
-                                    <CardActionArea sx={{ minHeight: 150, minWidth: 250}} onClick={() => {handleSelectModal(val)}}>
+                                    <CardActionArea sx={{ minHeight: itemH, minWidth: itemW}} onClick={() => {handleSelectModal(val)}}>
                                         <Box display="flex" justifyContent="center">
                                             <Typography variant="h5" color={(val === selectedModal) ? "white" : "black"}>{val}</Typography>
                                         </Box>
