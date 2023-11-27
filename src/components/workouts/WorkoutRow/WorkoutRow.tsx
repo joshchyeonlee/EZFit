@@ -4,9 +4,27 @@ import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
 export interface WorkoutRowProps {
   title: string;
   lastRun?: string;
+  onPlayClick?: (workoutData: any) => void;
+  exercises?: Exercise[];
 }
 
-function WorkoutRow({ title, lastRun }: WorkoutRowProps) {
+interface Exercise {
+  name: string;
+  muscles?: string;
+  equipment?: string;
+  execution?: string;
+  rest?: string;
+  gif?: string;
+}
+
+function WorkoutRow({ title, lastRun, onPlayClick, exercises }: WorkoutRowProps) {
+
+  const handleClick = () => {
+    if (onPlayClick) {
+      onPlayClick({ title, lastRun, exercises });
+    }
+  };
+
   return (
     <Grid display={"flex"} flexDirection={"column"}>
       <Divider sx={{ borderColor: "darkgray" }} />
@@ -17,7 +35,9 @@ function WorkoutRow({ title, lastRun }: WorkoutRowProps) {
         margin={"20px"}
       >
         <Grid display={"flex"} width="40%" alignItems={"center"}>
-          <PlayArrow color="primary" fontSize="large" />
+        <IconButton onClick={handleClick}>
+            <PlayArrow color="primary" fontSize="large" />
+          </IconButton>
           <Typography paddingLeft={"16px"} fontSize={"18px"}>
             {title}
           </Typography>

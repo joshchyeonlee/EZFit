@@ -15,11 +15,18 @@ function Dashboard() {
     setIsAddWidgetModalOpen(true);
   }
 
-  return <div>
+  return (<div>
     <UncondensedDashboard open={isUncondensedDashboardOpen} setOpen={setIsUncondensedDashboardOpen}/>
     <AddWidgetModal open={isAddWidgetModalOpen} setOpen={setIsAddWidgetModalOpen}/>
     <div>
-      Dashboard
+      <UncondensedDashboard
+        open={isUncondensedDashboardOpen}
+        setOpen={setIsUncondensedDashboardOpen}
+      />
+      <div>Dashboard</div>
+      <Button onClick={() => handleOpenUncondensedView()}>
+        Open uncondensed dashboard
+      </Button>
     </div>
     <Button onClick={() => handleOpenUncondensedView()}>
       Open uncondensed dashboard
@@ -27,6 +34,6 @@ function Dashboard() {
     <Button onClick={() => handleOpenAddWidgetModal()}>
       Open add widget modal
     </Button>
-  </div>;
+  </div>);
 }
 export default Dashboard;
