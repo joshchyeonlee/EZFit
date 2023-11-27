@@ -3,20 +3,24 @@ import React, { useState } from "react";
 import UncondensedDashboard from "./UncondensedDashboard";
 
 function Dashboard() {
-  const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] = useState(false);
-  
+  const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] =
+    useState(false);
+
   const handleOpenUncondensedView = () => {
     setIsUncondensedDashboardOpen(true);
-  }
+  };
 
-  return <div>
-    <UncondensedDashboard open={isUncondensedDashboardOpen} setOpen={setIsUncondensedDashboardOpen}/>
+  return (
     <div>
-      Dashboard
+      <UncondensedDashboard
+        open={isUncondensedDashboardOpen}
+        setOpen={setIsUncondensedDashboardOpen}
+      />
+      <div>Dashboard</div>
+      <Button onClick={() => handleOpenUncondensedView()}>
+        Open uncondensed dashboard
+      </Button>
     </div>
-    <Button onClick={() => handleOpenUncondensedView()}>
-      Open uncondensed dashboard
-    </Button>
-  </div>;
+  );
 }
 export default Dashboard;
