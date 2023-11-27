@@ -6,10 +6,7 @@ function Dashboard() {
   const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] = useState(false);
   
   const handleOpenUncondensedView = () => {
-    console.log(isUncondensedDashboardOpen);
-    console.log("opening")
     setIsUncondensedDashboardOpen(true);
-    console.log(isUncondensedDashboardOpen);
   }
 
   return <div>
