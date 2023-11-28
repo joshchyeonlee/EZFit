@@ -1,4 +1,5 @@
 import { Button, Box, Typography, Divider } from "@mui/material";
+import { useState } from "react";
 
 interface LandingButtonProps {
   title: string;
@@ -22,6 +23,11 @@ const LandingButton = ({ title, onClick }: LandingButtonProps) => {
 };
 
 function Landing() {
+  const [isThirdPartyModalOpen, setIsThirdPartyModalOpen] = useState(false);
+
+  const handleOpenThirdPartyModal = () => {
+    setIsThirdPartyModalOpen(true);
+  };
   return (
     <Box
       display={"flex"}
@@ -61,7 +67,10 @@ function Landing() {
         width={"40%"}
         sx={{ mt: 5 }}
       >
-        <LandingButton title={"3rd Party Sign In"} />
+        <LandingButton
+          title={"3rd Party Sign In"}
+          onClick={() => handleOpenThirdPartyModal()}
+        />
       </Box>
     </Box>
   );
