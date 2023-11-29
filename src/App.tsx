@@ -14,13 +14,17 @@ import AccountManagementPage from "./components/account/AccountManagementMenu/Ac
 import PersonalInformationPage from "./components/account/PersonalInformation/PersonalInformationPage";
 import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import Landing from "./components/landing/Landing";
+import SignUp from "./components/signup/SignUp";
+import { Login } from "@mui/icons-material";
 
 const App: React.FC = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} className="App">
         <Routes>
-          <Route path="/" element={<div>HOME</div>} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workouts" element={<WorkoutsDashboard />} />
           <Route path="/RunWorkout" element={<RunWorkout />} />

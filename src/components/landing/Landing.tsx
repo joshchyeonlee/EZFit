@@ -1,5 +1,6 @@
 import { Button, Box, Typography, Divider } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface LandingButtonProps {
   title: string;
@@ -28,6 +29,19 @@ function Landing() {
   const handleOpenThirdPartyModal = () => {
     setIsThirdPartyModalOpen(true);
   };
+
+  const navigateSignUp = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigateSignUp("/SignUp");
+  };
+
+  const navigateLogin = useNavigate();
+
+  const handleLoginClick = () => {
+    navigateLogin("/Login");
+  };
+
   return (
     <Box
       display={"flex"}
@@ -49,7 +63,7 @@ function Landing() {
         width={"40%"}
         sx={{ mt: 17 }}
       >
-        <LandingButton title={"Sign Up"} />
+        <LandingButton title={"Sign Up"} onClick={handleSignUpClick} />
       </Box>
       <Box
         display={"flex"}
@@ -57,7 +71,7 @@ function Landing() {
         width={"40%"}
         sx={{ mt: 4 }}
       >
-        <LandingButton title={"Log In"} />
+        <LandingButton title={"Log In"} onClick={handleLoginClick} />
       </Box>
       <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
       <Divider sx={{ width: "50%", borderColor: "black", mt: 5 }} />
