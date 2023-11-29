@@ -56,15 +56,6 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         return steps[index];
     }
 
-    const handleChevronClick = (setDiff : number) => {
-        const nextStepIndex = stepIndex + setDiff;
-        setDate(daysArray[nextStepIndex]);
-        setStepIndex(nextStepIndex);
-        setStep(steps[nextStepIndex]);
-        setIsTyped(false);
-        setInputValue(steps[nextStepIndex]);
-    }
-
     const graphChevronClick = (setDiff : number) => {
         var nextStepIndex = stepIndex + (setDiff * 7);
         var nextSplitIndex = splitIndex + (setDiff * 7);
@@ -145,9 +136,6 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                             <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
                         </Box>
                         <Box padding={4} display="flex" justifyContent="center" alignItems="center">
-                            <IconButton onClick={() => {handleChevronClick(-1)}} disabled={stepIndex === 0}>
-                                <ChevronLeft/>
-                            </IconButton>
                                 <DatePicker
                                     format="MMM DD, YYYY"
                                     value={date}
@@ -181,13 +169,11 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                         padding: "0px 16px 0px 0px",
                                       }}
                                 />
-                            <IconButton onClick={() => {handleChevronClick(1)}} disabled={stepIndex === 6}>
-                                <ChevronRight/>
-                            </IconButton>
                         </Box>
                         <Box display="flex" justifyContent="center" alignItems="center" padding={8}>
                             <TextField 
                                 variant="standard"
+                                inputProps={{ style:{textAlign:"center"} }}
                                 InputProps={{ endAdornment:"steps" }}
                                 value={!isTyped ? step : inputValue}
                                 onChange={(e) => {handleTextFieldUpdate(parseInt(e.target.value))}}
