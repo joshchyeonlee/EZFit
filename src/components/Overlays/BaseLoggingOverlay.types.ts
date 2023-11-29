@@ -1,3 +1,4 @@
+import { AppGlobalProps } from "../../App";
 import Workout from "../../models/Workout";
 
 export interface FieldTypeProps {
@@ -8,11 +9,11 @@ export interface FieldTypeProps {
   placeholder?: string;
 }
 
-export interface LoggingFieldProps extends FieldTypeProps {
+export interface LoggingFieldProps extends FieldTypeProps, AppGlobalProps {
   handleFieldChange: (fieldName: string, value: any) => void;
 }
 
-export interface OverlayProps {
+export interface OverlayProps extends AppGlobalProps {
   isOpen: boolean;
   handleClose: () => void;
   handleSubmit: (data: {}) => void;
@@ -20,7 +21,7 @@ export interface OverlayProps {
   existingData?: {};
 }
 
-export interface EditHistoryOverlayProps {
+export interface EditHistoryOverlayProps extends AppGlobalProps {
   isOpen: boolean;
   handleClose: () => void;
   workout: Workout;

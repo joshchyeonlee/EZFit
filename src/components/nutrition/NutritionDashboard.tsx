@@ -14,10 +14,11 @@ import {
   Edit,
 } from "@mui/icons-material";
 import { FoodLogging } from "../Overlays/LoggingOverlays";
+import { AppGlobalProps } from "../../App";
 
 const moment = require("moment");
 
-function Nutrition() {
+function Nutrition({ isMobile }: AppGlobalProps) {
   const [date, setDate] = useState(moment());
   const formattedDate = date.format("DD/MM/YYYY");
   const [foodLogOpen, setFoodLogOpen] = useState(false);
@@ -108,12 +109,13 @@ function Nutrition() {
         handleClose={() => setFoodLogOpen(false)}
         handleSubmit={handleNutritionLogging}
         title="Log Food"
+        isMobile={isMobile}
       />
       <Grid
         padding={"40px 0px 20px"}
         display={"flex"}
         justifyContent={"center"}
-        width={"500px"}
+        width={isMobile ? "100%" : "500px"}
       >
         <Grid justifyContent={"right"} width={"10%"}>
           <IconButton onClick={() => setDate(moment(date).subtract(1, "days"))}>
@@ -171,14 +173,13 @@ function Nutrition() {
       <Grid
         display={"flex"}
         flexDirection={"column"}
-        padding={"20px 0px"}
-        width={"450px"}
+        width={isMobile ? "90%" : "450px"}
       >
-        <Grid display={"flex"} justifyContent={"space-evenly"}>
-          <Typography fontSize={"18px"} padding={"0px 30px"}>
+        <Grid display={"flex"} justifyContent={"space-between"}>
+          <Typography fontSize={"18px"}>
             Calories In: {caloriesIn.toLocaleString()}
           </Typography>
-          <Typography fontSize={"18px"} padding={"0px 30px"}>
+          <Typography fontSize={"18px"}>
             Calories Out: {nutritionData?.caloriesOut}
           </Typography>
         </Grid>
@@ -207,6 +208,7 @@ function Nutrition() {
           nutritionData={nutritionData}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          isMobile={isMobile}
         ></NutritionSection>
         <NutritionSection
           title={"Lunch"}
@@ -214,6 +216,7 @@ function Nutrition() {
           nutritionData={nutritionData}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          isMobile={isMobile}
         ></NutritionSection>
         <NutritionSection
           title={"Dinner"}
@@ -221,6 +224,7 @@ function Nutrition() {
           nutritionData={nutritionData}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          isMobile={isMobile}
         ></NutritionSection>
         <NutritionSection
           title={"Snacks"}
@@ -228,6 +232,7 @@ function Nutrition() {
           nutritionData={nutritionData}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          isMobile={isMobile}
         ></NutritionSection>
       </Grid>
     </Grid>
@@ -242,6 +247,7 @@ const NutritionSection = ({
   nutritionData,
   handleEdit,
   handleDelete,
+  isMobile,
 }: NutritionSectionsProps) => {
   return (
     <>
@@ -250,14 +256,14 @@ const NutritionSection = ({
       <Grid
         display={"flex"}
         flexDirection={"column"}
-        width={"70%"}
-        padding={"20px"}
+        width={isMobile ? "100%" : "70%"}
+        padding={isMobile ? "4px" : "20px"}
       >
         <Grid display={"flex"} width={"100%"} alignItems={"end"}>
           <Typography
-            fontSize={"20px"}
+            fontSize={isMobile ? "16px" : "20px"}
             color={"primary"}
-            width={"40%"}
+            width={isMobile ? "30%" : "40%"}
             fontWeight={"bold"}
           >
             {title}
@@ -266,8 +272,8 @@ const NutritionSection = ({
           {foodIntake.length !== 0 ? (
             <>
               <Typography
-                width={"25%"}
-                fontSize={"18px"}
+                width={isMobile ? "35%" : "25%"}
+                fontSize={isMobile ? "16px" : "18px"}
                 sx={{ textDecoration: "underline" }}
                 textAlign={"center"}
                 fontWeight={"bold"}
@@ -276,7 +282,7 @@ const NutritionSection = ({
               </Typography>
               <Typography
                 width={"25%"}
-                fontSize={"18px"}
+                fontSize={isMobile ? "16px" : "18px"}
                 sx={{ textDecoration: "underline" }}
                 textAlign={"center"}
                 fontWeight={"bold"}
@@ -299,10 +305,13 @@ const NutritionSection = ({
                 nutritionData={nutritionData}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
+                isMobile={isMobile}
               />
             ))
           ) : (
-            <Typography padding={"20px"}>No Food Logged</Typography>
+            <Typography padding={"20px"} fontSize={isMobile ? "14px" : "16px"}>
+              No Food Logged
+            </Typography>
           )}
         </Grid>
       </Grid>
@@ -320,6 +329,7 @@ const FoodEntry = ({
   nutritionData,
   handleEdit,
   handleDelete,
+  isMobile,
 }: FoodEntryProps) => {
   const [foodEditOpen, setFoodEditOpen] = useState(false);
 
@@ -354,23 +364,46 @@ const FoodEntry = ({
             ["Calories/Serving"]: Math.floor(calories / servingSize),
             ["Servings Eaten"]: servingSize,
           }}
+          isMobile={isMobile}
         />
       )}
-      <Grid width={"40%"} paddingLeft={"20px"}>
-        <Typography>{foodName}</Typography>
+      <Grid
+        width={isMobile ? "30%" : "40%"}
+        paddingLeft={isMobile ? "4px " : "20px"}
+      >
+        <Typography fontSize={isMobile ? "14px" : "16px"}>
+          {foodName}
+        </Typography>
       </Grid>
-      <Typography width={"25%"} textAlign={"center"}>
+      <Typography
+        width={isMobile ? "35%" : "25%"}
+        textAlign={"center"}
+        fontSize={isMobile ? "14px" : "16px"}
+      >
         {servingSize}
       </Typography>
-      <Typography width={"25%"} textAlign={"center"}>
+      <Typography
+        width={"25%"}
+        textAlign={"center"}
+        fontSize={isMobile ? "14px" : "16px"}
+      >
         {calories.toLocaleString()}
       </Typography>
-      <Grid width={"10%"} display={"flex"} justifyContent={"space-evenly"}>
-        <IconButton onClick={() => setFoodEditOpen(true)}>
+      <Grid
+        width={"10%"}
+        display={"flex"}
+        justifyContent={"space-evenly"}
+        flexDirection={isMobile ? "column" : "row"}
+      >
+        <IconButton
+          onClick={() => setFoodEditOpen(true)}
+          size={isMobile ? "small" : "medium"}
+        >
           <Edit color="primary" />
         </IconButton>
         <IconButton
           onClick={() => handleDelete(meal.toLowerCase(), findIndex())}
+          size={isMobile ? "small" : "medium"}
         >
           <Delete color="primary" />
         </IconButton>

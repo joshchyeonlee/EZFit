@@ -17,7 +17,6 @@ import {
   BaseLoggingOverlayProps,
   LoggingFieldProps,
 } from "./BaseLoggingOverlay.types";
-import { string } from "prop-types";
 
 const moment = require("moment");
 
@@ -28,23 +27,25 @@ const LoggingField = ({
   defaultData,
   placeholder,
   handleFieldChange,
+  isMobile,
 }: LoggingFieldProps) => {
   return (
     <Grid
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
-      margin={"8px 0px"}
+      margin={isMobile ? "2px" : "8px 0px"}
+      flexDirection={isMobile ? "column" : "row"}
     >
       <Typography
         paddingRight={"8px"}
-        width={"30%"}
-        textAlign={"right"}
+        width={isMobile ? "100%" : "30%"}
+        textAlign={isMobile ? "left" : "right"}
         fontWeight={"bold"}
       >
         {fieldTitle}:
       </Typography>
-      <Grid width={"60%"}>
+      <Grid width={isMobile ? "100%" : "60%"}>
         {type === "text" || type === "decimal" || type === "integer" ? (
           <TextField
             type={type === "text" ? type : "number"}
@@ -94,7 +95,7 @@ const LoggingField = ({
               "& .MuiInputBase-input": {
                 padding: "5px",
                 textAlign: "center",
-                paddingLeft: "42px",
+                paddingLeft: () => (isMobile ? "0px" : "42px"),
               },
               "& .MuiInputBase-root": {
                 borderRadius: "10px",
@@ -118,8 +119,8 @@ const LoggingField = ({
               width: "100%",
               "& .MuiInputBase-input": {
                 padding: "5px",
-                textAlign: "right",
-                paddingRight: "54px",
+                textAlign: () => (isMobile ? "center" : "right"),
+                paddingRight: () => (isMobile ? "0px" : "54px"),
               },
               "& .MuiInputBase-root": {
                 borderRadius: "10px",
@@ -172,6 +173,7 @@ function BaseLoggingOverlay({
   submitText,
   confirmationText,
   readOnlyFields,
+  isMobile,
 }: BaseLoggingOverlayProps) {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -225,7 +227,7 @@ function BaseLoggingOverlay({
           justifyContent={"center"}
         >
           <Box
-            width={"550px"}
+            width={isMobile ? "90%" : "550px"}
             height={"500px"}
             bgcolor={"primaryBkg"}
             borderRadius={"50px"}
@@ -264,6 +266,7 @@ function BaseLoggingOverlay({
                   key={field.fieldTitle}
                   handleFieldChange={handleFieldChange}
                   dropdownFields={field.dropdownFields}
+                  isMobile={isMobile}
                 />
               ))}
               {readOnlyFields?.map((field) => (
