@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
 import WorkoutsPreview from "./WorkoutsPreview";
+import NewWorkout from "./NewWorkout/NewWorkout";
 
 function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   const [manualLogOpen, setManualLogOpen] = useState(false);
@@ -14,6 +15,7 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutRowProps>();
+  const [isCreatingNewWorkout, setIsCreatingNewWorkout] = useState(false);
 
   const handlePlayClick = (workoutData: any) => {
     setShowPreview(true);
@@ -25,10 +27,6 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   };
 
   const navigate = useNavigate();
-
-  const handleCreateClick = () => {
-    navigate("/NewWorkout");
-  };
 
   const handleNavExerciseLibrary = () => {
     navigate("/Exercise-Library");
@@ -50,6 +48,18 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   };
   const handleManualLogClose = () => {
     setManualLogOpen(false);
+  };
+
+  const handleCreateClick = () => {
+    setIsCreatingNewWorkout(true);
+  };
+
+  const handleBackFromNewWorkout = () => {
+    setIsCreatingNewWorkout(false);
+  };
+
+  const addNewWorkout = (newWorkout: WorkoutRowProps) => {
+    setWorkoutSearchResults((prevWorkouts) => [newWorkout, ...prevWorkouts]);
   };
 
   const renderMainContent = () => (
@@ -123,9 +133,16 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
 
   return (
     <>
-      {showPreview && selectedWorkout
-        ? renderWorkoutPreview()
-        : renderMainContent()}
+      {isCreatingNewWorkout ? (
+        <NewWorkout
+          onSaveWorkout={addNewWorkout}
+          onBack={handleBackFromNewWorkout}
+        />
+      ) : showPreview && selectedWorkout ? (
+        renderWorkoutPreview()
+      ) : (
+        renderMainContent()
+      )}
     </>
   );
 }
