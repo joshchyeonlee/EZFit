@@ -137,41 +137,8 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                         <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center" sx={{width:"100%"}}>
                             <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
                         </Box>
-                        <Box padding={4} display="flex" justifyContent="center" alignItems="center">
-                                <MobileDatePicker
-                                    format="MMM DD, YYYY"
-                                    value={date}
-                                    onChange={(newDate) => handleSetCalendarDate(newDate)}
-                                    minDate={daysArray[0]}
-                                    maxDate={daysArray[daysArray.length - 1]}
-                                    slotProps={{ textField:{InputProps:{endAdornment:(<CalendarMonthIcon/>)}}}}
-                                    // slotProps={{ openPickerButton: { color: "primary" }}}
-                                    sx={{
-                                        ".MuiInputBase-root:before, .MuiInputBase-root:after": {
-                                          borderBottom: "none",
-                                        },
-                          
-                                        ".MuiInputBase-root:hover:not(.Mui-disabled, .Mui-error)::before":
-                                          {
-                                            borderBottom: "none",
-                                          },
-                          
-                                        ".MuiInputBase-input": {
-                                          fontWeight: "bold",
-                                          textAlign: "center",
-                                          fontSize: "22px",
-                                          width: "80%",
-                                        },
-                                        ".MuiInputBase-root": {
-                                          justifyContent: "center",
-                                        },
-                                        ".MuiInputAdornment-root": {
-                                          width: "fit-content",
-                                          justifyContent: "left",
-                                        },
-                                        padding: "0px 16px 0px 0px",
-                                      }}
-                                />
+                        <Box paddingTop={2} paddingBottom={4} display="flex" justifyContent="center" alignItems="center">
+                                <Typography variant="h6">{date.format("MMM DD YYYY")}</Typography>
                         </Box>
                         <Box display="flex" justifyContent="center" alignItems="center" padding={8}>
                             <TextField 
@@ -182,7 +149,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                 onChange={(e) => {handleTextFieldUpdate(parseInt(e.target.value))}}
                                 />
                         </Box>
-                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" padding={8}>
                             <Box padding={1} width={250} display="flex" justifyContent="center" alignItems="center">
                                 <Button fullWidth variant="contained" onClick={() => {handleUpdateValue()}}>
                                     Confirm
