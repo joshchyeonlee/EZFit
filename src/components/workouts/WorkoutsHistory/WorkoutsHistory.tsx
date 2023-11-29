@@ -7,8 +7,9 @@ import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
 import { useNavigate } from "react-router-dom";
 import { EditHistoryOverlay } from "../../Overlays/LoggingOverlays";
+import { AppGlobalProps } from "../../../App";
 
-function WorkoutsHistory() {
+function WorkoutsHistory({ isMobile }: AppGlobalProps) {
   const [currentDayIndex, setCurrentDayIndex] = useState(
     new Date().toDateString()
   );
@@ -106,12 +107,10 @@ function WorkoutsHistory() {
             />
           </Box>
           <Typography textAlign="center" fontWeight="bold" paddingTop={1}>
-            {currentWeek
-              .at(0)
-              ?.toLocaleDateString("en-us", {
-                month: "short",
-                day: "numeric",
-              })}{" "}
+            {currentWeek.at(0)?.toLocaleDateString("en-us", {
+              month: "short",
+              day: "numeric",
+            })}{" "}
             -{" "}
             {currentWeek
               .at(currentWeek.length - 1)
@@ -130,6 +129,7 @@ function WorkoutsHistory() {
         isOpen={editWorkoutOpen}
         handleClose={handleEditWorkoutClose}
         workout={currentEditedWorkout}
+        isMobile={isMobile}
       />
     </Box>
   );

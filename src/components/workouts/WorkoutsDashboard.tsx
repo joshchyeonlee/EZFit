@@ -6,14 +6,16 @@ import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
 import WorkoutsPreview from "./WorkoutsPreview";
+import NewWorkout from "./NewWorkout/NewWorkout";
 
-function WorkoutsDashboard() {
+function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   const [manualLogOpen, setManualLogOpen] = useState(false);
   const [workoutSearchResults, setWorkoutSearchResults] =
     useState(workoutRowMockData);
 
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutRowProps>();
+  const [isCreatingNewWorkout, setIsCreatingNewWorkout] = useState(false);
 
   const handlePlayClick = (workoutData: any) => {
     setShowPreview(true);
@@ -25,10 +27,6 @@ function WorkoutsDashboard() {
   };
 
   const navigate = useNavigate();
-
-  const handleCreateClick = () => {
-    navigate("/NewWorkout");
-  };
 
   const handleNavExerciseLibrary = () => {
     navigate("/Exercise-Library");
@@ -52,13 +50,26 @@ function WorkoutsDashboard() {
     setManualLogOpen(false);
   };
 
+  const handleCreateClick = () => {
+    setIsCreatingNewWorkout(true);
+  };
+
+  const handleBackFromNewWorkout = () => {
+    setIsCreatingNewWorkout(false);
+  };
+
+  const addNewWorkout = (newWorkout: WorkoutRowProps) => {
+    setWorkoutSearchResults((prevWorkouts) => [newWorkout, ...prevWorkouts]);
+  };
+
   const renderMainContent = () => (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
-        handleSubmit={() => { }}
+        handleSubmit={() => {}}
         title="Manually Log Workout"
+        isMobile={isMobile}
       />
 
       <Box textAlign={"center"} padding={"40px 30px"}>
@@ -66,17 +77,18 @@ function WorkoutsDashboard() {
           Workouts
         </Typography>
       </Box>
-      <Box textAlign={"center"} padding={"20px 200px"} width={"60%"}>
+      <Box textAlign={"center"} padding={"20px 200px"} width={"80%"}>
         <SearchBar
           placeholder="Search For Workout..."
           onSearch={handleSearch}
         />
       </Box>
-      <Box
+      <Grid
         display={"flex"}
         justifyContent={"space-between"}
-        padding={"20px 50px"}
-        width={"60%"}
+        padding={isMobile ? "10px" : "20px 50px"}
+        width={isMobile ? "100%" : "80%"}
+        container
       >
         <WorkoutMenuButton title={"Create"} onClick={handleCreateClick} />
         <WorkoutMenuButton title={"Manual Log"} onClick={handleManualLogOpen} />
@@ -85,37 +97,54 @@ function WorkoutsDashboard() {
           title={"Exercise Library"}
           onClick={handleNavExerciseLibrary}
         />
-      </Box>
+      </Grid>
       <Divider sx={{ width: "70%", borderColor: "black", padding: "10px" }} />
-      <Grid width={"70%"} margin={"50px"} textAlign={"center"}>
+      <Grid
+        width={isMobile ? "90%" : "70%"}
+        margin={isMobile ? "0px" : "50px"}
+        textAlign={"center"}
+      >
         {workoutSearchResults.length !== 0 ? (
           workoutSearchResults.map(({ title, lastRun, exercises }) => (
-            <WorkoutRow title={title} lastRun={lastRun} key={title} exercises={exercises} onPlayClick={handlePlayClick} />
+            <WorkoutRow
+              title={title}
+              lastRun={lastRun}
+              key={title}
+              exercises={exercises}
+              onPlayClick={handlePlayClick}
+              isMobile={isMobile}
+            />
           ))
         ) : (
           <Typography fontSize={"18px"}>No Workouts Found</Typography>
         )}
       </Grid>
     </Grid>
-
-  )
-
-  const renderWorkoutPreview = () => (
-    selectedWorkout &&
-    <WorkoutsPreview
-      title={selectedWorkout.title}
-      exercises={selectedWorkout.exercises}
-      onBackClick={handleBackClick}
-    />
   );
+
+  const renderWorkoutPreview = () =>
+    selectedWorkout && (
+      <WorkoutsPreview
+        title={selectedWorkout.title}
+        exercises={selectedWorkout.exercises}
+        onBackClick={handleBackClick}
+      />
+    );
 
   return (
     <>
-      {showPreview && selectedWorkout ? renderWorkoutPreview() : renderMainContent()}
+      {isCreatingNewWorkout ? (
+        <NewWorkout
+          onSaveWorkout={addNewWorkout}
+          onBack={handleBackFromNewWorkout}
+        />
+      ) : showPreview && selectedWorkout ? (
+        renderWorkoutPreview()
+      ) : (
+        renderMainContent()
+      )}
     </>
   );
-
-
 }
 
 interface WorkoutMenuButtonProps {
@@ -125,7 +154,7 @@ interface WorkoutMenuButtonProps {
 
 const WorkoutMenuButton = ({ title, onClick }: WorkoutMenuButtonProps) => {
   return (
-    <Box textAlign={"center"} width={"25%"} padding={"0px 8px"}>
+    <Grid textAlign={"center"} padding={"8px 8px"} xs={6} sm={3}>
       <Button
         variant="contained"
         color="primary"
@@ -135,7 +164,7 @@ const WorkoutMenuButton = ({ title, onClick }: WorkoutMenuButtonProps) => {
       >
         <Typography color={"primaryBkg"}>{title}</Typography>
       </Button>
-    </Box>
+    </Grid>
   );
 };
 

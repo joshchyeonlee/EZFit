@@ -12,6 +12,7 @@ export function ManualLoggingOverlay({
   isOpen,
   handleClose,
   handleSubmit,
+  isMobile,
 }: OverlayProps) {
   return (
     <BaseLoggingOverlay
@@ -22,6 +23,7 @@ export function ManualLoggingOverlay({
       fields={manualLoggingFields}
       submitText={"Log Workout"}
       confirmationText={"Workout Logged"}
+      isMobile={isMobile}
     />
   );
 }
@@ -30,6 +32,7 @@ export function EditHistoryOverlay({
   isOpen,
   handleClose,
   workout,
+  isMobile,
 }: EditHistoryOverlayProps) {
   function getLoadedEditWorkoutFields(workout: Workout) {
     const fieldProps: FieldTypeProps[] = [
@@ -63,6 +66,7 @@ export function EditHistoryOverlay({
       fields={getLoadedEditWorkoutFields(workout)}
       submitText={"Save Changes"}
       confirmationText={"Workout History Modified"}
+      isMobile={isMobile}
     />
   );
 }
@@ -73,6 +77,7 @@ export function FoodLogging({
   handleSubmit,
   title,
   existingData,
+  isMobile,
 }: OverlayProps) {
   let fields = foodLoggingFields;
 
@@ -93,6 +98,7 @@ export function FoodLogging({
       submitText={title}
       confirmationText={"Food Logged "}
       readOnlyFields={[{ title: "Total Calories" }]}
+      isMobile={isMobile}
     />
   );
 }

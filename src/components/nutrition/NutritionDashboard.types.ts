@@ -1,3 +1,5 @@
+import { AppGlobalProps } from "../../App";
+
 export interface FoodIntakeProps {
   id: string;
   foodName: string;
@@ -5,7 +7,7 @@ export interface FoodIntakeProps {
   calories: number;
 }
 
-export interface FoodEntryProps extends FoodIntakeProps {
+export interface FoodEntryProps extends FoodIntakeProps, AppGlobalProps {
   meal: string;
   nutritionData: NutritionDashboardProps;
   handleEdit: (data: any, meal: string, index: number) => void;
@@ -23,7 +25,7 @@ export interface NutritionDashboardProps {
   };
 }
 
-export interface NutritionSectionsProps {
+export interface NutritionSectionsProps extends AppGlobalProps {
   title: "Breakfast" | "Lunch" | "Dinner" | "Snacks";
   foodIntake: FoodIntakeProps[];
   nutritionData: NutritionDashboardProps;

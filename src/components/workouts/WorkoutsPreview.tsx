@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoIcon from '@mui/icons-material/Info';
-import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
+import { IconButton, List, ListItem, ListItemSecondaryAction } from '@mui/material';
 import { WorkoutRowProps } from './WorkoutRow/WorkoutRow';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
