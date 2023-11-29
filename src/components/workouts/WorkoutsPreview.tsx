@@ -9,19 +9,15 @@ import InfoIcon from '@mui/icons-material/Info';
 import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import { WorkoutRowProps } from './WorkoutRow/WorkoutRow';
 import ArrowBack from '@mui/icons-material/ArrowBack';
-// export interface WorkoutRowProps {
-//   title: string;
-//   lastRun?: string;
-//   onPlayClick?: (workoutData: any) => void;
-//   exercises?: Exercise[];
-// }
+import { useNavigate } from 'react-router-dom';
+
 interface WorkoutsPreviewProps extends WorkoutRowProps {
   onBackClick: () => void;
 }
 
 
 const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps) => {
-  const [workout, setWorkout] = useState<number>(0);
+  const navigate = useNavigate();
 
   const handleLogWorkout = () => {
     // TODO: implement logging logic
@@ -29,8 +25,8 @@ const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps
   };
 
   const handleRunWorkout = () => {
-    // TODO: implement running logic
-    alert('Workout started!');
+    console.log(exercises)
+    navigate('/RunWorkout', { state: { exercises } });
   };
 
   return (
