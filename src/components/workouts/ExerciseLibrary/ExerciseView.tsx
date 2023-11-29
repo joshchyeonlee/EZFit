@@ -1,11 +1,13 @@
 import * as React from 'react'
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import { Exercise } from "./ExerciseLibrary.types";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBack from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import {
+    Grid,
+    Box,
+    IconButton,
+    Typography,
+  } from "@mui/material";
 
 const ExerciseView = (props: { exercise: Exercise }) => {
 
@@ -33,9 +35,13 @@ const ExerciseView = (props: { exercise: Exercise }) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Button variant="text" color="primary" startIcon={<ArrowBackIcon />} onClick={() => navigate(`/Exercise-Library`)}>
-                    Back
-                </Button>
+                <IconButton
+                    color="primary"
+                    onClick={() => navigate("/Workouts")}
+                    sx={{ paddingLeft: "1%", marginTop: '-1%' }}
+                >
+                    <ArrowBack sx={{ fontSize: "50px" }} />
+                </IconButton>
                 <Typography variant="h4" fontWeight="bold" sx={{ marginLeft: '-5%' }}>
                     {props.exercise.name}
                 </Typography>
