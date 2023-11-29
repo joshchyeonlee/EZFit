@@ -8,15 +8,18 @@ function Dashboard() {
   const handleOpenUncondensedView = () => {
     setIsUncondensedDashboardOpen(true);
   }
-
-  return <div>
-    <UncondensedDashboard open={isUncondensedDashboardOpen} setOpen={setIsUncondensedDashboardOpen}/>
+  
+  return (
     <div>
-      Dashboard
+      <UncondensedDashboard
+        open={isUncondensedDashboardOpen}
+        setOpen={setIsUncondensedDashboardOpen}
+      />
+      <div>Dashboard</div>
+      <Button onClick={() => handleOpenUncondensedView()}>
+        Open uncondensed dashboard
+      </Button>
     </div>
-    <Button onClick={() => handleOpenUncondensedView()}>
-      Open uncondensed dashboard
-    </Button>
-  </div>;
+  );
 }
 export default Dashboard;

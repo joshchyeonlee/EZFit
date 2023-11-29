@@ -156,17 +156,30 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                                     maxDate={daysArray[daysArray.length - 1]}
                                     slotProps={{ openPickerButton: { color: "primary" } }}
                                     sx={{
-                                    backgroundColor: (theme) => theme.palette.textFieldBkg,
-                                    borderRadius: "10px",
-                                    width: "100%",
-                                    "& .MuiInputBase-input": {
-                                        padding: "5px",
-                                        textAlign: "center",
-                                    },
-                                    "& .MuiInputBase-root": {
-                                        borderRadius: "10px",
-                                    },
-                                    }}
+                                        ".MuiInputBase-root:before, .MuiInputBase-root:after": {
+                                          borderBottom: "none",
+                                        },
+                          
+                                        ".MuiInputBase-root:hover:not(.Mui-disabled, .Mui-error)::before":
+                                          {
+                                            borderBottom: "none",
+                                          },
+                          
+                                        ".MuiInputBase-input": {
+                                          fontWeight: "bold",
+                                          textAlign: "center",
+                                          fontSize: "22px",
+                                          width: "80%",
+                                        },
+                                        ".MuiInputBase-root": {
+                                          justifyContent: "center",
+                                        },
+                                        ".MuiInputAdornment-root": {
+                                          width: "fit-content",
+                                          justifyContent: "left",
+                                        },
+                                        padding: "0px 16px 0px 0px",
+                                      }}
                                 />
                             <IconButton onClick={() => {handleChevronClick(1)}} disabled={stepIndex === 6}>
                                 <ChevronRight/>
