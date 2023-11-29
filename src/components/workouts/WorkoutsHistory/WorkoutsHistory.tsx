@@ -2,7 +2,7 @@ import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import WorkoutsHistoryGrid from "./WorkoutsHistoryGrid";
 import { useEffect, useState } from "react";
-import workouts from "../../../mockData/Workouts";
+import workoutData from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,7 @@ function WorkoutsHistory() {
     setCurrentWeek(newWeek);
   }, [currentDayIndex]);
 
-  const [activeWorkouts, setActiveWorkouts] = useState(workouts);
+  const [activeWorkouts, setActiveWorkouts] = useState(workoutData);
 
   const removeWorkout = (workout: Workout) => {
     var newWorkoutList = activeWorkouts.filter((e) => e != workout);

@@ -5,7 +5,7 @@ import WorkoutRow from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
-import workouts from "../../mockData/Workouts";
+import workoutData from "../../mockData/Workouts";
 import Workout from "../../models/Workout";
 import WorkoutDuration from "../../models/WorkoutDuration";
 
@@ -53,7 +53,7 @@ function WorkoutsDashboard() {
     
     var newWorkout : Workout = new Workout(title, date, duration);
     
-    (workouts as any).push(newWorkout);
+    (workoutData as any).push(newWorkout);
   };
 
   return (
