@@ -24,9 +24,6 @@ function Dashboard() {
         setOpen={setIsUncondensedDashboardOpen}
       />
       <div>Dashboard</div>
-      <Button onClick={() => handleOpenUncondensedView()}>
-        Open uncondensed dashboard
-      </Button>
     </div>
     <Button onClick={() => handleOpenUncondensedView()}>
       Open uncondensed dashboard
