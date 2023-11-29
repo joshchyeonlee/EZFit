@@ -96,7 +96,7 @@ const RunWorkout = () => {
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
                 <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginLeft: '5%', marginRight: '5%', maxWidth: '40.5%' }}>
 
-                    <Grid item xs={6} style={{ marginTop: '15%', marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginTop: '15%', marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Muscles Targeted</Typography>
                         {exercises[workout].muscles.map((muscle, index) => (
                             <Typography key={index} sx={{ textAlign: 'center' }}>
@@ -104,12 +104,12 @@ const RunWorkout = () => {
                             </Typography>
                         ))}
                     </Grid>
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Equipment</Typography>
                         <Typography sx={{ textAlign: 'center' }}>{exercises[workout].equipment}</Typography>
                     </Grid>
 
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Execution</Typography>
                         {exercises[workout].execution.map((step, index) => (
                             <Typography key={index} sx={{ textAlign: 'center' }}>
@@ -118,7 +118,7 @@ const RunWorkout = () => {
                         ))}
                     </Grid>
 
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Rest</Typography>
                         <Typography sx={{ textAlign: 'center' }}>{exercises[workout].rest}</Typography>
                     </Grid>
@@ -175,7 +175,7 @@ const RunWorkout = () => {
                         bottom: 0,
                         marginLeft: '10%',
                         marginBottom: '10%',
-                        marginTop: '3%',
+                        marginTop: '6%',
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
