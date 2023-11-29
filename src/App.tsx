@@ -42,6 +42,7 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         <Routes>
+          <Route path="/" element={<div>HOME</div>} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route
             path="/Workouts"
