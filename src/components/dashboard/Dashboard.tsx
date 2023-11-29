@@ -11,6 +11,10 @@ function Dashboard() {
     setIsUncondensedDashboardOpen(true);
   }
 
+  const handleOpenAddWidgetModal = () => {
+    setIsAddWidgetModalOpen(true);
+  }
+
   return (<div>
     <UncondensedDashboard open={isUncondensedDashboardOpen} setOpen={setIsUncondensedDashboardOpen}/>
     <AddWidgetModal open={isAddWidgetModalOpen} setOpen={setIsAddWidgetModalOpen}/>

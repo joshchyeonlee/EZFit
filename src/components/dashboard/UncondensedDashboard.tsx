@@ -1,5 +1,4 @@
 import { Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from "@mui/material";
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Close } from '@mui/icons-material';
 import { useState, useEffect } from "react";
 import UncondensedDashboardGraph from "./UncondensedDashboardGraph";
@@ -99,7 +98,9 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         boxShadow: 24,
         p: 4,
         display: 'flex',
-        maxWidth: "70%",
+        maxWidth: "65%",
+        minWidth: "40%",
+        minHeight: "60%",
     };
 
     const handleConfirmationClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -132,7 +133,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                     
                     {isUpdateManually ?
                     <div>
-                        <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+                        <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center" sx={{width:"100%"}}>
                             <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
                         </Box>
                         <Box padding={4} display="flex" justifyContent="center" alignItems="center">
