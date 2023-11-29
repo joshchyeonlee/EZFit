@@ -13,6 +13,7 @@ import { ArrowBack } from "@mui/icons-material";
 import { exerciseLibraryMockData } from "./ExerciseLibrary.mockData";
 import { Exercise, muscleGroup } from "./ExerciseLibrary.types";
 import { ChangeEvent, useEffect, useState } from "react";
+import { AppGlobalProps } from "../../../App";
 
 const initialFilterState: muscleGroup[] = [
   "Back",
@@ -27,7 +28,7 @@ const initialFilterState: muscleGroup[] = [
   "Quadriceps",
 ];
 
-function ExerciseLibrary() {
+function ExerciseLibrary({ isMobile }: { isMobile: boolean }) {
   const [exerciseSearchResults, setExerciseSearchResults] = useState(
     exerciseLibraryMockData
   );
@@ -74,7 +75,7 @@ function ExerciseLibrary() {
   }, [filters, exerciseSearchResults]);
 
   return (
-    <Grid paddingBottom={"100px"}>
+    <Grid marginBottom={"20px"}>
       <IconButton
         color="primary"
         onClick={() => navigate("/Workouts")}
@@ -90,8 +91,8 @@ function ExerciseLibrary() {
       >
         Exercise Library
       </Typography>
-      <Grid justifyContent={"center"} display={"flex"}>
-        <Grid>
+      <Grid justifyContent={"center"} display={"flex"} width={"100%"}>
+        <Grid width={"80%"}>
           <SearchBar
             placeholder="Search For Exercise..."
             onSearch={handleSearch}
@@ -99,6 +100,7 @@ function ExerciseLibrary() {
           <ExerciseFilters
             handleFilterChange={handleFilterChange}
             handleFilterToggle={handleFilterToggle}
+            isMobile={isMobile}
           />
         </Grid>
       </Grid>
@@ -124,7 +126,7 @@ function ExerciseLibrary() {
   );
 }
 
-interface ExerciseFiltersProps {
+interface ExerciseFiltersProps extends AppGlobalProps {
   handleFilterChange: (
     event: ChangeEvent<HTMLInputElement>,
     label: muscleGroup
@@ -135,6 +137,7 @@ interface ExerciseFiltersProps {
 const ExerciseFilters = ({
   handleFilterChange,
   handleFilterToggle,
+  isMobile,
 }: ExerciseFiltersProps) => {
   const [checkedState, setCheckedState] = useState<"all" | "some" | "none">(
     "some"
@@ -147,26 +150,90 @@ const ExerciseFilters = ({
 
   return (
     <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
-      <Grid display={"flex"} width={"100%"}>
-        {initialFilterState.slice(0, 5).map((category) => (
-          <ExerciseCheckbox
-            label={category}
-            handleChange={handleCheckboxChange}
-            key={category}
-            checkedState={checkedState}
-          />
-        ))}
-      </Grid>
-      <Grid display={"flex"} width={"100%"}>
-        {initialFilterState.slice(5, 10).map((category) => (
-          <ExerciseCheckbox
-            label={category}
-            handleChange={handleCheckboxChange}
-            key={category}
-            checkedState={checkedState}
-          />
-        ))}
-      </Grid>
+      {!isMobile ? (
+        <>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(0, 5).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(5, 10).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+        </>
+      ) : (
+        <>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(0, 2).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(2, 4).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(4, 6).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(6, 8).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+          <Grid display={"flex"} width={"100%"}>
+            {initialFilterState.slice(8, 10).map((category) => (
+              <ExerciseCheckbox
+                label={category}
+                handleChange={handleCheckboxChange}
+                key={category}
+                checkedState={checkedState}
+                isMobile={isMobile}
+              />
+            ))}
+          </Grid>
+        </>
+      )}
       <Grid
         paddingTop={"16px"}
         justifyContent={"space-evenly"}
@@ -194,7 +261,7 @@ const ExerciseFilters = ({
   );
 };
 
-interface ExerciseCheckboxProps {
+interface ExerciseCheckboxProps extends AppGlobalProps {
   label: string;
   handleChange: (
     event: ChangeEvent<HTMLInputElement>,
@@ -206,6 +273,7 @@ const ExerciseCheckbox = ({
   label,
   handleChange,
   checkedState,
+  isMobile,
 }: ExerciseCheckboxProps) => {
   const [checked, setChecked] = useState(true);
 
@@ -222,7 +290,7 @@ const ExerciseCheckbox = ({
       display={"flex"}
       padding={"10px"}
       justifyContent={"left"}
-      width={"20%"}
+      width={isMobile ? "50%" : "20%"}
     >
       <FormControlLabel
         control={
@@ -251,7 +319,7 @@ const ExerciseList = ({
     (entry) => entry.name[0] === letter
   );
 
-  if (letterExercises.length > 0){
+  if (letterExercises.length > 0) {
     return (
       <Grid>
         <Typography variant="h5" color={"primary"}>
