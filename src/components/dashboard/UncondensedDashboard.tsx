@@ -4,7 +4,6 @@ import { useState } from "react";
 import UncondensedDashboardGraph from "./UncondensedDashboardGraph";
 import steps from "../../mockData/Steps";
 import sevenDaysArray from "../../mockData/Dates";
-import React from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 
 const moment = require("moment");
