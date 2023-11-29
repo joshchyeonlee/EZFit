@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import UncondensedDashboardGraph from "./UncondensedDashboardGraph";
 import steps from "../../mockData/Steps";
 import daysArray from "../../mockData/Dates";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const moment = require("moment");
 
@@ -137,13 +138,14 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                             <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Manual Update</Typography>
                         </Box>
                         <Box padding={4} display="flex" justifyContent="center" alignItems="center">
-                                <DatePicker
+                                <MobileDatePicker
                                     format="MMM DD, YYYY"
                                     value={date}
                                     onChange={(newDate) => handleSetCalendarDate(newDate)}
                                     minDate={daysArray[0]}
                                     maxDate={daysArray[daysArray.length - 1]}
-                                    slotProps={{ openPickerButton: { color: "primary" } }}
+                                    slotProps={{ textField:{InputProps:{endAdornment:(<CalendarMonthIcon/>)}}}}
+                                    // slotProps={{ openPickerButton: { color: "primary" }}}
                                     sx={{
                                         ".MuiInputBase-root:before, .MuiInputBase-root:after": {
                                           borderBottom: "none",
