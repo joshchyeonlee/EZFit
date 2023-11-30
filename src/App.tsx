@@ -14,7 +14,7 @@ import PersonalInformationPage from "./components/account/PersonalInformation/Pe
 import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import Landing from "./components/landing/Landing";
 import SignUp from "./components/signup/SignUp";
-import { Login } from "@mui/icons-material";
+import Login from "./components/login/Login";
 import ForgotPassword from "./components/landing/ForgotPassword";
 import ExerciseLibrary from "./components/workouts/ExerciseLibrary/ExerciseLibrary";
 import { Exercise } from "./components/workouts/ExerciseLibrary/ExerciseLibrary.types";
