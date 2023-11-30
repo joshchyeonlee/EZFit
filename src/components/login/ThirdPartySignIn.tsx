@@ -1,5 +1,5 @@
 function ThirdPartySignIn(props: { open: boolean; setOpen: any }) {
-  return <div>Third Party Sign In</div>;
+  return <div></div>;
 }
 
 export default ThirdPartySignIn;

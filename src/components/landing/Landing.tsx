@@ -1,6 +1,7 @@
 import { Button, Box, Typography, Divider } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ThirdPartySignIn from "../login/ThirdPartySignIn";
 
 interface LandingButtonProps {
   title: string;
@@ -84,6 +85,10 @@ function Landing() {
         width={"40%"}
         sx={{ mt: 5 }}
       >
+        <ThirdPartySignIn
+          open={isThirdPartyModalOpen}
+          setOpen={setIsThirdPartyModalOpen}
+        />
         <LandingButton
           title={"3rd Party Sign In"}
           onClick={() => handleOpenThirdPartyModal()}
