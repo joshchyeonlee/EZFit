@@ -6,7 +6,9 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
+  IconButton,
 } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link, useNavigate } from "react-router-dom";
 
 interface LoginButtonProps {
@@ -31,10 +33,16 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
 };
 
 function Login() {
-  const navigate = useNavigate();
+  const navigateLoginClick = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/Dashboard");
+    navigateLoginClick("/Dashboard");
+  };
+
+  const navigateBackArrowClick = useNavigate();
+
+  const handleBackArrowClick = () => {
+    navigateBackArrowClick(-1);
   };
 
   return (
@@ -51,6 +59,11 @@ function Login() {
           width={"100%"}
           height={"auto"}
         />
+      </Box>
+      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
+        <IconButton size="large" onClick={handleBackArrowClick}>
+          <ArrowBackIcon />
+        </IconButton>
       </Box>
       <Typography variant="h5" sx={{ mt: 8 }}>
         Log In
