@@ -1,12 +1,6 @@
-import {
-  Button,
-  Box,
-  Typography,
-  TextField,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router";
 
 interface SignUpButtonProps {
   title: string;
@@ -30,6 +24,18 @@ const SignUpButton = ({ title, onClick }: SignUpButtonProps) => {
 };
 
 function SignUp() {
+  const navigateSignUpClick = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigateSignUpClick("/Dashboard");
+  };
+
+  const navigateBackArrowClick = useNavigate();
+
+  const handleBackArrowClick = () => {
+    navigateBackArrowClick(-1);
+  };
+
   return (
     <Box
       display={"flex"}
@@ -44,6 +50,11 @@ function SignUp() {
           width={"100%"}
           height={"auto"}
         />
+      </Box>
+      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
+        <IconButton size="large" onClick={handleBackArrowClick}>
+          <ArrowBackIcon />
+        </IconButton>
       </Box>
       <Typography variant="h5" sx={{ mt: 7 }}>
         Sign Up
@@ -98,7 +109,7 @@ function SignUp() {
         <TextField size="small"></TextField>
       </Box>
       <Box sx={{ mt: 4 }}></Box>
-      <SignUpButton title={"Sign Up"} />
+      <SignUpButton title={"Sign Up"} onClick={handleSignUpClick} />
     </Box>
   );
 }
