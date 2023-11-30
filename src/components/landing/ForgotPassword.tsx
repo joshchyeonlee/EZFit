@@ -47,7 +47,7 @@ function ForgotPassword() {
 
   const navigate = useNavigate();
 
-  const handleBackArrayClick = () => {
+  const handleBackArrowClick = () => {
     navigate(-1);
   };
 
@@ -79,7 +79,7 @@ function ForgotPassword() {
       </Box>
 
       <Box display="flex" position={"absolute"} top={"10px"} left={"10px"}>
-        <IconButton size="large" onClick={handleBackArrayClick}>
+        <IconButton size="large" onClick={handleBackArrowClick}>
           <ArrowBackIcon />
         </IconButton>
       </Box>
