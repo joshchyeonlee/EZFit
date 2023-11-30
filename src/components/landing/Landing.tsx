@@ -1,6 +1,6 @@
 import { Button, Box, Typography, Divider } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface LandingButtonProps {
   title: string;
@@ -73,7 +73,10 @@ function Landing() {
       >
         <LandingButton title={"Log In"} onClick={handleLoginClick} />
       </Box>
-      <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+      <Link to={"/ForgotPassword"}>
+        {" "}
+        <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+      </Link>
       <Divider sx={{ width: "50%", borderColor: "black", mt: 5 }} />
       <Box
         display={"flex"}

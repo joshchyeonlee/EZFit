@@ -16,6 +16,7 @@ import PreferencesPage from "./components/account/Preferences/PreferencesPage";
 import Landing from "./components/landing/Landing";
 import SignUp from "./components/signup/SignUp";
 import { Login } from "@mui/icons-material";
+import ForgotPassword from "./components/landing/ForgotPassword";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
       <Grid height={"100vh"} className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Dashboard" element={<Dashboard />} />
