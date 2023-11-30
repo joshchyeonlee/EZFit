@@ -1,5 +1,6 @@
 import { Button, Box, Typography, Modal, IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 interface ThirdPartySignInButtonProps {
   title: string;
@@ -28,6 +29,12 @@ const ThirdPartySignInButton = ({
 function ThirdPartySignIn(props: { open: boolean; setOpen: any }) {
   const handleClose = () => {
     props.setOpen(false);
+  };
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/Dashboard");
   };
 
   const style = {
@@ -68,9 +75,15 @@ function ThirdPartySignIn(props: { open: boolean; setOpen: any }) {
             Third Party Sign In
           </Typography>
           <Box sx={{ mt: 14 }}></Box>
-          <ThirdPartySignInButton title={"Sign in with Google"} />
+          <ThirdPartySignInButton
+            title={"Sign in with Google"}
+            onClick={handleButtonClick}
+          />
           <Box sx={{ mt: 3 }}></Box>
-          <ThirdPartySignInButton title={"Sign in with Apple ID"} />
+          <ThirdPartySignInButton
+            title={"Sign in with Apple ID"}
+            onClick={handleButtonClick}
+          />
         </Box>
       </Box>
     </Modal>
