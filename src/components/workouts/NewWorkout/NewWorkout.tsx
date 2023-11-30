@@ -19,6 +19,7 @@ import {
 import { Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
 import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
+import { useNavigate } from "react-router-dom";
 
 interface Workout {
   name: string;
@@ -34,26 +35,30 @@ const categories: { name: string; exercises: string[] }[] = [
 
 interface NewWorkoutProps {
   onSaveWorkout: (newWorkout: WorkoutRowProps) => void;
-  onBack: () => void
+  onBack: () => void;
 }
 
-const NewWorkout = ({ onSaveWorkout, onBack }: NewWorkoutProps): JSX.Element => {
+const NewWorkout = ({
+  onSaveWorkout,
+  onBack,
+}: NewWorkoutProps): JSX.Element => {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState<string>("");
   const [exercises, setExercises] = useState<Workout[]>([]);
   const [workoutName, setWorkoutName] = useState("");
   const [open, setOpen] = useState(false);
 
-
-  const [snackBarMessage, setSnackBarMessage] = useState('');
+  const [snackBarMessage, setSnackBarMessage] = useState("");
 
   const handleSaveWorkout = (): void => {
-    if (workoutName.trim() === '') {
-      setSnackBarMessage('Workout name is required.');
+    if (workoutName.trim() === "") {
+      setSnackBarMessage("Workout name is required.");
       setOpen(true);
       return;
     }
     if (exercises.length === 0) {
-      setSnackBarMessage('At least one exercise is required.');
+      setSnackBarMessage("At least one exercise is required.");
       setOpen(true);
       return;
     }
@@ -65,7 +70,7 @@ const NewWorkout = ({ onSaveWorkout, onBack }: NewWorkoutProps): JSX.Element => 
 
     onSaveWorkout(newWorkout);
     setOpen(true);
-    setSnackBarMessage('Workout saved!');
+    setSnackBarMessage("Workout saved!");
     setTimeout(() => {
       onBack();
     }, 2000);
@@ -119,17 +124,25 @@ const NewWorkout = ({ onSaveWorkout, onBack }: NewWorkoutProps): JSX.Element => 
     <div>
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '10%',
-          padding: '2%'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "10%",
+          padding: "2%",
         }}
       >
-        <Button sx={{ marginLeft: '3%'}} onClick={onBack}>Back</Button>
+        <Button sx={{ marginLeft: "3%" }} onClick={() => navigate("/Workouts")}>
+          Back
+        </Button>
 
         <Typography
-          style={{ textAlign: "center", color: "black", fontWeight: "bold", fontSize: 'large', marginLeft: '-8%' }}
+          style={{
+            textAlign: "center",
+            color: "black",
+            fontWeight: "bold",
+            fontSize: "large",
+            marginLeft: "-8%",
+          }}
         >
           Create Workout
         </Typography>
@@ -336,7 +349,10 @@ const NewWorkout = ({ onSaveWorkout, onBack }: NewWorkoutProps): JSX.Element => 
         </div>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={snackBarMessage === 'Workout saved!' ? "success" : "error"}>
+        <Alert
+          onClose={handleClose}
+          severity={snackBarMessage === "Workout saved!" ? "success" : "error"}
+        >
           {snackBarMessage}
         </Alert>
       </Snackbar>

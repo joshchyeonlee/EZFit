@@ -1,13 +1,12 @@
-import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import WorkoutsHistoryGrid from "./WorkoutsHistoryGrid";
 import { useEffect, useState } from "react";
 import workouts from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
-import { useNavigate } from "react-router-dom";
 import { EditHistoryOverlay } from "../../Overlays/LoggingOverlays";
 import { AppGlobalProps } from "../../../App";
+import BackButton from "../../utils/BackButton";
 
 function WorkoutsHistory({ isMobile }: AppGlobalProps) {
   const [currentDayIndex, setCurrentDayIndex] = useState(
@@ -68,18 +67,10 @@ function WorkoutsHistory({ isMobile }: AppGlobalProps) {
     setEditWorkoutOpen(false);
   };
 
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate("/Workouts/");
-  };
-
   return (
     <Box justifyContent="center" padding={3}>
       <Box textAlign="left" justifyContent="center">
-        <IconButton onClick={handleBackClick}>
-          <ArrowBack fontSize="large" color="primary"></ArrowBack>
-        </IconButton>
+        <BackButton route="/Workouts/" />
       </Box>
       <Box
         width="100%"

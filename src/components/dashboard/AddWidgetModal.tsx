@@ -11,6 +11,7 @@ import {
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import theme from "../../themes/theme";
+import CancelButton from "../utils/CancelButton";
 
 function AddWidgetModal(props: { open: boolean; setOpen: any }) {
   const availableModals = [
@@ -183,14 +184,7 @@ function AddWidgetModal(props: { open: boolean; setOpen: any }) {
             </Button>
           </Box>
           <Box paddingTop={"10px"} width={"50%"}>
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={handleClose}
-              color="secondary"
-            >
-              Cancel
-            </Button>
+            <CancelButton handleClose={handleClose} />
           </Box>
         </Box>
       </Box>
