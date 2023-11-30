@@ -1,9 +1,9 @@
 const moment = require("moment");
 
-const sevenDaysArray: moment.Moment[] = [];
-for (var i = 6; i >= 0; i--) {
-    sevenDaysArray.push(moment().subtract(i, "days"));
+const daysArray: moment.Moment[] = [];
+for (var i = 15; i >= 0; i--) {
+    const d = new moment().startOf("day").subtract(i, "days");
+    daysArray.push(d);
 }
-console.log(sevenDaysArray);
 
-export default sevenDaysArray;
+export default daysArray;
