@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
+import WorkoutComplete from './WorkoutComplete';
 
 interface Exercise {
     name: string;
@@ -57,9 +59,20 @@ const exercises: Exercise[] = [
 
 const RunWorkout = () => {
     const [workout, setWorkout] = useState<number>(0);
+    const [showWorkoutComplete, setShowWorkoutComplete] = useState(false);
 
+    const navigate = useNavigate();
     const handleNextExercise = () => {
-        setWorkout((workout + 1) % exercises.length);
+        if (workout === exercises.length - 1) {
+            setShowWorkoutComplete(true);
+        } else {
+            setWorkout((workout + 1) % exercises.length);
+        }
+    };
+
+    const handleClose= () => {
+        setShowWorkoutComplete(false); 
+        navigate('/Workouts'); 
     };
 
     const handlePreviousExercise = () => {
@@ -77,8 +90,41 @@ const RunWorkout = () => {
                 bgcolor: 'primary',
                 height: '90vh',
                 padding: 2,
+                position: 'relative'
             }}
         >
+            {showWorkoutComplete && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 1, 
+                    }}
+                ></div>
+            )}
+            {showWorkoutComplete && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '50%',
+                        height: '50%',
+                        backgroundColor: 'primary',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: 1, 
+                    }}
+                >
+                    <WorkoutComplete onClose={handleClose} exercises={exercises}/>
+                </div>
+            )}
+
             <Typography variant="h4" align="center" fontWeight="bold">
                 Workout #{workout + 1}
             </Typography>
@@ -183,6 +229,7 @@ const RunWorkout = () => {
                     </Grid>
                 </div>
             </div>
+
         </Box>
     );
 };
