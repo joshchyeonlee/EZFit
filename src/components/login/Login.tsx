@@ -7,6 +7,7 @@ import {
   FormGroup,
   FormControlLabel,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 interface LoginButtonProps {
   title: string;
@@ -30,6 +31,12 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
 };
 
 function Login() {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/Dashboard");
+  };
+
   return (
     <Box
       display={"flex"}
@@ -77,9 +84,12 @@ function Login() {
           <FormControlLabel control={<Checkbox />} label="Remember Me" />
         </FormGroup>
       </Box>
-      <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+      <Link to={"/ForgotPassword"}>
+        {" "}
+        <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+      </Link>
       <Box sx={{ mt: 4 }}></Box>
-      <LoginButton title={"Log In"} />
+      <LoginButton title={"Log In"} onClick={handleLoginClick} />
     </Box>
   );
 }
