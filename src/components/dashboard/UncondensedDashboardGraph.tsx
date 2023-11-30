@@ -1,42 +1,52 @@
-import { Button, Box, IconButton, Typography } from "@mui/material";
+import { Button, Box, IconButton, Typography, Grid, CardActionArea, Card } from "@mui/material";
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import sevenDaysArray from "../../mockData/Dates";
-import React from "react";
+import daysArray from "../../mockData/Dates";
+import { useEffect, useState } from "react";
 
-function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; }){
+function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; handleChevronClick: any; setStep: any; splitIndex: number; setSplitIndex: any; }){
+    const [dateFormat, setDateFormat] = useState((window.innerWidth < 500) ? "DD" : "MMM DD");
+    const [barWidth, setBarWidth] = useState((window.innerWidth < 500) ? "10px" : "25px");
+    
     const handleGridClick = (i: number) => {
-        props.setCurrentIndex(i);
-        props.handleSetDate(sevenDaysArray[i]);
+        props.handleSetDate(i);
     }
 
-    const handleChevronClick = (setDiff : number) => {
-        const nextIndex = props.currentIndex + setDiff;
-        props.handleSetDate(sevenDaysArray[nextIndex]);
-        var currInd = props.currentIndex + setDiff;
-        props.setCurrentIndex(currInd);
+    const handleResize = () => {
+        if(window.innerWidth < 500){
+            setDateFormat("DD");
+            setBarWidth("10px");
+        } else {
+            setDateFormat("MMM DD");
+            setBarWidth("25px");
+        }
     }
+
+    //based off of https://stackoverflow.com/questions/60642486/react-hooks-useeffect-update-window-innerheight
+    useEffect(() => {
+        handleResize();
+    },[]);
 
     return (
-        <Box display="flex" bgcolor="ButtonShadow">
-            <IconButton onClick={() => handleChevronClick(-1)} disabled={props.currentIndex === 0}>
+        <Box display="flex" bgcolor="ButtonShadow" justifyContent="center">
+            <IconButton onClick={() => props.handleChevronClick(-1)} disabled={props.splitIndex < 1}>
                 <ChevronLeft/>
             </IconButton>
-            <Box display="flex">
-                {props.steps.map((step, index) =>
-                <Box display="flex" flexDirection="column" justifyContent="flex-end" padding={2} alignItems="center">
-                        <Button variant="contained"
-                            color={index === props.currentIndex ? "primary" : "secondary"}
-                            key={step}
-                            style={{maxWidth: 3, maxHeight: step/35, minWidth: 3, minHeight: step/35, borderRadius:5}}
-                            onClick={() => {handleGridClick(index)}}
+            <Box sx={{height:"250px", gridAutoFlow:"column"}} display="flex" flexDirection="row">
+            {props.steps.slice(props.splitIndex, props.splitIndex + 7).map((step, index) =>
+                <Box display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center" key={index} paddingLeft={1} paddingRight={1}>
+                    <Card sx={{bgcolor: (props.splitIndex + index === props.currentIndex) ? "primary.main" : "secondary.main"}}>
+                        <CardActionArea      
+                                style={{height: step/35, width: barWidth, borderRadius:5}}
+                                onClick={() => {handleGridClick(props.splitIndex + index)}}
                         />
+                    </Card>
                     <Typography variant="body2" noWrap paddingTop={"5px"}>
-                    {sevenDaysArray[index].format("MMM DD")}
+                        {daysArray[props.splitIndex + index].format(dateFormat)}
                     </Typography>
                 </Box>
-                )}
+            )}
             </Box>
-            <IconButton onClick={() => handleChevronClick(1)} disabled={props.currentIndex === props.steps.length-1}>
+            <IconButton onClick={() => props.handleChevronClick(1)} disabled={props.splitIndex >= props.steps.length-7}>
                 <ChevronRight/>
             </IconButton>
         </Box>
