@@ -197,4 +197,49 @@ export const exerciseLibraryMockData: Exercise[] = [
       "Set 4: 12 reps.",
     ],
   },
+  {
+    name: "Inclined Dumbbell Chest Press",
+    muscles: ["Quadriceps", "Cardio"],
+    equipment: "Plyo Box",
+    instruction:
+      "Stand in front of a sturdy, knee-height box. Jump onto the box, landing softly on both feet. Step back down and repeat for the desired number of reps.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  },
+  {
+    name: "Push-Ups",
+    muscles: ["Quadriceps", "Cardio"],
+    equipment: "Plyo Box",
+    instruction:
+      "Stand in front of a sturdy, knee-height box. Jump onto the box, landing softly on both feet. Step back down and repeat for the desired number of reps.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  },
+  {
+    name: "Burpees",
+    muscles: ["Quadriceps", "Cardio"],
+    equipment: "Plyo Box",
+    instruction:
+      "Stand in front of a sturdy, knee-height box. Jump onto the box, landing softly on both feet. Step back down and repeat for the desired number of reps.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  }
 ];
