@@ -78,9 +78,9 @@ function ForgotPassword() {
         />
       </Box>
 
-      <Box display="flex" position={"absolute"} top={"10px"} left={"10px"}>
+      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
         <IconButton size="large" onClick={handleBackArrowClick}>
-          <ArrowBackIcon />
+          <ArrowBackIcon color="primary" />
         </IconButton>
       </Box>
       <Typography variant="h5" sx={{ mt: 8 }}>
