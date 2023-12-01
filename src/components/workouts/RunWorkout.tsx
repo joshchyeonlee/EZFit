@@ -4,62 +4,36 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
-interface Exercise {
-    name: string;
-    muscles: string;
-    equipment: string;
-    execution: string[];
-    instruction: string;
-    rest: string;
-    gif: string;
-}
-
-const exercises: Exercise[] = [
-    {
-        name: 'Squats',
-        muscles: 'Legs, glutes, core',
-        equipment: 'Barbell, rack',
-        instruction: 'Stand with your feet shoulder-width apart and the barbell resting on your upper back. Keep your chest up and your core tight. Slowly bend your knees and lower your hips until your thighs are parallel to the floor. Pause for a second and then push yourself back up to the starting position. Repeat for the desired number of reps.',
-        rest: '90 seconds',
-        gif: 'https://media.giphy.com/media/3o6Zt6KHxJTbXCnSvu/giphy.gif',
-        execution: ["Set 1: 12 reps.", "Set 2: 12 reps.", "Set 3: 12 reps.", "Set 4: 12 reps."]
-    },
-    {
-        name: 'Lunges',
-        muscles: 'Legs, glutes, core',
-        equipment: 'Dumbbells',
-        instruction: 'Stand with your feet hip-width apart and hold a dumbbell in each hand. Step forward with your right leg and lower your body until your right thigh is parallel to the floor and your left knee is almost touching the ground. Keep your torso upright and your core tight. Push yourself back up to the starting position and repeat with your left leg. Alternate legs for the desired number of reps.',
-        rest: '60 seconds',
-        gif: 'https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif',
-        execution: ["Set 1: 12 reps.", "Set 2: 12 reps.", "Set 3: 12 reps.", "Set 4: 12 reps."]
-    },
-    {
-        name: 'Push-ups',
-        muscles: 'Chest, triceps, shoulders, core',
-        equipment: 'None',
-        instruction: 'Place your hands on the floor slightly wider than your shoulders and extend your legs behind you. Keep your body in a straight line from head to toe and your elbows tucked close to your sides. Lower your chest until it almost touches the floor and then push yourself back up to the starting position. Repeat for the desired number of reps.',
-        rest: '45 seconds',
-        gif: 'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif',
-        execution: ["Set 1: 12 reps.", "Set 2: 12 reps.", "Set 3: 12 reps.", "Set 4: 12 reps."]
-
-    },
-    {
-        name: 'Bench press',
-        muscles: 'Chest, triceps, shoulders',
-        equipment: 'Barbell, bench',
-        instruction: 'Lie on a flat bench and grasp the barbell with a medium-width grip. Lift the bar off the rack and hold it above your chest with your arms fully extended. Slowly lower the bar until it touches your chest and then press it back up to the starting position. Repeat for the desired number of reps.',
-        rest: '90 seconds',
-        gif: 'https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif',
-        execution: ["Set 1: 12 reps.", "Set 2: 12 reps.", "Set 3: 12 reps.", "Set 4: 12 reps."]
-    },
-];
+import { useNavigate } from 'react-router-dom';
+import WorkoutComplete from './WorkoutComplete';
+import { useLocation } from 'react-router-dom';
+import { Exercise } from './ExerciseLibrary/ExerciseLibrary.types';
+import { exerciseLibraryMockData } from './ExerciseLibrary/ExerciseLibrary.mockData';
 
 const RunWorkout = () => {
-    const [workout, setWorkout] = useState<number>(0);
+    const location = useLocation();
 
+    const passedExercises = location.state?.exercises as Partial<Exercise>[] || [];
+    const exercises = passedExercises.map(exerciseNameObj => {
+        const fullExerciseDetails = exerciseLibraryMockData.find(exercise => exercise.name === exerciseNameObj.name);
+        return fullExerciseDetails || null;
+      }).filter((exercise): exercise is Exercise => exercise !== null);
+
+    const [workout, setWorkout] = useState<number>(0);
+    const [showWorkoutComplete, setShowWorkoutComplete] = useState(false);
+
+    const navigate = useNavigate();
     const handleNextExercise = () => {
-        setWorkout((workout + 1) % exercises.length);
+        if (workout === exercises.length - 1) {
+            setShowWorkoutComplete(true);
+        } else {
+            setWorkout((workout + 1) % exercises.length);
+        }
+    };
+
+    const handleClose = () => {
+        setShowWorkoutComplete(false);
+        navigate('/Workouts');
     };
 
     const handlePreviousExercise = () => {
@@ -77,10 +51,43 @@ const RunWorkout = () => {
                 bgcolor: 'primary',
                 height: '90vh',
                 padding: 2,
+                position: 'relative'
             }}
         >
+            {showWorkoutComplete && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 1,
+                    }}
+                ></div>
+            )}
+            {showWorkoutComplete && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '50%',
+                        height: '50%',
+                        backgroundColor: 'primary',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: 1,
+                    }}
+                >
+                    <WorkoutComplete onClose={handleClose} exercises={exercises} />
+                </div>
+            )}
+
             <Typography variant="h4" align="center" fontWeight="bold">
-                Workout #{workout + 1}
+                {exercises[workout].name}
             </Typography>
 
             <Button variant="contained" color="error" onClick={handleEndWorkout} style={{ position: 'absolute', top: '4%', left: '81%', width: '15%', height: '7%' }}>
@@ -89,23 +96,29 @@ const RunWorkout = () => {
             <div style={{ display: 'flex', overflowX: 'hidden', height: '80vh', zIndex: 0 }}>
                 <div style={{ flexBasis: '50%', overflowY: 'auto', zIndex: 0, marginLeft: '5%', marginRight: '5%', maxWidth: '40.5%' }}>
 
-                    <Grid item xs={6} style={{ marginTop: '15%', marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginTop: '15%', marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Muscles Targeted</Typography>
-                        <Typography sx={{ textAlign: 'center' }}>{exercises[workout].muscles}</Typography>
+                        {exercises[workout].muscles.map((muscle, index) => (
+                            <Typography key={index} sx={{ textAlign: 'center' }}>
+                                {muscle}
+                            </Typography>
+                        ))}
                     </Grid>
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Equipment</Typography>
                         <Typography sx={{ textAlign: 'center' }}>{exercises[workout].equipment}</Typography>
                     </Grid>
 
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Execution</Typography>
                         {exercises[workout].execution.map((step, index) => (
-                            <Typography sx={{ textAlign: 'center' }} key={index}>{step}</Typography>
+                            <Typography key={index} sx={{ textAlign: 'center' }}>
+                                {step}
+                            </Typography>
                         ))}
                     </Grid>
 
-                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '10%' }}>
+                    <Grid item xs={6} style={{ marginLeft: '15%', marginBottom: '5%' }}>
                         <Typography sx={{ textAlign: 'center' }} variant="h6">Rest</Typography>
                         <Typography sx={{ textAlign: 'center' }}>{exercises[workout].rest}</Typography>
                     </Grid>
@@ -162,7 +175,7 @@ const RunWorkout = () => {
                         bottom: 0,
                         marginLeft: '10%',
                         marginBottom: '10%',
-                        marginTop: '3%',
+                        marginTop: '6%',
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
@@ -183,6 +196,7 @@ const RunWorkout = () => {
                     </Grid>
                 </div>
             </div>
+
         </Box>
     );
 };

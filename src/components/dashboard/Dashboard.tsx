@@ -1,5 +1,5 @@
 import { Button, Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import UncondensedDashboard from "./UncondensedDashboard";
 
 interface DashboardButtonProps {
@@ -60,19 +60,24 @@ const DashboardCard = ({
     </Box>
   );
 };
+import AddWidgetModal from "./AddWidgetModal";
 
 function Dashboard() {
   const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] =
     useState(false);
+  const [isAddWidgetModalOpen, setIsAddWidgetModalOpen] = useState(false);
 
   const handleOpenUncondensedView = () => {
-    console.log(isUncondensedDashboardOpen);
-    console.log("opening");
     setIsUncondensedDashboardOpen(true);
-    console.log(isUncondensedDashboardOpen);
-  };
+  }
 
-  return (
+  const handleOpenAddWidgetModal = () => {
+    setIsAddWidgetModalOpen(true);
+  }
+
+  return (<div>
+    <UncondensedDashboard open={isUncondensedDashboardOpen} setOpen={setIsUncondensedDashboardOpen}/>
+    <AddWidgetModal open={isAddWidgetModalOpen} setOpen={setIsAddWidgetModalOpen}/>
     <div>
       <UncondensedDashboard
         open={isUncondensedDashboardOpen}
