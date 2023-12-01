@@ -2,7 +2,8 @@ import * as React from "react";
 import { Exercise } from "./ExerciseLibrary.types";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-import { Grid, Box, IconButton, Typography } from "@mui/material";
+import { Grid, Box, IconButton, Typography, Divider } from "@mui/material";
+import { height } from "@mui/system";
 
 const ExerciseView = (props: { exercise: Exercise }) => {
   const navigate = useNavigate();
@@ -10,13 +11,11 @@ const ExerciseView = (props: { exercise: Exercise }) => {
   return (
     <Box
       sx={{
-        position: "fixed",
         top: 0,
         left: 0,
         width: "100%",
         bgcolor: "primary",
         zIndex: 1000,
-        padding: 2,
       }}
     >
       <Box
@@ -39,29 +38,16 @@ const ExerciseView = (props: { exercise: Exercise }) => {
         <div></div>
       </Box>
 
-      <div
+      <Grid
         style={{
           display: "flex",
-          overflowX: "hidden",
-          height: "80vh",
           zIndex: 0,
+          width: "100%",
         }}
+        container
       >
-        <div
-          style={{
-            flexBasis: "50%",
-            overflowY: "auto",
-            zIndex: 0,
-            marginLeft: "5%",
-            marginRight: "5%",
-            maxWidth: "40.5%",
-          }}
-        >
-          <Grid
-            item
-            xs={6}
-            style={{ marginTop: "15%", marginLeft: "15%", marginBottom: "10%" }}
-          >
+        <Grid sm={6} xs={12} item borderRight={"2px solid black"}>
+          <Grid item style={{ marginTop: "15%", marginBottom: "10%" }}>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Muscles Targeted
             </Typography>
@@ -71,7 +57,7 @@ const ExerciseView = (props: { exercise: Exercise }) => {
               </Typography>
             ))}
           </Grid>
-          <Grid item xs={6} style={{ marginLeft: "15%", marginBottom: "10%" }}>
+          <Grid item style={{ marginBottom: "10%" }}>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Equipment
             </Typography>
@@ -80,7 +66,7 @@ const ExerciseView = (props: { exercise: Exercise }) => {
             </Typography>
           </Grid>
 
-          <Grid item xs={6} style={{ marginLeft: "15%", marginBottom: "10%" }}>
+          <Grid item style={{ marginBottom: "10%" }}>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Execution
             </Typography>
@@ -91,7 +77,7 @@ const ExerciseView = (props: { exercise: Exercise }) => {
             ))}
           </Grid>
 
-          <Grid item xs={6} style={{ marginLeft: "15%", marginBottom: "10%" }}>
+          <Grid item style={{ marginBottom: "10%" }}>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Rest
             </Typography>
@@ -99,39 +85,22 @@ const ExerciseView = (props: { exercise: Exercise }) => {
               {props.exercise.rest}
             </Typography>
           </Grid>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "2px",
-              backgroundColor: "gray",
-              position: "absolute",
-              top: "15%",
-              bottom: "15%",
-              left: "50%",
-            }}
-          ></div>{" "}
-          {/* Vertical Divider */}
-        </div>
+        </Grid>
 
-        <div style={{ flexBasis: "50%", overflowY: "auto", zIndex: 0 }}>
-          <Grid item xs={6} style={{ marginLeft: "10%", marginBottom: "5%" }}>
+        <Grid
+          sm={6}
+          xs={12}
+          item
+          container
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          <Grid item style={{ marginBottom: "5%" }}>
             <Box
               sx={{
-                position: "absolute",
-                textAlign: "center",
                 minHeight: "100px",
                 minWidth: "100px",
-                top: "20%",
-                left: "50%",
-                right: 0,
-                bottom: 0,
+                paddingTop: "100px",
               }}
             >
               <img src={props.exercise.gif} alt={props.exercise.name} />
@@ -139,18 +108,11 @@ const ExerciseView = (props: { exercise: Exercise }) => {
           </Grid>
           <Grid
             item
-            xs={6}
             style={{
-              position: "absolute",
               textAlign: "center",
               minHeight: "100px",
               minWidth: "100px",
-              top: "50%",
-              left: "50%",
-              width: "30%",
-              right: 0,
-              bottom: 0,
-              marginLeft: "10%",
+              padding: "10%",
               marginBottom: "10%",
               marginTop: "3%",
               display: "flex",
@@ -160,16 +122,14 @@ const ExerciseView = (props: { exercise: Exercise }) => {
             <div
               style={{
                 textAlign: "center",
-                overflowY: "auto",
-                maxHeight: "200px",
                 flexGrow: 1,
               }}
             >
               <Typography>{props.exercise.instruction}</Typography>
             </div>
           </Grid>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

@@ -1,6 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import Workout from "../../../models/Workout";
 import { Delete, Edit } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 
 function WorkoutHistoryListItem(props: {
   workout: Workout;
@@ -14,6 +15,17 @@ function WorkoutHistoryListItem(props: {
   const handleOnClickDelete = () => {
     props.removeWorkout(props.workout);
   };
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const isMobile = width <= 480;
+
+  useEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    return () => {
+      window.removeEventListener("resize", () => setWidth(window.innerHeight));
+    };
+  }, []);
 
   return (
     <Box
@@ -52,17 +64,18 @@ function WorkoutHistoryListItem(props: {
             {props.workout.duration.toString()}
           </Typography>
         </Box>
-      </Box>
-      <Box display="block" id="buttons" textAlign="end" justifyContent="end">
-        <Box position="absolute" right="45px" top="20%">
-          <IconButton color="primary" onClick={handleOnClickEdit}>
-            <Edit></Edit>
-          </IconButton>
-        </Box>
-        <Box position="absolute" right="0px" top="20%">
-          <IconButton color="primary" onClick={handleOnClickDelete}>
-            <Delete></Delete>
-          </IconButton>
+
+        <Box display="block" id="buttons" textAlign="end" justifyContent="end">
+          <Box position="absolute" right="45px" top={isMobile ? "40%" : "20%"}>
+            <IconButton color="primary" onClick={handleOnClickEdit}>
+              <Edit />
+            </IconButton>
+          </Box>
+          <Box position="absolute" right="0px" top={isMobile ? "40%" : "20%"}>
+            <IconButton color="primary" onClick={handleOnClickDelete}>
+              <Delete />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     </Box>

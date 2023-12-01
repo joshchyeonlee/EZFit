@@ -41,7 +41,7 @@ function PersonalInformationPage() {
         <Button
           variant="contained"
           size="large"
-          sx={{ width: "50%" }}
+          sx={{ width: "60%" }}
           color="primary"
           disableElevation
         >
@@ -65,7 +65,7 @@ function PersonalInformationPage() {
         <Button
           variant="contained"
           size="large"
-          sx={{ width: "50%" }}
+          sx={{ width: "60%" }}
           color="error"
           disableElevation
           onClick={() => setDeleteAccountModalOpen(true)}

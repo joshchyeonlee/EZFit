@@ -15,6 +15,7 @@ import {
   IconButton,
   InputAdornment,
   Snackbar,
+  Grid,
 } from "@mui/material";
 import { Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
@@ -44,8 +45,6 @@ const NewWorkout = ({
   onSaveWorkout,
   onBack,
 }: NewWorkoutProps): JSX.Element => {
-  const navigate = useNavigate();
-
   const [search, setSearch] = useState<string>("");
   const [exercises, setExercises] = useState<Workout[]>([]);
   const [workoutName, setWorkoutName] = useState("");
@@ -73,9 +72,6 @@ const NewWorkout = ({
     onSaveWorkout(newWorkout);
     setOpen(true);
     setSnackBarMessage("Workout saved!");
-    setTimeout(() => {
-      onBack();
-    }, 2000);
   };
 
   const handleWorkoutNameChange = (
@@ -140,26 +136,36 @@ const NewWorkout = ({
             textAlign: "center",
             color: "black",
             fontWeight: "bold",
-            fontSize: "large",
             marginLeft: "-8%",
           }}
+          variant="h5"
         >
           Create Workout
         </Typography>
         <div></div>
       </Box>
 
-      <div style={{ display: "flex", overflowX: "hidden", height: "80vh" }}>
-        <div
-          style={{
-            flexBasis: "50%",
-            marginLeft: "5%",
-            marginRight: "5%",
-            maxWidth: "42%",
-          }}
+      <Grid
+        style={{
+          display: "flex",
+          overflowX: "hidden",
+        }}
+        container
+      >
+        <Grid
+          container
+          xs={12}
+          sm={6}
+          borderRight={"2px solid black"}
+          paddingLeft={"16px"}
         >
-          <Typography style={{ marginLeft: "2%" }}>
-            Find, Drag, and Drop Exercises
+          <Typography
+            style={{ width: "100%", paddingBottom: "20px" }}
+            textAlign={"center"}
+            fontSize={"18px"}
+            fontWeight={"bold"}
+          >
+            Add Exercises
           </Typography>
           <TextField
             sx={{
@@ -181,7 +187,7 @@ const NewWorkout = ({
               ),
             }}
           />
-          <List style={{ marginTop: "1%", marginBottom: "2%" }}>
+          <List style={{ marginTop: "1%", marginBottom: "2%", width: "100%" }}>
             {categories
               .map((category) => ({
                 ...category,
@@ -199,7 +205,6 @@ const NewWorkout = ({
                         <React.Fragment key={index}>
                           <ListItem
                             key={exercise}
-                            button
                             onClick={() => handleAddExercise(exercise)}
                           >
                             <ListItemIcon>
@@ -215,59 +220,24 @@ const NewWorkout = ({
                 </ListItem>
               ))}
           </List>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <div
-              style={{
-                width: "2px",
-                backgroundColor: "gray",
-                position: "absolute",
-                top: "15%",
-                bottom: "55%",
-                left: "50%",
-              }}
-            ></div>
-            <SwapHoriz
-              fontSize="large"
-              style={{
-                fontSize: "5rem",
-                position: "absolute",
-                top: "50%",
-                left: "47.3%",
-                fontWeight: "bold",
-                textShadow: "0 0 4px black",
-              }}
-            />
-            <div
-              style={{
-                width: "2px",
-                backgroundColor: "gray",
-                position: "absolute",
-                top: "65%",
-                bottom: 0,
-                left: "50%",
-              }}
-            ></div>
-          </div>
-        </div>
+        </Grid>
 
-        <div style={{ flexBasis: "50%", marginTop: "1.3%", marginLeft: "2%" }}>
+        <Grid
+          xs={12}
+          sm={6}
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+        >
           <Box
             sx={{
               padding: 2,
               marginLeft: "5%",
-              width: "80%",
               display: "flex",
               alignItems: "center",
               height: "5%",
               paddingLeft: "5%",
+              width: "100%",
             }}
           >
             <Typography
@@ -277,40 +247,33 @@ const NewWorkout = ({
                 whiteSpace: "nowrap",
               }}
             >
-              Workout Name:{" "}
+              Workout Name:
             </Typography>
             <TextField
               id="workout-name"
               variant="standard"
               value={workoutName}
               onChange={handleWorkoutNameChange}
-              style={{ marginLeft: "5rem", width: "50%" }}
+              style={{ width: "80%", padding: "0px 54px" }}
             />
           </Box>
-          <List style={{ marginTop: "6.2%" }}>
+          <List style={{ marginTop: "6.2%", width: "80%" }}>
             {exercises.map((exercise, index) => (
               <React.Fragment key={(exercise.name, exercise.index)}>
                 <ListItem
                   sx={{
-                    padding: "1%",
-                    paddingRight: "3%",
-                    height: "1%",
-                    display: "flex",
-                    alignItems: "center",
+                    padding: "20px",
                   }}
                 >
-                  <ListItemText
-                    primary={`${exercise.index + 1}:`}
-                    sx={{ width: "5%", flex: "none" }} // Adjust the width as needed
-                  />
+                  <ListItemText primary={`${exercise.index + 1}:`} />
                   <div
                     style={{
                       display: "flex",
                       marginLeft: "4%",
                       alignItems: "center",
                       border: "2px solid #8F2D56",
-                      flex: 1,
                       paddingRight: "2%",
+                      width: "100%",
                     }}
                   >
                     <ListItemText
@@ -336,12 +299,7 @@ const NewWorkout = ({
             onClick={handleSaveWorkout}
             style={{
               margin: 16,
-              position: "fixed",
-              bottom: "12%",
-              left: "75%",
-              transform: "translateX(-50%)",
-              zIndex: 1,
-              width: "45%",
+              width: "70%",
             }}
           >
             Save Workout
@@ -349,19 +307,21 @@ const NewWorkout = ({
           <Box
             style={{
               margin: 16,
-              position: "fixed",
-              bottom: "6%",
-              left: "75%",
-              transform: "translateX(-50%)",
-              zIndex: 1,
-              width: "45%",
+
+              width: "70%",
             }}
           >
             <CancelButton handleClose={() => onBack()} />
           </Box>
-        </div>
-      </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        </Grid>
+      </Grid>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
         <Alert
           onClose={handleClose}
           severity={snackBarMessage === "Workout saved!" ? "success" : "error"}
