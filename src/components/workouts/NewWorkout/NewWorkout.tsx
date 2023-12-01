@@ -20,6 +20,8 @@ import { Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
 import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../utils/BackButton";
+import CancelButton from "../../utils/CancelButton";
 
 interface Workout {
   name: string;
@@ -131,9 +133,7 @@ const NewWorkout = ({
           padding: "2%",
         }}
       >
-        <Button sx={{ marginLeft: "3%" }} onClick={() => navigate("/Workouts")}>
-          Back
-        </Button>
+        <BackButton route="/Workouts" />
 
         <Typography
           style={{
@@ -337,7 +337,7 @@ const NewWorkout = ({
             style={{
               margin: 16,
               position: "fixed",
-              bottom: "6%",
+              bottom: "12%",
               left: "75%",
               transform: "translateX(-50%)",
               zIndex: 1,
@@ -346,6 +346,19 @@ const NewWorkout = ({
           >
             Save Workout
           </Button>
+          <Box
+            style={{
+              margin: 16,
+              position: "fixed",
+              bottom: "6%",
+              left: "75%",
+              transform: "translateX(-50%)",
+              zIndex: 1,
+              width: "45%",
+            }}
+          >
+            <CancelButton handleClose={() => onBack()} />
+          </Box>
         </div>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
