@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Workout from "../../../models/Workout";
 import WorkoutHistoryListItem from "./WorkoutHistoryListItem";
 

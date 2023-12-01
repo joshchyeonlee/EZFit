@@ -8,6 +8,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoIcon from '@mui/icons-material/Info';
 import { IconButton, List, ListItem, ListItemSecondaryAction } from '@mui/material';
 import { WorkoutRowProps } from './WorkoutRow/WorkoutRow';
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 interface WorkoutsPreviewProps extends WorkoutRowProps {
   onBackClick: () => void;
@@ -15,6 +17,7 @@ interface WorkoutsPreviewProps extends WorkoutRowProps {
 
 
 const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps) => {
+  const navigate = useNavigate();
 
   const handleLogWorkout = () => {
     // TODO: implement logging logic
@@ -22,8 +25,8 @@ const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps
   };
 
   const handleRunWorkout = () => {
-    // TODO: implement running logic
-    alert('Workout started!');
+    console.log(exercises)
+    navigate('/RunWorkout', { state: { exercises } });
   };
 
   return (
@@ -43,9 +46,13 @@ const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps
               justifyContent: 'space-between',
             }}
           >
-            <Button variant="text" color="primary" startIcon={<ArrowBackIcon />} onClick={onBackClick}>
-              Back
-            </Button>
+            <IconButton
+              color="primary"
+              onClick={onBackClick}
+              sx={{ paddingLeft: "1%", marginTop: '-4%' }}
+            >
+              <ArrowBack sx={{ fontSize: "50px" }} />
+            </IconButton>
             <Typography variant="h4" sx={{ marginTop: '3%', marginLeft: '-5%' }}>{title}</Typography>
             <div />
           </Box>
@@ -70,12 +77,12 @@ const WorkoutsPreview = ({ title, exercises, onBackClick }: WorkoutsPreviewProps
                   <Typography style={{ textAlign: 'center', flex: 1 }}>
                     {exercise.name}
                   </Typography>
-                  </div>
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" color="primary" sx={{ marginTop: '85%' }}>
-                      <InfoIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                </div>
+                <ListItemSecondaryAction>
+                  <IconButton edge="end" color="primary" sx={{ marginTop: '85%' }}>
+                    <InfoIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
             ))}
           </List>
