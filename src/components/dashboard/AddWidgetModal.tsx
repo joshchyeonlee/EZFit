@@ -3,9 +3,11 @@ import { Close } from '@mui/icons-material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { useEffect, useState } from "react";
 import theme from "../../themes/theme";
+import AvailableWidgets from "../../mockData/AvailableWidgets";
 
-function AddWidgetModal(props: { open: boolean; setOpen: any; }){
-    const availableModals = ["Active Minutes", "Today's Macros", "Distance Travelled", "Heart Rate", "Steps"];
+function AddWidgetModal(props: { open: boolean; setOpen: any; addedModals: string[] }){
+    // console.log(AvailableWidgets)
+    const [availableModals, setAvailableModals] = useState<string[]>([]);
     const [index, setIndex] = useState(0);
     const [selectedModal, setSelectedModal] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);
@@ -58,9 +60,26 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; }){
         maxWidth:"70%"
     };
 
+    const handleAvailableModals = () => {
+        const arr = [];
+        for(var i = 0; i < AvailableWidgets.length; i++) {
+            arr.push(AvailableWidgets[i].topText);
+        }
+        console.log(AvailableWidgets[0]);
+        console.log(AvailableWidgets[1]);
+        console.log(AvailableWidgets);
+        const filtered = arr.filter(x => props.addedModals.indexOf(x) >= 0);
+        // console.log(filtered);
+        // console.log(props.addedModals)
+        // const modalsNotAdded = AvailableWidgets.filter((x => x.topText)})
+
+        // console.log(modalsNotAdded);
+    }
+
     useEffect(() => {
         window.addEventListener("resize", handleUpdateWindow);
         handleUpdateWindow();
+        handleAvailableModals();
     })
 
     return(

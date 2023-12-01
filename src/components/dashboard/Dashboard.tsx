@@ -7,10 +7,14 @@ import {
   Grid,
   Snackbar,
   Alert,
+  IconButton,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import UncondensedDashboard from "./UncondensedDashboard";
-import AddWidgetModal from "./AddWidgetModal";
+import { useLocation, useNavigate } from "react-router-dom";
+import moment from "moment";
+import AvailableWidgets from "../../mockData/AvailableWidgets";
 
 interface DashboardButtonProps {
   title: string;
@@ -55,7 +59,7 @@ const DashboardCard = ({
       }}
     >
       <CardActionArea onClick={onClick}>
-        <Box display="flex" justifyContent="center" flexDirection={"column"}>
+        <Box display="flex" justifyContent="center" flexDirection={"column"} padding={2}>
           <Typography fontWeight={"bold"} padding={"5px"} color={"black"}>
             {topText}
           </Typography>
@@ -77,45 +81,14 @@ const DashboardCard = ({
 };
 
 function Dashboard() {
-  const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] =
-    useState(false);
-  const [isAddWidgetModalOpen, setIsAddWidgetModalOpen] = useState(false);
-  const [cardData, setCardData] = useState([
-    {
-      topText: "Steps",
-      middleText: "3,001",
-      bottomText: "-2,450 from yesterday",
-      onClick: () => {
-        handleOpenUncondensedView();
-      },
-    },
-    {
-      topText: "Calories Burned",
-      middleText: "1,560",
-      bottomText: "-620 from yesterday",
-      onClick: () => {},
-    },
-    {
-      topText: "Recommended Exercise",
-      middleText: "Calf Raises",
-      bottomText: "Try it Out ->",
-      onClick: () => {},
-    },
-    {
-      topText: "Active Minutes",
-      middleText: "34",
-      bottomText: "+3 from yesterday",
-      onClick: () => {},
-    },
-    {
-      topText: "Distance Travelled",
-      middleText: "2.4 Kilometers",
-      bottomText: "-1.9 from yesterday",
-      onClick: () => {},
-    },
-  ]);
+  const location = useLocation();
+  const [currentDate, setCurrentDate] = useState(moment().format("LL"));
+  const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] = useState(false);
+  const [selectedModal, setSelectedModal] = useState("");
+  const [addedModals, setAddedModals] = useState<string[]>(location.state ? location.state.addedModals : ["Calories Burned", "Steps"]);
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpen(false);
@@ -125,34 +98,48 @@ function Dashboard() {
     setOpen(true);
   };
 
-  const handleOpenUncondensedView = () => {
-    setIsUncondensedDashboardOpen(true);
+  const handleOpenUncondensedView = (modal: string) => {
+    setSelectedModal(modal);
   };
 
-  const handleOpenAddWidgetModal = () => {
-    setIsAddWidgetModalOpen(true);
-  };
+  const handleChevronClick = (i: number) => {
+    const nextIndex = index + (i * 4);
+    console.log(nextIndex);
+    setIndex(nextIndex);
+  }
+
+  const getMiddleText = (modal: string) => {
+    const index = AvailableWidgets.findIndex(x => x.topText = modal);
+    const modalInfo = AvailableWidgets[index];
+
+    return modalInfo.middleText;
+  }
+
+  const getBottomText = (modal: string) => {
+    const index = AvailableWidgets.findIndex(x => x.topText = modal);
+    const modalInfo = AvailableWidgets[index];
+
+    return modalInfo.bottomText;
+  }
+
+  useEffect(() => {
+    if(selectedModal !== "") setIsUncondensedDashboardOpen(true);
+  },[selectedModal])
 
   return (
     <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
       <UncondensedDashboard
         open={isUncondensedDashboardOpen}
         setOpen={setIsUncondensedDashboardOpen}
+        selectedModal={selectedModal}
       />
-      <AddWidgetModal
-        open={isAddWidgetModalOpen}
-        setOpen={setIsAddWidgetModalOpen}
-      />
-      <UncondensedDashboard
-        open={isUncondensedDashboardOpen}
-        setOpen={setIsUncondensedDashboardOpen}
-      />
+
       <Box textAlign={"center"} padding={"20px"}>
         <Typography variant={"h5"} padding={"10px"}>
           Good Morning, Susanna!
         </Typography>
         <Typography variant={"h5"} fontWeight={"bold"} padding={"10px"}>
-          October 10, 2023
+          {currentDate}
         </Typography>
       </Box>
       <Box
@@ -161,28 +148,34 @@ function Dashboard() {
         width={"70%"}
         flexDirection={window.innerWidth < 576 ? "column" : "row"}
       >
-        <DashboardButton title={"Edit Dashboard"} />
+        <DashboardButton title={"Edit Dashboard"} onClick={() => navigate("edit", {state: {addedModals: addedModals}})}/>
         <DashboardButton
           title={"Sync Device Data"}
           onClick={handleSyncDeviceDataClick}
         />
       </Box>
 
-      <Box width={"62%"} sx={{ mt: 4 }}>
+      <Box sx={{ mt: 4, width:"62%", height:"500px" }} display="flex">
+        <IconButton disabled={index < 4} onClick={() => handleChevronClick(-1)}>
+          <ChevronLeft/>
+        </IconButton>
         <Grid container spacing={{ xs: 1, md: 2 }} columns={{ md: 4, xs: 2 }}>
-          {cardData.slice(index, index + 4).map((data) => {
+          {addedModals.slice(index, index + 4).map((data) => {
             return (
               <Grid item xs={2} md={2} padding={"10px"}>
                 <DashboardCard
-                  topText={data.topText}
-                  middleText={data.middleText}
-                  bottomText={data.bottomText}
-                  onClick={data.onClick}
+                  topText={data}
+                  middleText={getMiddleText(data)}
+                  bottomText={getBottomText(data)}
+                  onClick={() => handleOpenUncondensedView(data)}
                 />
               </Grid>
             );
           })}
         </Grid>
+        <IconButton disabled={index >= addedModals.length - 4} onClick={() => handleChevronClick(1)}>
+          <ChevronRight />
+        </IconButton>
       </Box>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={"success"}>
