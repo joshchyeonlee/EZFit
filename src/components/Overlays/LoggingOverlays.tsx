@@ -31,6 +31,7 @@ export function ManualLoggingOverlay({
 export function EditHistoryOverlay({
   isOpen,
   handleClose,
+  handleSubmit,
   workout,
   isMobile,
 }: EditHistoryOverlayProps) {
@@ -60,8 +61,8 @@ export function EditHistoryOverlay({
   return (
     <BaseLoggingOverlay
       isOpen={isOpen}
-      handleSubmit={() => {}}
       handleClose={handleClose}
+      handleSubmit={handleSubmit}
       title={"Edit Workout"}
       fields={getLoadedEditWorkoutFields(workout)}
       submitText={"Save Changes"}
