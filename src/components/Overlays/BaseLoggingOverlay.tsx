@@ -110,7 +110,7 @@ const LoggingField = ({
           <TimePicker
             views={["hours", "minutes", "seconds"]}
             format="HH:mm:ss"
-            defaultValue={moment(defaultData) ?? null}
+            defaultValue={defaultData ? moment(defaultData) : null}
             ampm={false}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
