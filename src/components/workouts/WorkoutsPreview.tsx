@@ -13,8 +13,8 @@ import {
   ListItemSecondaryAction,
 } from "@mui/material";
 import { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
-import BackButton from "../utils/BackButton";
-import { ArrowBack } from "@mui/icons-material";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 interface WorkoutsPreviewProps extends WorkoutRowProps {
   onBackClick: () => void;
@@ -25,14 +25,16 @@ const WorkoutsPreview = ({
   exercises,
   onBackClick,
 }: WorkoutsPreviewProps) => {
+  const navigate = useNavigate();
+
   const handleLogWorkout = () => {
     // TODO: implement logging logic
     alert("Workout logged!");
   };
 
   const handleRunWorkout = () => {
-    // TODO: implement running logic
-    alert("Workout started!");
+    console.log(exercises);
+    navigate("/RunWorkout", { state: { exercises } });
   };
 
   return (
