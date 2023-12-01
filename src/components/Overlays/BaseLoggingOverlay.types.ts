@@ -24,6 +24,7 @@ export interface OverlayProps extends AppGlobalProps {
 export interface EditHistoryOverlayProps extends AppGlobalProps {
   isOpen: boolean;
   handleClose: () => void;
+  handleSubmit: (data: {}) => void;
   workout: Workout;
 }
 
