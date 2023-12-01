@@ -5,6 +5,8 @@ import {
   Card,
   CardActionArea,
   Grid,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useState } from "react";
 import UncondensedDashboard from "./UncondensedDashboard";
@@ -105,8 +107,23 @@ function Dashboard() {
       bottomText: "+3 from yesterday",
       onClick: () => {},
     },
+    {
+      topText: "Distance Travelled",
+      middleText: "2.4 Kilometers",
+      bottomText: "-1.9 from yesterday",
+      onClick: () => {},
+    },
   ]);
   const [index, setIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSyncDeviceDataClick = () => {
+    setOpen(true);
+  };
 
   const handleOpenUncondensedView = () => {
     setIsUncondensedDashboardOpen(true);
@@ -145,7 +162,10 @@ function Dashboard() {
         flexDirection={window.innerWidth < 576 ? "column" : "row"}
       >
         <DashboardButton title={"Edit Dashboard"} />
-        <DashboardButton title={"Sync Device Data"} />
+        <DashboardButton
+          title={"Sync Device Data"}
+          onClick={handleSyncDeviceDataClick}
+        />
       </Box>
 
       <Box width={"62%"} sx={{ mt: 4 }}>
@@ -164,6 +184,11 @@ function Dashboard() {
           })}
         </Grid>
       </Box>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={"success"}>
+          Device Data Synced Successfully!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
