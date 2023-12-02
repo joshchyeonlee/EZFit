@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import SearchBar from "../../utils/SearchBar";
 import { useNavigate } from "react-router-dom";
-import { ArrowBack } from "@mui/icons-material";
 import { exerciseLibraryMockData } from "./ExerciseLibrary.mockData";
 import { Exercise, muscleGroup } from "./ExerciseLibrary.types";
 import { ChangeEvent, useEffect, useState } from "react";
 import { AppGlobalProps } from "../../../App";
+import BackButton from "../../utils/BackButton";
 
 const initialFilterState: muscleGroup[] = [
   "Back",
@@ -38,7 +38,6 @@ function ExerciseLibrary({ isMobile }: { isMobile: boolean }) {
   );
 
   const [filters, setFilters] = useState<muscleGroup[]>(initialFilterState);
-  const navigate = useNavigate();
 
   const letters = (() => {
     return [...Array(26)].map((val, i) => String.fromCharCode(i + 65));
@@ -76,13 +75,7 @@ function ExerciseLibrary({ isMobile }: { isMobile: boolean }) {
 
   return (
     <Grid marginBottom={"20px"}>
-      <IconButton
-        color="primary"
-        onClick={() => navigate("/Workouts")}
-        sx={{ paddingLeft: "2%" }}
-      >
-        <ArrowBack sx={{ fontSize: "50px" }} />
-      </IconButton>
+      <BackButton route="/Workouts" />
       <Typography
         fontWeight={"bold"}
         textAlign={"center"}
