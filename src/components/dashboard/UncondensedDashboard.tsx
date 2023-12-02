@@ -8,7 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 const moment = require("moment");
 
-function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModal: string }) {
+function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModal: string; }) {
     const [date, setDate] = useState(moment());
     const [stepIndex, setStepIndex] = useState(modalData[0].length - 1);
     const [splitIndex, setSplitIndex] = useState(modalData[0].length - 7);
@@ -24,6 +24,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModa
         setStepIndex(daysArray.length - 1);
         setDate(daysArray[daysArray.length - 1]);
         props.setOpen(false);
+        console.log("set open false");
         setIsUpdateManually(false);
     }
 
@@ -116,6 +117,10 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModa
     useEffect(() => {
         if(props.selectedModal === "Steps") setData(modalData[0]);
         else if(props.selectedModal === "Calories Burned") setData(modalData[1]);
+        else if(props.selectedModal === "Active Minutes") setData(modalData[2]);
+        else if(props.selectedModal === "Distance Travelled") setData(modalData[3]);
+        else setData([]);
+
     }, [props.selectedModal])
 
     return(

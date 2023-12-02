@@ -10,5 +10,8 @@ const activeMinutes = [68, 120, 101, 93, 130, 213, 139,
                         129, 120, 230, 110, 293, 132, 318,
                         173, 142]
 
-const modalData = [steps, caloriesBurned, activeMinutes];
+const distanceTravelled = [1420, 3051, 4023, 4305, 3019, 2402, 1042,
+                            3910, 2419, 3401, 1932, 1049, 2394, 2394,
+                            2391, 4821]
+const modalData = [steps, caloriesBurned, activeMinutes, distanceTravelled];
 export default modalData;
