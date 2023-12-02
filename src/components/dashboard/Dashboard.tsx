@@ -16,7 +16,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import AvailableWidgets from "../../mockData/AvailableWidgets";
 import modalData from "../../mockData/Steps";
-import AddWidgetModal from "./AddWidgetModal";
 
 interface DashboardButtonProps {
   title: string;
@@ -91,8 +90,7 @@ function Dashboard() {
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState(moment().format("LL"));
   const [isUncondensedDashboardOpen, setIsUncondensedDashboardOpen] = useState(false);
-  const [addedModals, setAddedModals] = useState<string[]>(location.state ? location.state.addedModals : ["Calories Burned", "Steps"]);
-  const [isAddWidgetModalOpen, setIsAddWidgetModalOpen] = useState(false);
+  const [addedModals, setAddedModals] = useState<string[]>(location.state ? location.state.addedModals : ["Calories Burned", "Recommended Exercise"]);
   const [selectedModal, setSelectedModal] = useState("");
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
@@ -113,7 +111,6 @@ function Dashboard() {
 
   const handleChevronClick = (i: number) => {
     const nextIndex = index + (i * 4);
-    console.log(nextIndex);
     setIndex(nextIndex);
   }
 
@@ -191,7 +188,7 @@ function Dashboard() {
                     middleText={getMiddleText(data)}
                     bottomText={getBottomText(data)}
                     onClick={() => handleOpenUncondensedView(data)}
-                    navigate={() => navigate("/burpees")}
+                    navigate={() => navigate("/burpees", {state:{from:"/Dashboard"}})}
                   />
                 </Grid>
               );

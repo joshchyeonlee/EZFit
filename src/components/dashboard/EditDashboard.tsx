@@ -67,7 +67,6 @@ const EditDashboard = () => {
     const [index, setIndex] = useState(0);
     const [isAddWidgetModalOpen, setIsAddWidgetModalOpen] = useState(false);
     const [addedModalCount, setAddedModalCount] = useState(location.state.addedModals.length + 1);
-    console.log(addedModalCount);
 
     const handleRemove = (index: number) => {
         const newAddedModals = [...addedModals];
@@ -77,7 +76,6 @@ const EditDashboard = () => {
     }
 
     const handleAddWidget = () => {
-        console.log("adding widget");
         setIsAddWidgetModalOpen(true);
     }
 

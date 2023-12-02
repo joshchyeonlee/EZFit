@@ -1,17 +1,20 @@
 import * as React from 'react'
 import { Exercise } from "./ExerciseLibrary.types";
 import ArrowBack from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
     Grid,
     Box,
     IconButton,
     Typography,
   } from "@mui/material";
+import { useState } from 'react';
 
 const ExerciseView = (props: { exercise: Exercise }) => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const [prevPage, setPrevPage] = useState(location.state);
 
     return (
         <Box
@@ -37,7 +40,7 @@ const ExerciseView = (props: { exercise: Exercise }) => {
             >
                 <IconButton
                     color="primary"
-                    onClick={() => navigate("/Workouts")}
+                    onClick={() => (prevPage ? navigate(prevPage.from) : navigate("/Workouts"))}
                     sx={{ paddingLeft: "1%", marginTop: '-1%' }}
                 >
                     <ArrowBack sx={{ fontSize: "50px" }} />

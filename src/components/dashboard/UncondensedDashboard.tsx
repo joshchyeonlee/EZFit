@@ -24,7 +24,6 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModa
         setStepIndex(daysArray.length - 1);
         setDate(daysArray[daysArray.length - 1]);
         props.setOpen(false);
-        console.log("set open false");
         setIsUpdateManually(false);
     }
 
