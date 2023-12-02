@@ -14,7 +14,7 @@ export default function AccountManagementMenu() {
                     </AccountManagementMenuItem>
                 </Box>   
                 <Box sx={{ borderBottom: 2, borderColor: '#808080'}}>
-                    <AccountManagementMenuItem buttonLink="./">
+                    <AccountManagementMenuItem buttonLink="/Account/ConnectedDevices">
                         Connected Devices
                     </AccountManagementMenuItem>
                 </Box>   

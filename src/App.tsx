@@ -18,6 +18,7 @@ import { exerciseLibraryMockData } from "./components/workouts/ExerciseLibrary/E
 import ExerciseView from "./components/workouts/ExerciseLibrary/ExerciseView";
 import WorkoutsHistory from "./components/workouts/WorkoutsHistory/WorkoutsHistory";
 import EditDashboard from "./components/dashboard/EditDashboard";
+import AccountConnectDevice from "./components/account/AccountConnectDevice";
 
 const generatePath = (name: string) => {
   return `/${name.replace(" ", "-")}`;
@@ -71,7 +72,8 @@ const App: React.FC = () => {
               element={<ExerciseView exercise={exercise} />}
               key={exercise.name}
             />
-          ))}
+            ))}
+          <Route path="/Account/ConnectedDevices" element={<AccountConnectDevice />} />
           <Route
             path="/Workouts/History"
             element={<WorkoutsHistory isMobile={isMobile} />}
