@@ -64,7 +64,7 @@ const DashboardCard = ({
         height:"100%",
       }}
     >
-      <CardActionArea onClick={ (topText === "Recommended Exercise") ? navigate : onClick}>
+      <CardActionArea sx={{ height:"100%" }} onClick={ (topText === "Recommended Exercise") ? navigate : onClick}>
         <Box display="flex" justifyContent="center" flexDirection={"column"} padding={2}>
           <Typography fontWeight={"bold"} padding={"5px"} color={"black"}>
             {topText}
