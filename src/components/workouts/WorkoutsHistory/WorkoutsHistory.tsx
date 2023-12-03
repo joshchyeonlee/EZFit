@@ -32,7 +32,7 @@ function WorkoutsHistory({ isMobile }: AppGlobalProps) {
     setCurrentWeek(newWeek);
   }, [currentDayIndex]);
 
-  const [activeWorkouts, setActiveWorkouts] = useState(workoutData);
+  const [activeWorkouts, setActiveWorkouts] = useState(workoutData.sort( (a, b) => a.date.getTime() - b.date.getTime() ) );
 
   const removeWorkout = (workout: Workout) => {
     var newWorkoutList = activeWorkouts.filter((e) => e != workout);
