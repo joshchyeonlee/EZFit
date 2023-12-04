@@ -1,7 +1,7 @@
 import { NavigationBar } from "./components/navigation/NavigationBar";
 import { Grid } from "@mui/material";
 import "./App.css";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate, useLocation } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import Nutrition from "./components/nutrition/NutritionDashboard";
@@ -35,6 +35,19 @@ const App: React.FC = () => {
 
   const isMobile = width <= 480;
 
+  const excludeNavigationPages = [
+    "/EZFit",
+    "/EZFit/",
+    "/ForgotPassword",
+    "/Login",
+    "/SignUp",
+  ];
+
+  const currentPath = useLocation().pathname;
+
+  const shouldRenderNavigationBar =
+    !excludeNavigationPages.includes(currentPath);
+
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
     return () => {
@@ -46,7 +59,7 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/EZFit" element={<Landing />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
@@ -82,7 +95,7 @@ const App: React.FC = () => {
             element={<WorkoutsHistory isMobile={isMobile} />}
           />
         </Routes>
-        <NavigationBar />
+        {shouldRenderNavigationBar && <NavigationBar />}
       </Grid>
     </LocalizationProvider>
   );
