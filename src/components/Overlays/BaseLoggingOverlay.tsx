@@ -1,4 +1,3 @@
-import { Close } from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -17,6 +16,7 @@ import {
   BaseLoggingOverlayProps,
   LoggingFieldProps,
 } from "./BaseLoggingOverlay.types";
+import CancelButton from "../utils/CancelButton";
 
 const moment = require("moment");
 
@@ -110,7 +110,7 @@ const LoggingField = ({
           <TimePicker
             views={["hours", "minutes", "seconds"]}
             format="HH:mm:ss"
-            defaultValue={moment(defaultData) ?? null}
+            defaultValue={defaultData ? moment(defaultData) : null}
             ampm={false}
             slotProps={{ openPickerButton: { color: "primary" } }}
             sx={{
@@ -237,16 +237,7 @@ function BaseLoggingOverlay({
             component={"form"}
             onSubmit={handleSubmitOverlay}
           >
-            <Grid
-              textAlign={"right"}
-              width={"100%"}
-              padding={"10px"}
-              height={"10%"}
-            >
-              <Button onClick={handleCloseOverlay}>
-                <Close />
-              </Button>
-            </Grid>
+            <Grid width={"100%"} height={"10%"}></Grid>
             <Typography fontSize="18px" fontWeight={"bold"} height={"5%"}>
               {title}
             </Typography>
@@ -282,10 +273,13 @@ function BaseLoggingOverlay({
                 </Typography>
               ))}
             </Grid>
-            <Grid height={"20%"} width={"60%"}>
+            <Grid height={"10%"} width={"60%"}>
               <Button variant="contained" fullWidth type="submit">
                 {submitText}
               </Button>
+            </Grid>
+            <Grid height={"15%"} width={"60%"}>
+              <CancelButton handleClose={handleCloseOverlay} />
             </Grid>
           </Box>
         </Grid>
