@@ -10,6 +10,9 @@ import WorkoutsPreview from "./WorkoutsPreview";
 import NewWorkout from "./NewWorkout/NewWorkout";
 import { Exercise } from "./ExerciseLibrary/ExerciseLibrary.types";
 import EditWorkout from "./EditWorkout";
+import WorkoutDuration from "../../models/WorkoutDuration";
+import Workout from "../../models/Workout";
+import workoutData from "../../mockData/Workouts";
 
 function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   const [manualLogOpen, setManualLogOpen] = useState(false);
@@ -72,6 +75,18 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
     setManualLogOpen(false);
   };
 
+  const handleManualLogSubmit = (data: any) => {
+    var title : string = data["Workout Title"];
+
+    var date : Date = new Date(data["Date"]);
+
+    var durationAsDate : Date = new Date(data["Duration"] ?? new Date());
+    var duration : WorkoutDuration = new WorkoutDuration(durationAsDate.getHours(), durationAsDate.getMinutes(), durationAsDate.getSeconds());
+    
+    var newWorkout = new Workout(title, date, duration);
+    workoutData.push(newWorkout);
+  };
+
   const handleCreateClick = () => {
     setIsCreatingNewWorkout(true);
   };
@@ -96,7 +111,7 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
-        handleSubmit={() => { }}
+        handleSubmit={handleManualLogSubmit}
         title="Manually Log Workout"
         isMobile={isMobile}
       />

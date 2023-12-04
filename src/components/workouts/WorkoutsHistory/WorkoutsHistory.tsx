@@ -1,13 +1,12 @@
-import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import WorkoutsHistoryGrid from "./WorkoutsHistoryGrid";
 import { useEffect, useState } from "react";
 import workoutData from "../../../mockData/Workouts";
 import WorkoutHistoryList from "./WorkoutHistoryList";
 import Workout from "../../../models/Workout";
-import { useNavigate } from "react-router-dom";
 import { EditHistoryOverlay } from "../../Overlays/LoggingOverlays";
 import { AppGlobalProps } from "../../../App";
+import BackButton from "../../utils/BackButton";
 import WorkoutDuration from "../../../models/WorkoutDuration";
 
 function WorkoutsHistory({ isMobile }: AppGlobalProps) {
@@ -33,7 +32,7 @@ function WorkoutsHistory({ isMobile }: AppGlobalProps) {
     setCurrentWeek(newWeek);
   }, [currentDayIndex]);
 
-  const [activeWorkouts, setActiveWorkouts] = useState(workoutData);
+  const [activeWorkouts, setActiveWorkouts] = useState(workoutData.sort( (a, b) => a.date.getTime() - b.date.getTime() ) );
 
   const removeWorkout = (workout: Workout) => {
     var newWorkoutList = activeWorkouts.filter((e) => e != workout);
@@ -66,15 +65,19 @@ function WorkoutsHistory({ isMobile }: AppGlobalProps) {
   };
 
   const handleEditWorkoutSubmit = (data: any) => {
-    var title : string = data["Workout Title"];
+    var title: string = data["Workout Title"];
 
-    var date : Date = new Date(data["Date"]);
+    var date: Date = new Date(data["Date"]);
 
-    var durationAsDate : Date = new Date(data["Duration"] ?? new Date());
-    var duration : WorkoutDuration = new WorkoutDuration(durationAsDate.getHours(), durationAsDate.getMinutes(), durationAsDate.getSeconds());
-    
-    currentEditedWorkout.title = title
-    currentEditedWorkout.date = date
+    var durationAsDate: Date = new Date(data["Duration"] ?? new Date());
+    var duration: WorkoutDuration = new WorkoutDuration(
+      durationAsDate.getHours(),
+      durationAsDate.getMinutes(),
+      durationAsDate.getSeconds()
+    );
+
+    currentEditedWorkout.title = title;
+    currentEditedWorkout.date = date;
     currentEditedWorkout.duration = duration;
   };
 
@@ -82,18 +85,10 @@ function WorkoutsHistory({ isMobile }: AppGlobalProps) {
     setEditWorkoutOpen(false);
   };
 
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate("/Workouts/");
-  };
-
   return (
     <Box justifyContent="center" padding={3}>
       <Box textAlign="left" justifyContent="center">
-        <IconButton onClick={handleBackClick}>
-          <ArrowBack fontSize="large" color="primary"></ArrowBack>
-        </IconButton>
+        <BackButton route="/Workouts/" />
       </Box>
       <Box
         width="100%"
