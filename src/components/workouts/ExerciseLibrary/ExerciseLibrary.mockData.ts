@@ -199,10 +199,10 @@ export const exerciseLibraryMockData: Exercise[] = [
   },
   {
     name: "Inclined Dumbbell Chest Press",
-    muscles: ["Quadriceps", "Cardio"],
-    equipment: "Plyo Box",
+    muscles: ["Chest", "Shoulders", "Triceps"],
+    equipment: "Dumbbells, Incline Bench",
     instruction:
-      "Stand in front of a sturdy, knee-height box. Jump onto the box, landing softly on both feet. Step back down and repeat for the desired number of reps.",
+      "Lie on an incline bench with a dumbbell in each hand. Press the dumbbells upward until your arms are fully extended, then lower them back to chest level.",
     rest: "45 seconds",
     gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
     execution: [
@@ -229,10 +229,55 @@ export const exerciseLibraryMockData: Exercise[] = [
   },
   {
     name: "Burpees",
-    muscles: ["Quadriceps", "Cardio"],
-    equipment: "Plyo Box",
+    muscles: ["Cardio"],
+    equipment: "None",
     instruction:
-      "Stand in front of a sturdy, knee-height box. Jump onto the box, landing softly on both feet. Step back down and repeat for the desired number of reps.",
+      "Start standing, drop into a squat with your hands on the ground, kick your feet back into a plank position, do a push-up, then jump back to standing.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  },
+  {
+    name: "Crunches",
+    muscles: ["Core"],
+    equipment: "Mat",
+    instruction:
+      "Lie on your back with knees bent and feet flat on the floor. Curl your upper body towards your knees, then lower back down.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  },
+  {
+    name: "Planks",
+    muscles: ["Core"],
+    equipment: "NA",
+    instruction:
+      "Start in a push-up position, but with your weight on your forearms instead of your hands. Your body should form a straight line from your head to your heels. Keep your core engaged and hold this position for the duration of the exercise.",
+    rest: "45 seconds",
+    gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+    execution: [
+      "Set 1: 12 reps.",
+      "Set 2: 12 reps.",
+      "Set 3: 12 reps.",
+      "Set 4: 12 reps.",
+    ],
+  },
+  {
+    name: "Sit-ups",
+    muscles: ["Core"],
+    equipment: "NA",
+    instruction:
+      "Lie on your back with knees bent and feet flat on the floor. Place your hands behind your head. Curl your upper body towards your knees, then lower back down.",
     rest: "45 seconds",
     gif: "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
     execution: [
