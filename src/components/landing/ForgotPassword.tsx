@@ -17,25 +17,35 @@ interface ResetPasswordProps {
   onClick?: () => void;
 }
 
-const ResetPasswordButton = ({ title, onClick }: ResetPasswordProps) => {
-  return (
-    <Box textAlign={"center"} width={"30%"} padding={"0px 8px"}>
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        sx={{ minHeight: "28px" }}
-        onClick={onClick}
-      >
-        <Typography color={"primaryBkg"}>{title}</Typography>
-      </Button>
-    </Box>
-  );
-};
-
 function ForgotPassword() {
   const [textFieldValue, setTextFieldValue] = useState("");
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  const validateEmail = () => {
+    const emailRegex = /^([a-zA-Z0-9-.]+)@([a-zA-Z0-9-.]+)\.([a-zA-Z]{1,5})$/;
+    const isValid = emailRegex.test(textFieldValue);
+    setIsEmailValid(isValid);
+    return isValid;
+  };
+
+  const ResetPasswordButton = ({ title, onClick }: ResetPasswordProps) => {
+    return (
+      <Box textAlign={"center"} width={"30%"} padding={"0px 8px"}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ minHeight: "28px" }}
+          onClick={onClick}
+          disabled={!isEmailValid}
+        >
+          <Typography color={"primaryBkg"}>{title}</Typography>
+        </Button>
+      </Box>
+    );
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -53,6 +63,7 @@ function ForgotPassword() {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(event.target.value);
+    validateEmail();
   };
 
   const checkInput = (): string => {
@@ -99,6 +110,7 @@ function ForgotPassword() {
           size="small"
           sx={{ mt: 1 }}
           value={textFieldValue}
+          error={!isEmailValid}
           onChange={handleInputChange}
         ></TextField>
       </Box>
