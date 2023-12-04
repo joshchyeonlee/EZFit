@@ -1,7 +1,7 @@
 import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SignUpButtonProps {
   title: string;
@@ -34,14 +34,10 @@ function SignUp() {
     validateEmail();
   };
 
-  const validatePasswordMatch = () => {
+  useEffect(() => {
     const state = password === confirmPassword ? true : false;
-    console.log(`password: ${password}`);
-    console.log(`confirmPassword: ${confirmPassword}`);
-    console.log(`State: ${state}`);
     setIsPasswordMatch(state);
-    return state;
-  };
+  }, [password, confirmPassword]);
 
   const isFormValid = () => {
     return (
@@ -49,9 +45,8 @@ function SignUp() {
       isFirstNameValid &&
       isLastNameValid &&
       isPasswordValid &&
-      isConfirmPasswordValid
-      // &&
-      // isPasswordMatch
+      isConfirmPasswordValid &&
+      isPasswordMatch
     );
   };
 
@@ -190,7 +185,7 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isConfirmPasswordValid}
+          error={!isConfirmPasswordValid || !isPasswordMatch}
           type="password"
           onChange={(e) => {
             setConfirmPassword(e.target.value);
