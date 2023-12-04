@@ -8,6 +8,8 @@ export interface WorkoutRowProps {
   onPlayClick?: (workoutData: any) => void;
   exercises?: Exercise[];
   isMobile?: boolean;
+  onDeleteClick?: () => void;
+  onEditClick?: () => void;
 }
 
 interface Exercise {
@@ -25,6 +27,8 @@ function WorkoutRow({
   onPlayClick,
   exercises,
   isMobile,
+  onDeleteClick,
+  onEditClick
 }: WorkoutRowProps) {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -90,10 +94,10 @@ function WorkoutRow({
             <Grid />
           )}
           <Grid xs={12} sm={3}>
-            <IconButton color="primary" aria-label="edit">
+            <IconButton color="primary" aria-label="edit" onClick={onEditClick}>
               <Edit fontSize="large" />
             </IconButton>
-            <IconButton color="primary" aria-label="delete">
+            <IconButton color="primary" aria-label="delete" onClick={onDeleteClick}>
               <Delete fontSize="large" />
             </IconButton>
           </Grid>

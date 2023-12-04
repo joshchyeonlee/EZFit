@@ -1,12 +1,18 @@
 import { Button, Box, Divider, Grid, Typography } from "@mui/material";
 import SearchBar from "../utils/SearchBar";
 import { workoutRowMockData } from "./WorkoutRow/Workout.mockData";
+import { exerciseLibraryMockData } from "./ExerciseLibrary/ExerciseLibrary.mockData";
 import WorkoutRow, { WorkoutRowProps } from "./WorkoutRow/WorkoutRow";
 import { useState } from "react";
 import { ManualLoggingOverlay } from "../Overlays/LoggingOverlays";
 import { useNavigate } from "react-router-dom";
 import WorkoutsPreview from "./WorkoutsPreview";
 import NewWorkout from "./NewWorkout/NewWorkout";
+import { Exercise } from "./ExerciseLibrary/ExerciseLibrary.types";
+import EditWorkout from "./EditWorkout";
+import WorkoutDuration from "../../models/WorkoutDuration";
+import Workout from "../../models/Workout";
+import workoutData from "../../mockData/Workouts";
 
 function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   const [manualLogOpen, setManualLogOpen] = useState(false);
@@ -16,6 +22,25 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutRowProps>();
   const [isCreatingNewWorkout, setIsCreatingNewWorkout] = useState(false);
+
+  const [editingWorkout, setEditingWorkout] = useState<WorkoutRowProps>() || undefined;
+
+  const handleEditClick = (workoutData: WorkoutRowProps) => {
+    setEditingWorkout(workoutData);
+    setIsCreatingNewWorkout(false);
+    setShowPreview(false);
+  };
+
+  const handleUpdateWorkout = (updatedWorkout: WorkoutRowProps) => {
+    setWorkoutSearchResults((prevWorkouts) =>
+      prevWorkouts.map((workout) =>
+        workout.title === updatedWorkout.title
+          ? { ...updatedWorkout }
+          : workout
+      )
+    );
+    setEditingWorkout(undefined);
+  };
 
   const handlePlayClick = (workoutData: any) => {
     setShowPreview(true);
@@ -50,16 +75,35 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
     setManualLogOpen(false);
   };
 
+  const handleManualLogSubmit = (data: any) => {
+    var title : string = data["Workout Title"];
+
+    var date : Date = new Date(data["Date"]);
+
+    var durationAsDate : Date = new Date(data["Duration"] ?? new Date());
+    var duration : WorkoutDuration = new WorkoutDuration(durationAsDate.getHours(), durationAsDate.getMinutes(), durationAsDate.getSeconds());
+    
+    var newWorkout = new Workout(title, date, duration);
+    workoutData.push(newWorkout);
+  };
+
   const handleCreateClick = () => {
     setIsCreatingNewWorkout(true);
   };
 
   const handleBackFromNewWorkout = () => {
     setIsCreatingNewWorkout(false);
+
   };
 
   const addNewWorkout = (newWorkout: WorkoutRowProps) => {
     setWorkoutSearchResults((prevWorkouts) => [newWorkout, ...prevWorkouts]);
+  };
+
+  const handleDeleteWorkout = (workoutTitle: string) => {
+    setWorkoutSearchResults((prevWorkouts) =>
+      prevWorkouts.filter((workout) => workout.title !== workoutTitle)
+    );
   };
 
   const renderMainContent = () => (
@@ -67,7 +111,7 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
       <ManualLoggingOverlay
         isOpen={manualLogOpen}
         handleClose={handleManualLogClose}
-        handleSubmit={() => {}}
+        handleSubmit={handleManualLogSubmit}
         title="Manually Log Workout"
         isMobile={isMobile}
       />
@@ -113,6 +157,8 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
               exercises={exercises}
               onPlayClick={handlePlayClick}
               isMobile={isMobile}
+              onDeleteClick={() => handleDeleteWorkout(title)}
+              onEditClick={() => handleEditClick({ title, lastRun, exercises })}
             />
           ))
         ) : (
@@ -134,10 +180,9 @@ function WorkoutsDashboard({ isMobile }: { isMobile: boolean }) {
   return (
     <>
       {isCreatingNewWorkout ? (
-        <NewWorkout
-          onSaveWorkout={addNewWorkout}
-          onBack={handleBackFromNewWorkout}
-        />
+        <NewWorkout onSaveWorkout={addNewWorkout} onBack={handleBackFromNewWorkout} />
+      ) : editingWorkout ? (
+        <EditWorkout workout={editingWorkout} onSaveWorkout={handleUpdateWorkout} onBack={() => setEditingWorkout(undefined)} />
       ) : showPreview && selectedWorkout ? (
         renderWorkoutPreview()
       ) : (
