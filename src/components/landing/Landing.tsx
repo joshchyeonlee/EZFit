@@ -2,6 +2,7 @@ import { Button, Box, Typography, Divider } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThirdPartySignIn from "../login/ThirdPartySignIn";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface LandingButtonProps {
   title: string;
@@ -51,12 +52,7 @@ function Landing() {
       sx={{ mt: 7 }}
     >
       <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="/EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
       <Box
         display={"flex"}
@@ -76,7 +72,9 @@ function Landing() {
       </Box>
       <Link to={"/ForgotPassword"}>
         {" "}
-        <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+        <Typography sx={{ mt: 2 }} color={"black"}>
+          Forgot Password?
+        </Typography>
       </Link>
       <Divider sx={{ width: "50%", borderColor: "black", mt: 5 }} />
       <Box

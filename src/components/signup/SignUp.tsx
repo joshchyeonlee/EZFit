@@ -2,6 +2,7 @@ import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface SignUpButtonProps {
   title: string;
@@ -88,12 +89,7 @@ function SignUp() {
       sx={{ mt: 6 }}
     >
       <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
       <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
         <IconButton size="large" onClick={handleBackArrowClick}>
@@ -113,9 +109,14 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isEmailValid}
+          error={email !== "" && !isEmailValid}
           value={email}
           onChange={handleEmailChange}
+          helperText={
+            email !== "" && !isEmailValid
+              ? "Please enter valid email address"
+              : null
+          }
         ></TextField>
       </Box>
       <Box
@@ -129,7 +130,7 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isFirstNameValid}
+          error={firstName !== "" && !isFirstNameValid}
           onChange={(e) => {
             setFirstName(e.target.value);
             setIsFirstNameValid(e.target.value !== "");
@@ -147,7 +148,7 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isLastNameValid}
+          error={lastName !== "" && !isLastNameValid}
           onChange={(e) => {
             setLastName(e.target.value);
             setIsLastNameValid(e.target.value !== "");
@@ -165,7 +166,7 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isPasswordValid}
+          error={password !== "" && !isPasswordValid}
           type="password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -185,13 +186,21 @@ function SignUp() {
         <TextField
           size="small"
           required
-          error={!isConfirmPasswordValid || !isPasswordMatch}
+          error={
+            confirmPassword !== "" &&
+            (!isConfirmPasswordValid || !isPasswordMatch)
+          }
           type="password"
           onChange={(e) => {
             setConfirmPassword(e.target.value);
             setIsConfirmPasswordValid(e.target.value !== "");
             // validatePasswordMatch();
           }}
+          helperText={
+            confirmPassword !== "" && !isPasswordMatch
+              ? "Passwords do not match"
+              : null
+          }
         ></TextField>
       </Box>
       <Box sx={{ mt: 4 }}></Box>

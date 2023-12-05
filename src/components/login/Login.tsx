@@ -11,6 +11,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface LoginButtonProps {
   title: string;
@@ -78,12 +79,7 @@ function Login() {
       sx={{ mt: 6 }}
     >
       <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="/EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
       <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
         <IconButton size="large" onClick={handleBackArrowClick}>
@@ -104,9 +100,15 @@ function Login() {
           size="small"
           sx={{ mt: 1 }}
           required
-          error={!isEmailValid}
+          error={email !== "" && !isEmailValid}
           value={email}
           onChange={handleEmailChange}
+          type="email"
+          helperText={
+            email !== "" && !isEmailValid
+              ? "Please enter valid email address"
+              : null
+          }
         ></TextField>
       </Box>
       <Box
@@ -121,7 +123,7 @@ function Login() {
           size="small"
           sx={{ mt: 1 }}
           type="password"
-          error={!isPasswordValid}
+          error={password !== "" && !isPasswordValid}
           onChange={(e) => {
             setPassword(e.target.value);
             setIsPasswordValid(e.target.value !== "");
@@ -139,8 +141,9 @@ function Login() {
         </FormGroup>
       </Box>
       <Link to={"/ForgotPassword"}>
-        {" "}
-        <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+        <Typography sx={{ mt: 2 }} color={"black"}>
+          Forgot Password?
+        </Typography>
       </Link>
       <Box sx={{ mt: 4 }}></Box>
       <LoginButton title={"Log In"} onClick={handleLoginClick} />
