@@ -2,22 +2,23 @@ import { Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from 
 import { Close } from '@mui/icons-material';
 import { useState, useEffect } from "react";
 import UncondensedDashboardGraph from "./UncondensedDashboardGraph";
-import steps from "../../mockData/Steps";
+import modalData from "../../mockData/Steps";
 import daysArray from "../../mockData/Dates";
 import { DatePicker } from "@mui/x-date-pickers";
 
 const moment = require("moment");
 
-function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
+function UncondensedDashboard(props: { open: boolean; setOpen: any; selectedModal: string; }) {
     const [date, setDate] = useState(moment());
-    const [stepIndex, setStepIndex] = useState(steps.length - 1);
-    const [splitIndex, setSplitIndex] = useState(steps.length - 7);
+    const [stepIndex, setStepIndex] = useState(modalData[0].length - 1);
+    const [splitIndex, setSplitIndex] = useState(modalData[0].length - 7);
     const [avgSteps, setAvgSteps] = useState(0)
     const [isUpdateManually, setIsUpdateManually] = useState((false));
-    const [step, setStep] = useState(steps[stepIndex])
+    const [step, setStep] = useState(modalData[0][stepIndex])
     const [isTyped, setIsTyped] = useState(false);
     const [inputValue, setInputValue] = useState(0);
     const [openUpdateConfirmation, setOpenUpdateConfirmation] = useState(false);
+    const [data, setData] = useState<number[]>(modalData[0]);
 
     const handleClose = () => {
         setStepIndex(daysArray.length - 1);
@@ -28,14 +29,14 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
 
     const calculateAverage = (start: number) => {
         const initVal = 0;
-        const sum = steps.slice(start, start + 7).reduce((acc, curr) => acc + curr, initVal);
-        setAvgSteps(Math.round(sum/steps.length))
+        const sum = data.slice(start, start + 7).reduce((acc, curr) => acc + curr, initVal);
+        setAvgSteps(Math.round(sum/data.length))
     }
     
     function handleSetDate(index: number){
         setDate(daysArray[index]);
         setStepIndex(index);
-        setStep(steps[index]);
+        setStep(data[index]);
     }
 
     function handleSetCalendarDate(newDate: moment.Moment){
@@ -46,13 +47,13 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         
         setDate(newDate);
         setStepIndex(nextStepIndex);
-        setStep(steps[nextStepIndex]);
+        setStep(data[nextStepIndex]);
         setIsTyped(false);
-        setInputValue(steps[nextStepIndex]);
+        setInputValue(data[nextStepIndex]);
     }
 
     function getSteps(index: number){
-        return steps[index];
+        return data[index];
     }
 
     const graphChevronClick = (setDiff : number) => {
@@ -60,17 +61,17 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
         var nextSplitIndex = splitIndex + (setDiff * 7);
         
         if(nextStepIndex < 0) nextStepIndex = 0;
-        else if (nextStepIndex > steps.length - 1) nextStepIndex = steps.length - 1;
+        else if (nextStepIndex > data.length - 1) nextStepIndex = data.length - 1;
 
         if(nextSplitIndex < 0) nextSplitIndex = 0;
-        else if (nextSplitIndex > steps.length - 7) nextSplitIndex = steps.length - 7;
+        else if (nextSplitIndex > data.length - 7) nextSplitIndex = data.length - 7;
 
         setSplitIndex(nextSplitIndex);
         setDate(daysArray[nextStepIndex]);
         setStepIndex(nextStepIndex);
-        setStep(steps[nextStepIndex]);
+        setStep(data[nextStepIndex]);
         setIsTyped(false);
-        setInputValue(steps[nextStepIndex]);
+        setInputValue(data[nextStepIndex]);
         calculateAverage(nextSplitIndex);
     }
 
@@ -81,7 +82,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
     }
 
     const handleUpdateValue = () => {
-        steps[stepIndex] = inputValue;
+        data[stepIndex] = inputValue;
         setIsUpdateManually(false);
         calculateAverage(splitIndex);
         setOpenUpdateConfirmation(true);
@@ -111,6 +112,15 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
     useEffect(() => {
         calculateAverage(splitIndex);
     }, [])
+
+    useEffect(() => {
+        if(props.selectedModal === "Steps") setData(modalData[0]);
+        else if(props.selectedModal === "Calories Burned") setData(modalData[1]);
+        else if(props.selectedModal === "Active Minutes") setData(modalData[2]);
+        else if(props.selectedModal === "Distance Travelled") setData(modalData[3]);
+        else setData([]);
+
+    }, [props.selectedModal])
 
     return(
         <div>
@@ -164,11 +174,11 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                     :
                     <div>
                     <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center" sx={{width:"100%"}}>
-                        <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Step Count</Typography>
-                        <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} steps</Typography>
+                        <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >{props.selectedModal}</Typography>
+                        <Typography variant="subtitle1" sx={{paddingTop:1}}>Average: {avgSteps} {props.selectedModal}</Typography>
                         <Box padding={2}>
                             <UncondensedDashboardGraph
-                                steps={steps}
+                                steps={data}
                                 handleSetDate={handleSetDate}
                                 currentIndex={stepIndex}
                                 setCurrentIndex={setStepIndex}
@@ -200,7 +210,7 @@ function UncondensedDashboard(props: { open: boolean; setOpen: any; }) {
                             />
                         </Box>
                         <Box paddingTop={1} paddingBottom={4}>
-                            <Typography variant="h6">{getSteps(stepIndex)} steps</Typography>
+                            <Typography variant="h6">{getSteps(stepIndex)} {props.selectedModal}</Typography>
                         </Box>
                         <Button variant="contained" onClick={() => {setIsUpdateManually(true)}}>Update Manually</Button>
                     </Box>

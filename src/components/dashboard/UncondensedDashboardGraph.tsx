@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; currentIndex: number; setCurrentIndex: any; handleChevronClick: any; setStep: any; splitIndex: number; setSplitIndex: any; }){
     const [dateFormat, setDateFormat] = useState((window.innerWidth < 500) ? "DD" : "MMM DD");
     const [barWidth, setBarWidth] = useState((window.innerWidth < 500) ? "10px" : "25px");
+    const [maxVal, setMaxVal] = useState(1);
     
     const handleGridClick = (i: number) => {
         props.handleSetDate(i);
@@ -24,7 +25,14 @@ function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; 
     //based off of https://stackoverflow.com/questions/60642486/react-hooks-useeffect-update-window-innerheight
     useEffect(() => {
         handleResize();
+        const data = props.steps.slice(props.splitIndex, props.splitIndex + 7)
+        setMaxVal(Math.max(...data));
     },[]);
+
+    useEffect(() => {
+        const data = props.steps.slice(props.splitIndex, props.splitIndex + 7)
+        setMaxVal(Math.max(...data));
+    }, [props.splitIndex, props.steps])
 
     return (
         <Box display="flex" bgcolor="ButtonShadow" justifyContent="center">
@@ -36,7 +44,7 @@ function UncondensedDashboardGrid(props: { steps: number[]; handleSetDate: any; 
                 <Box display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center" key={index} paddingLeft={1} paddingRight={1}>
                     <Card sx={{bgcolor: (props.splitIndex + index === props.currentIndex) ? "primary.main" : "secondary.main"}}>
                         <CardActionArea      
-                                style={{height: step/35, width: barWidth, borderRadius:5}}
+                                style={{height: (step/maxVal) * 200, width: barWidth, borderRadius:5}}
                                 onClick={() => {handleGridClick(props.splitIndex + index)}}
                         />
                     </Card>
