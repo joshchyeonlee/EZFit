@@ -8,7 +8,6 @@ import { height } from "@mui/system";
 
 const ExerciseView = (props: { exercise: Exercise }) => {
     const navigate = useNavigate();
-    const navigate = useNavigate();
     const location = useLocation();
     const [prevPage, setPrevPage] = useState(location.state);
 

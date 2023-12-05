@@ -10,7 +10,6 @@ import {
 import SearchBar from "../../utils/SearchBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 import { exerciseLibraryMockData } from "./ExerciseLibrary.mockData";
 import { Exercise, muscleGroup } from "./ExerciseLibrary.types";
 import { ChangeEvent, useEffect, useState } from "react";
