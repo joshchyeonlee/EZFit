@@ -16,9 +16,10 @@ import Logo from "../../imgs/EZFitLogo.png";
 interface LoginButtonProps {
   title: string;
   onClick?: () => void;
+  isMobile: boolean;
 }
 
-function Login() {
+function Login({ isMobile }: { isMobile: boolean }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,9 +42,13 @@ function Login() {
     return isEmailValid && isPasswordValid;
   };
 
-  const LoginButton = ({ title, onClick }: LoginButtonProps) => {
+  const LoginButton = ({ title, onClick, isMobile }: LoginButtonProps) => {
     return (
-      <Box textAlign={"center"} width={"40%"} padding={"0px 8px"}>
+      <Box
+        textAlign={"center"}
+        width={isMobile ? "80%" : "40%"}
+        padding={"0px 8px"}
+      >
         <Button
           variant="contained"
           color="primary"
@@ -76,23 +81,24 @@ function Login() {
       display={"flex"}
       alignItems={"center"}
       flexDirection={"column"}
-      sx={{ mt: 6 }}
+      sx={{ mt: 2 }}
     >
+      <Box width={"100%"}>
+        <IconButton onClick={handleBackArrowClick}>
+          <ArrowBackIcon color="primary" sx={{ fontSize: "45px" }} />
+        </IconButton>
+      </Box>
       <Box maxWidth={"300px"} minWidth={"200px"}>
         <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
-      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
-        <IconButton size="large" onClick={handleBackArrowClick}>
-          <ArrowBackIcon color="primary" />
-        </IconButton>
-      </Box>
+
       <Typography variant="h5" sx={{ mt: 8 }}>
         Log In
       </Typography>
       <Box
         display={"flex"}
         flexDirection={"column"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 4 }}
       >
         <Typography>Email Address</Typography>
@@ -115,7 +121,7 @@ function Login() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Password</Typography>
@@ -146,7 +152,11 @@ function Login() {
         </Typography>
       </Link>
       <Box sx={{ mt: 4 }}></Box>
-      <LoginButton title={"Log In"} onClick={handleLoginClick} />
+      <LoginButton
+        title={"Log In"}
+        onClick={handleLoginClick}
+        isMobile={isMobile}
+      />
     </Box>
   );
 }

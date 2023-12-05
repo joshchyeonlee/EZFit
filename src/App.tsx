@@ -61,12 +61,12 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         <Routes>
-          <Route path="/EZFit" element={<Landing />} />
+          <Route path="/EZFit" element={<Landing isMobile={isMobile} />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login isMobile={isMobile} />} />
+          <Route path="/SignUp" element={<SignUp isMobile={isMobile} />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Dashboard/Edit" element={<EditDashboard/>}/>
+          <Route path="/Dashboard/Edit" element={<EditDashboard />} />
           <Route
             path="/Workouts"
             element={<WorkoutsDashboard isMobile={isMobile} />}
@@ -92,8 +92,11 @@ const App: React.FC = () => {
               element={<ExerciseView exercise={exercise} />}
               key={exercise.name}
             />
-            ))}
-          <Route path="/Account/ConnectedDevices" element={<AccountConnectDevice />} />
+          ))}
+          <Route
+            path="/Account/ConnectedDevices"
+            element={<AccountConnectDevice />}
+          />
           <Route
             path="/Workouts/History"
             element={<WorkoutsHistory isMobile={isMobile} />}

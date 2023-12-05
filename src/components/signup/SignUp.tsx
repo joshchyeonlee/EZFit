@@ -7,9 +7,10 @@ import Logo from "../../imgs/EZFitLogo.png";
 interface SignUpButtonProps {
   title: string;
   onClick?: () => void;
+  isMobile: boolean;
 }
 
-function SignUp() {
+function SignUp({ isMobile }: { isMobile: boolean }) {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -51,9 +52,13 @@ function SignUp() {
     );
   };
 
-  const SignUpButton = ({ title, onClick }: SignUpButtonProps) => {
+  const SignUpButton = ({ title, onClick, isMobile }: SignUpButtonProps) => {
     return (
-      <Box textAlign={"center"} width={"40%"} padding={"0px 8px"}>
+      <Box
+        textAlign={"center"}
+        width={isMobile ? "80%" : "40%"}
+        padding={"0px 8px"}
+      >
         <Button
           variant="contained"
           color="primary"
@@ -86,15 +91,15 @@ function SignUp() {
       display={"flex"}
       alignItems={"center"}
       flexDirection={"column"}
-      sx={{ mt: 6 }}
+      sx={{ mt: 2 }}
     >
+      <Box textAlign={"left"} width={"100%"}>
+        <IconButton onClick={handleBackArrowClick}>
+          <ArrowBackIcon color="primary" sx={{ fontSize: "45px" }} />
+        </IconButton>
+      </Box>
       <Box maxWidth={"300px"} minWidth={"200px"}>
         <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
-      </Box>
-      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
-        <IconButton size="large" onClick={handleBackArrowClick}>
-          <ArrowBackIcon color="primary" />
-        </IconButton>
       </Box>
       <Typography variant="h5" textAlign="center" sx={{ mt: 7 }}>
         Sign Up
@@ -102,7 +107,7 @@ function SignUp() {
       <Box
         display={"flex"}
         flexDirection={"column"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 3 }}
       >
         <Typography>Email Address</Typography>
@@ -123,7 +128,7 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>First Name</Typography>
@@ -141,7 +146,7 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Last Name</Typography>
@@ -159,7 +164,7 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Password</Typography>
@@ -179,7 +184,7 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Confirm Password</Typography>
@@ -204,7 +209,11 @@ function SignUp() {
         ></TextField>
       </Box>
       <Box sx={{ mt: 4 }}></Box>
-      <SignUpButton title={"Sign Up"} onClick={handleSignUpClick} />
+      <SignUpButton
+        title={"Sign Up"}
+        onClick={handleSignUpClick}
+        isMobile={isMobile}
+      />
     </Box>
   );
 }

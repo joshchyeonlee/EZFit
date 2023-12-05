@@ -51,7 +51,13 @@ function ThirdPartySignIn(props: { open: boolean; setOpen: any }) {
 
   return (
     <Modal open={props.open} onClose={handleClose}>
-      <Box sx={style} justifyContent="center" width={600} height={330}>
+      <Box
+        sx={style}
+        justifyContent="center"
+        width={"70%"}
+        maxWidth={600}
+        height={330}
+      >
         <Box
           position="absolute"
           display="flex"

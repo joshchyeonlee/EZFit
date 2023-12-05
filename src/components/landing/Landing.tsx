@@ -25,7 +25,7 @@ const LandingButton = ({ title, onClick }: LandingButtonProps) => {
   );
 };
 
-function Landing() {
+function Landing({ isMobile }: { isMobile: boolean }) {
   const [isThirdPartyModalOpen, setIsThirdPartyModalOpen] = useState(false);
 
   const handleOpenThirdPartyModal = () => {
@@ -57,7 +57,7 @@ function Landing() {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
+        width={isMobile ? "80%" : "40%"}
         sx={{ mt: 17 }}
       >
         <LandingButton title={"Sign Up"} onClick={handleSignUpClick} />
@@ -65,7 +65,7 @@ function Landing() {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
+        width={isMobile ? "80%" : "40%"}
         sx={{ mt: 4 }}
       >
         <LandingButton title={"Log In"} onClick={handleLoginClick} />
@@ -80,8 +80,8 @@ function Landing() {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
         sx={{ mt: 5 }}
+        width={isMobile ? "80%" : "40%"}
       >
         <ThirdPartySignIn
           open={isThirdPartyModalOpen}
