@@ -101,128 +101,50 @@ function AddWidgetModal(props: { open: boolean; setOpen: any; addedModals: strin
       aria-describedby="add-widget-modal"
     >
       <Box sx={style} justifyContent="center">
-        <Box
-          position="absolute"
-          display="flex"
-          justifyContent="flex-end"
-          right="10px"
-          top="10px"
-          padding="10px"
-        ></Box>
-        <Box
-          display="flex"
-          justifyContent="center"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-            Add Widget
-          </Typography>
+        <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+          <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Add Widget</Typography>
           <Box display="flex" justifyContent="center" paddingTop={2}>
-            <IconButton
-              onClick={() => handleChevronClick(-1)}
-              disabled={index - 4 < 0}
-            >
-              <ChevronLeft />
+            <IconButton onClick={() => handleChevronClick(-1)} disabled={index - 4 < 0}>
+              <ChevronLeft/>
             </IconButton>
             <Box
               padding={2}
               display="absolute"
               width={containerW}
               height={300}
-              sx={{
-                opacity: isAnimating ? 0 : 1,
-                transition: "opacity .15s ease-in-out",
-              }}
-            >
-              <Grid
-                container
-                spacing={{ xs: 1, md: 2 }}
-                columns={{ md: 4, xs: 2 }}
-              >
-                {availableModals.slice(index, index + 4).map((val) => {
-                  return (
-                    <Grid item xs={2} md={2}>
-                      <Card
-                        variant="outlined"
-                        sx={{
-                          bgcolor:
-                            val === selectedModal
-                              ? theme.palette.primary.main
-                              : "ButtonShadow",
-                          borderRadius: 4,
-                          boxShadow: 3,
-                          transition:
-                            "bgcolor .15s ease opacity .15s ease-in-out",
-                          opacity: isAnimating ? 0 : 1,
-                        }}
-                      >
-                        <CardActionArea
-                          sx={{ minHeight: itemH, minWidth: itemW }}
-                          onClick={() => {
-                            handleSelectModal(val);
-                          }}
-                        >
-                          <Box display="flex" justifyContent="center">
-                            <Typography
-                              variant="h5"
-                              color={val === selectedModal ? "white" : "black"}
-                            >
-                              {val}
-                            </Typography>
-                          </Box>
-                        </CardActionArea>
-                      </Card>
-                    </Grid>
-                  );
-                })}
+              sx = {{
+              opacity: isAnimating ? 0 : 1,
+              transition: 'opacity .15s ease-in-out',
+              }}>    
+              <Grid container spacing={{xs: 1, md: 2}} columns={{md: 4, xs: 2}}>
+                {modalsNotAdded.slice(index, index+4).map((val) => {return(
+                  <Grid item xs={2} md={2}>
+                    <Card variant="outlined"
+                    sx={{   bgcolor: (val === selectedModal) ? theme.palette.primary.main : "ButtonShadow",
+                    borderRadius: 4,
+                    boxShadow: 3,
+                    transition: "bgcolor .15s ease opacity .15s ease-in-out",
+                    opacity: isAnimating ? 0 : 1,
+                    }}>
+                      <CardActionArea sx={{ minHeight: itemH, minWidth: itemW}} onClick={() => {handleSelectModal(val)}}>
+                        <Box display="flex" justifyContent="center" padding={4} textAlign="center">
+                          <Typography variant="h5" color={(val === selectedModal) ? "white" : "black"}>{val}</Typography>
+                        </Box>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                )})}
               </Grid>
             </Box>
-            <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
-                <Typography variant="h5"  sx={{ fontWeight: 'bold' }} >Add Widget</Typography>
-                <Box display="flex" justifyContent="center" paddingTop={2}>
-                    <IconButton onClick={() => handleChevronClick(-1)} disabled={index - 4 < 0}>
-                        <ChevronLeft/>
-                    </IconButton>
-                    <Box
-                            padding={2}
-                            display="absolute"
-                            width={containerW}
-                            height={300}
-                            sx = {{
-                                opacity: isAnimating ? 0 : 1,
-                                transition: 'opacity .15s ease-in-out',
-                            }}>    
-                        <Grid container spacing={{xs: 1, md: 2}} columns={{md: 4, xs: 2}}>
-                            {modalsNotAdded.slice(index, index+4).map((val) => {return(
-                            <Grid item xs={2} md={2}>
-                                <Card variant="outlined"
-                                        sx={{   bgcolor: (val === selectedModal) ? theme.palette.primary.main : "ButtonShadow",
-                                                borderRadius: 4,
-                                                boxShadow: 3,
-                                                transition: "bgcolor .15s ease opacity .15s ease-in-out",
-                                                opacity: isAnimating ? 0 : 1,
-                                                }}>
-                                    <CardActionArea sx={{ minHeight: itemH, minWidth: itemW}} onClick={() => {handleSelectModal(val)}}>
-                                        <Box display="flex" justifyContent="center" padding={4} textAlign="center">
-                                            <Typography variant="h5" color={(val === selectedModal) ? "white" : "black"}>{val}</Typography>
-                                        </Box>
-                                    </CardActionArea>
-                                </Card>
-                            </Grid>
-                            )})}
-                        </Grid>
-                    </Box>
-                    <IconButton size="large" onClick={() => handleChevronClick(1)} disabled={index + 4 >= modalsNotAdded.length}>
-                        <ChevronRight/>
-                    </IconButton>
-                </Box>
-                <Box padding={4}>
-                    <Button size="large" disabled={selectedModal===""} variant="contained" onClick={() => handleConfirmClick()}>
-                        Confirm
-                    </Button>
-                </Box>
-            </Box>
+            <IconButton size="large" onClick={() => handleChevronClick(1)} disabled={index + 4 >= modalsNotAdded.length}>
+              <ChevronRight/>
+            </IconButton>
+          </Box>
+          <Box padding={4}>
+            <Button size="large" disabled={selectedModal===""} variant="contained" onClick={() => handleConfirmClick()}>
+            Confirm
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Modal>
