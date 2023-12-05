@@ -11,6 +11,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
 import { ChangeEvent, useState } from "react";
+import React from "react";
 
 interface ResetPasswordProps {
   title: string;
