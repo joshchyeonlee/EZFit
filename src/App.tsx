@@ -61,7 +61,7 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         <Routes>
-          <Route path="/EZFit" element={<Landing isMobile={isMobile} />} />
+          <Route path="/" element={<Landing isMobile={isMobile} />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Login" element={<Login isMobile={isMobile} />} />
           <Route path="/SignUp" element={<SignUp isMobile={isMobile} />} />
