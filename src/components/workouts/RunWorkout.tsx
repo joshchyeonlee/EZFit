@@ -41,8 +41,7 @@ const RunWorkout = () => {
     };
 
     const handleEndWorkout = () => {
-        // TODO: implement ending logic
-        alert('Workout ended!');
+        navigate('/Workouts');
     };
 
     return (
