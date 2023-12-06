@@ -74,7 +74,7 @@ function AccountConnectDevice(){
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: (window.innerWidth < 570) ? 250 : 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         borderRadius: 8,
@@ -115,9 +115,9 @@ function AccountConnectDevice(){
                 </Box>
             </Modal>
             <Modal open={addDeviceModalOpen} onClose={handleAddDeviceClose}>
-                <Box sx={modal}>
+                <Box sx={modal} display="flex" justifyContent="center" flexDirection="column">
                     <Typography textAlign="center" paddingBottom={1} variant="h5">Found Devices</Typography>
-                    <Box padding={4} minWidth={250} maxWidth={500} minHeight={175} maxHeight={250}
+                    <Box padding={4}
                         sx={{ overflow: "hidden", overflowY: "scroll" }}>
                         {availableDevices.length > 0 ? availableDevices.map((device) =>
                             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
@@ -141,11 +141,9 @@ function AccountConnectDevice(){
                 </Box>
             </Modal>
             <Box padding={5}>
-                <Box textAlign="left" justifyContent="center">
-                    <BackButton route="/Account/" />
-                </Box>
+                <BackButton route="/Account/" />
                 <Typography variant="h5" fontWeight="bold" textAlign="center">Connect Device</Typography>
-                <Box display="flex" justifyContent="center" padding={2}>
+                <Box display="flex" justifyContent="center" padding={2} textAlign="center">
                     {isConnected ?
                         <Typography>Currently connected to: {connectedDevice}</Typography>
                         :<Typography textAlign="center">You do not have any devices connected currently</Typography>
@@ -154,16 +152,31 @@ function AccountConnectDevice(){
                 <Divider variant="middle"></Divider>
                     <Box padding={1} display="flex" justifyContent="center" flexDirection="column" alignItems="center">
                         <Typography textAlign="center" padding={2} variant="h6">Registered Devices</Typography>
-                        <Box padding={4} minWidth={500} maxWidth={500} minHeight={200} maxHeight={200}
-                            sx={{ border: 1, borderRadius: 3, margin: 1, borderColor: "ActiveBorder", overflow: "hidden", overflowY: "scroll" }}>
+                        <Box padding={4}
+                            sx={{ border: 1, 
+                                width: (window.innerWidth < 570) ? "80%" : "30%",
+                                height: (window.innerWidth < 570) ? "180px" : "400px",
+                                borderRadius: 3,
+                                margin: 1,
+                                borderColor: "ActiveBorder",
+                                overflow: "hidden",
+                                overflowY: "scroll" }}>
                                 {registeredDevices.length > 0 ? registeredDevices.map((device) =>
-                                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" padding={1}>
+                                <Box display="flex"
+                                    flexDirection={(window.innerWidth < 570) ? "column" : "row"}
+                                    alignItems="center"
+                                    justifyContent={(window.innerWidth < 570) ? "center" : "space-between"}
+                                    padding={1}>
                                     <Typography>{device}</Typography>
-                                    <Box display="flex" gap={1}>
-                                        {(device === connectedDevice) ?
-                                            <Button variant="contained" onClick={() => handleDisconnectDevice()}>Disconnect</Button>:
-                                            <Button variant="contained" onClick={() => handleConnectDevice(device)}>Connect</Button>}
-                                        <Button variant="contained" color="error" onClick={() => handleRemoveDevice(device)}>Remove</Button>
+                                    <Box display="flex">
+                                        <Box padding={1}>
+                                            {(device === connectedDevice) ?
+                                                <Button variant="contained" onClick={() => handleDisconnectDevice()}>Disconnect</Button>:
+                                                <Button variant="contained" onClick={() => handleConnectDevice(device)}>Connect</Button>}
+                                        </Box>
+                                        <Box padding={1}>
+                                            <Button variant="contained" color="error" onClick={() => handleRemoveDevice(device)}>Remove</Button>
+                                        </Box>
                                     </Box>
                                 </Box>) : 
                                 <Typography textAlign="center"> No devices registered yet!</Typography>
