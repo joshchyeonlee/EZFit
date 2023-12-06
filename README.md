@@ -1,8 +1,14 @@
-# Getting Started with Create React App
+# Welcome to the EZ-Fit App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The EZ-Fit App is a fitness application built to help improve user health. This application was developed using React.
 
-## Available Scripts
+To run the application, open the following project demo link:
+
+**Project Demo Link:** https://joshchyeonlee.github.io/EZFit/#/
+
+This app can also be run from the source code by unzipping the source code folder and using the following React commands.
+
+## Relevant React Commands
 
 In the project directory, you can run:
 
