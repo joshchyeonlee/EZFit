@@ -38,13 +38,7 @@ const App: React.FC = () => {
 
   const isMobile = width <= 480;
 
-  const excludeNavigationPages = [
-    "/EZFit",
-    "/EZFit/",
-    "/ForgotPassword",
-    "/Login",
-    "/SignUp",
-  ];
+  const excludeNavigationPages = ["/", "/ForgotPassword", "/Login", "/SignUp"];
 
   const currentPath = useLocation().pathname;
 
@@ -107,48 +101,7 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         {routes}
-        {/* <Routes>
-          <Route path="/" element={<Landing isMobile={isMobile} />} />
-          <Route path="/ForgotPassword" element={<ForgotPassword />} />
-          <Route path="/Login" element={<Login isMobile={isMobile} />} />
-          <Route path="/SignUp" element={<SignUp isMobile={isMobile} />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Dashboard/Edit" element={<EditDashboard />} />
-          <Route
-            path="/Workouts"
-            element={<WorkoutsDashboard isMobile={isMobile} />}
-          />
-          <Route
-            path="/Exercise-Library"
-            element={<ExerciseLibrary isMobile={isMobile} />}
-          />
-          <Route path="/RunWorkout" element={<RunWorkout />} />
-          <Route
-            path="/Nutrition"
-            element={<Nutrition isMobile={isMobile} />}
-          />
-          <Route path="/Account" element={<AccountManagementPage />} />
-          <Route
-            path="/Account/PersonalInformation"
-            element={<PersonalInformationPage />}
-          />
-          <Route path="/Account/Preferences" element={<PreferencesPage />} />
-          {(exerciseLibraryMockData as any).map((exercise: Exercise) => (
-            <Route
-              path={generatePath(exercise.name)}
-              element={<ExerciseView exercise={exercise} />}
-              key={exercise.name}
-            />
-          ))}
-          <Route
-            path="/Account/ConnectedDevices"
-            element={<AccountConnectDevice />}
-          />
-          <Route
-            path="/Workouts/History"
-            element={<WorkoutsHistory isMobile={isMobile} />}
-          />
-        </Routes> */}
+
         {shouldRenderNavigationBar && <NavigationBar />}
       </Grid>
     </LocalizationProvider>

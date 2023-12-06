@@ -11,7 +11,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
 import { ChangeEvent, useState } from "react";
-import React from "react";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface ResetPasswordProps {
   title: string;
@@ -81,20 +81,15 @@ function ForgotPassword() {
       flexDirection={"column"}
       sx={{ mt: 6 }}
     >
-      <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="/EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
-      </Box>
-
-      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
-        <IconButton size="large" onClick={handleBackArrowClick}>
-          <ArrowBackIcon color="primary" />
+      <Box width={"100%"}>
+        <IconButton onClick={handleBackArrowClick}>
+          <ArrowBackIcon color="primary" sx={{ fontSize: "45px" }} />
         </IconButton>
       </Box>
+      <Box maxWidth={"300px"} minWidth={"200px"}>
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
+      </Box>
+
       <Typography variant="h5" sx={{ mt: 8 }}>
         Forgot Password?
       </Typography>
@@ -111,8 +106,13 @@ function ForgotPassword() {
           size="small"
           sx={{ mt: 1 }}
           value={textFieldValue}
-          error={!isEmailValid}
+          error={email !== "" && !isEmailValid}
           onChange={handleInputChange}
+          helperText={
+            email !== "" && !isEmailValid
+              ? "Please enter valid email address"
+              : null
+          }
         ></TextField>
       </Box>
       <Box sx={{ mt: 9 }}></Box>
