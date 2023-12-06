@@ -140,7 +140,7 @@ function Nutrition({ isMobile }: AppGlobalProps) {
                 fontWeight: "bold",
                 textAlign: "center",
                 fontSize: "22px",
-                width: "80%",
+                width: "100%",
               },
               ".MuiInputBase-root": {
                 justifyContent: "center",
@@ -251,7 +251,9 @@ const NutritionSection = ({
 }: NutritionSectionsProps) => {
   return (
     <>
-      <Divider sx={{ width: "70%", borderColor: "black" }} />
+      <Divider
+        sx={{ width: isMobile ? "100%" : "70%", borderColor: "black" }}
+      />
 
       <Grid
         display={"flex"}
@@ -315,7 +317,6 @@ const NutritionSection = ({
           )}
         </Grid>
       </Grid>
-      <Divider sx={{ width: "70%", borderColor: "black" }} />
     </>
   );
 };
