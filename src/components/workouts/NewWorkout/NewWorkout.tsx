@@ -17,7 +17,7 @@ import {
   Snackbar,
   Grid,
 } from "@mui/material";
-import { Search, SwapHoriz } from "@mui/icons-material";
+import { ArrowBack, Search, SwapHoriz } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
 import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
 import { useNavigate } from "react-router-dom";
@@ -130,6 +130,13 @@ const NewWorkout = ({
         }}
       >
         <BackButton route="/Workouts" />
+        <IconButton
+          onClick={() => onBack()}
+          color="primary"
+          sx={{ paddingLeft: "2%" }}
+        >
+          <ArrowBack sx={{ fontSize: "45px" }} />
+        </IconButton>
 
         <Typography
           style={{

@@ -101,7 +101,6 @@ const App: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
         {routes}
-
         {shouldRenderNavigationBar && <NavigationBar />}
       </Grid>
     </LocalizationProvider>
