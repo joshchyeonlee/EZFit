@@ -17,11 +17,9 @@ import {
   Snackbar,
   Grid,
 } from "@mui/material";
-import { ArrowBack, Search, SwapHoriz } from "@mui/icons-material";
+import { ArrowBack, Search } from "@mui/icons-material";
 import Alert from "../../utils/Alert";
 import { WorkoutRowProps } from "../WorkoutRow/WorkoutRow";
-import { useNavigate } from "react-router-dom";
-import BackButton from "../../utils/BackButton";
 import CancelButton from "../../utils/CancelButton";
 
 interface Workout {
@@ -129,7 +127,6 @@ const NewWorkout = ({
           padding: "2%",
         }}
       >
-        <BackButton route="/Workouts" />
         <IconButton
           onClick={() => onBack()}
           color="primary"

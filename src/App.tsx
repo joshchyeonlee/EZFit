@@ -1,7 +1,7 @@
 import { NavigationBar } from "./components/navigation/NavigationBar";
 import { Grid } from "@mui/material";
 import "./App.css";
-import { Routes, Route, useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Dashboard from "./components/dashboard/Dashboard";
 import WorkoutsDashboard from "./components/workouts/WorkoutsDashboard";
 import Nutrition from "./components/nutrition/NutritionDashboard";
