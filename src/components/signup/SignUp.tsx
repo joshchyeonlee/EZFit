@@ -2,13 +2,15 @@ import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface SignUpButtonProps {
   title: string;
   onClick?: () => void;
+  isMobile: boolean;
 }
 
-function SignUp() {
+function SignUp({ isMobile }: { isMobile: boolean }) {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,9 +52,13 @@ function SignUp() {
     );
   };
 
-  const SignUpButton = ({ title, onClick }: SignUpButtonProps) => {
+  const SignUpButton = ({ title, onClick, isMobile }: SignUpButtonProps) => {
     return (
-      <Box textAlign={"center"} width={"40%"} padding={"0px 8px"}>
+      <Box
+        textAlign={"center"}
+        width={isMobile ? "80%" : "40%"}
+        padding={"0px 8px"}
+      >
         <Button
           variant="contained"
           color="primary"
@@ -85,20 +91,15 @@ function SignUp() {
       display={"flex"}
       alignItems={"center"}
       flexDirection={"column"}
-      sx={{ mt: 6 }}
+      sx={{ mt: 2 }}
     >
-      <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
-      </Box>
-      <Box display="flex" position={"absolute"} top={"30px"} left={"30px"}>
-        <IconButton size="large" onClick={handleBackArrowClick}>
-          <ArrowBackIcon color="primary" />
+      <Box textAlign={"left"} width={"100%"}>
+        <IconButton onClick={handleBackArrowClick}>
+          <ArrowBackIcon color="primary" sx={{ fontSize: "45px" }} />
         </IconButton>
+      </Box>
+      <Box maxWidth={"300px"} minWidth={"200px"}>
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
       <Typography variant="h5" textAlign="center" sx={{ mt: 7 }}>
         Sign Up
@@ -106,30 +107,35 @@ function SignUp() {
       <Box
         display={"flex"}
         flexDirection={"column"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 3 }}
       >
         <Typography>Email Address</Typography>
         <TextField
           size="small"
           required
-          error={!isEmailValid}
+          error={email !== "" && !isEmailValid}
           value={email}
           onChange={handleEmailChange}
+          helperText={
+            email !== "" && !isEmailValid
+              ? "Please enter valid email address"
+              : null
+          }
         ></TextField>
       </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>First Name</Typography>
         <TextField
           size="small"
           required
-          error={!isFirstNameValid}
+          error={firstName !== "" && !isFirstNameValid}
           onChange={(e) => {
             setFirstName(e.target.value);
             setIsFirstNameValid(e.target.value !== "");
@@ -140,14 +146,14 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Last Name</Typography>
         <TextField
           size="small"
           required
-          error={!isLastNameValid}
+          error={lastName !== "" && !isLastNameValid}
           onChange={(e) => {
             setLastName(e.target.value);
             setIsLastNameValid(e.target.value !== "");
@@ -158,14 +164,14 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Password</Typography>
         <TextField
           size="small"
           required
-          error={!isPasswordValid}
+          error={password !== "" && !isPasswordValid}
           type="password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -178,24 +184,36 @@ function SignUp() {
         display={"flex"}
         flexDirection={"column"}
         alignContent={"left"}
-        width={"50%"}
+        width={isMobile ? "80%" : "50%"}
         sx={{ mt: 2 }}
       >
         <Typography>Confirm Password</Typography>
         <TextField
           size="small"
           required
-          error={!isConfirmPasswordValid || !isPasswordMatch}
+          error={
+            confirmPassword !== "" &&
+            (!isConfirmPasswordValid || !isPasswordMatch)
+          }
           type="password"
           onChange={(e) => {
             setConfirmPassword(e.target.value);
             setIsConfirmPasswordValid(e.target.value !== "");
             // validatePasswordMatch();
           }}
+          helperText={
+            confirmPassword !== "" && !isPasswordMatch
+              ? "Passwords do not match"
+              : null
+          }
         ></TextField>
       </Box>
       <Box sx={{ mt: 4 }}></Box>
-      <SignUpButton title={"Sign Up"} onClick={handleSignUpClick} />
+      <SignUpButton
+        title={"Sign Up"}
+        onClick={handleSignUpClick}
+        isMobile={isMobile}
+      />
     </Box>
   );
 }

@@ -2,6 +2,7 @@ import { Button, Box, Typography, Divider } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThirdPartySignIn from "../login/ThirdPartySignIn";
+import Logo from "../../imgs/EZFitLogo.png";
 
 interface LandingButtonProps {
   title: string;
@@ -24,7 +25,7 @@ const LandingButton = ({ title, onClick }: LandingButtonProps) => {
   );
 };
 
-function Landing() {
+function Landing({ isMobile }: { isMobile: boolean }) {
   const [isThirdPartyModalOpen, setIsThirdPartyModalOpen] = useState(false);
 
   const handleOpenThirdPartyModal = () => {
@@ -51,17 +52,12 @@ function Landing() {
       sx={{ mt: 7 }}
     >
       <Box maxWidth={"300px"} minWidth={"200px"}>
-        <img
-          src="/EZFitLogo.png"
-          alt="EZFit Logo"
-          width={"100%"}
-          height={"auto"}
-        />
+        <img src={Logo} alt="EZFit Logo" width={"100%"} height={"auto"} />
       </Box>
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
+        width={isMobile ? "80%" : "40%"}
         sx={{ mt: 17 }}
       >
         <LandingButton title={"Sign Up"} onClick={handleSignUpClick} />
@@ -69,21 +65,23 @@ function Landing() {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
+        width={isMobile ? "80%" : "40%"}
         sx={{ mt: 4 }}
       >
         <LandingButton title={"Log In"} onClick={handleLoginClick} />
       </Box>
       <Link to={"/ForgotPassword"}>
         {" "}
-        <Typography sx={{ mt: 2 }}>Forgot Password?</Typography>
+        <Typography sx={{ mt: 2 }} color={"black"}>
+          Forgot Password?
+        </Typography>
       </Link>
       <Divider sx={{ width: "50%", borderColor: "black", mt: 5 }} />
       <Box
         display={"flex"}
         justifyContent={"center"}
-        width={"40%"}
         sx={{ mt: 5 }}
+        width={isMobile ? "80%" : "40%"}
       >
         <ThirdPartySignIn
           open={isThirdPartyModalOpen}

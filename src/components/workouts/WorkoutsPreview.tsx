@@ -121,15 +121,20 @@ const WorkoutsPreview = ({
               ))}
           </List>
         </Grid>
-        <Grid container spacing={2} sx={{ marginLeft: "23%", marginTop: "5%" }}>
-          <Grid item xs={6}>
+        <Grid
+          container
+          spacing={2}
+          sx={{ marginTop: "5%" }}
+          textAlign={"center"}
+        >
+          <Grid item xs={12} sm={6}>
             <Button
               variant="contained"
               color="primary"
               onClick={handleLogWorkout}
               sx={{
                 width: "40%",
-                borderRadius: "50px",
+                borderRadius: "15px",
                 border: "1px solid #000",
                 padding: "10px",
               }}
@@ -137,14 +142,14 @@ const WorkoutsPreview = ({
               Manually Log Workout
             </Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Button
               variant="contained"
               color="primary"
               onClick={handleRunWorkout}
               sx={{
                 width: "40%",
-                borderRadius: "50px",
+                borderRadius: "15px",
                 border: "1px solid #000",
                 padding: "10px",
               }}
