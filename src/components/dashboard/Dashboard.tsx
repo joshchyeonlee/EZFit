@@ -30,7 +30,7 @@ const DashboardButton = ({ title, onClick, disabled }: DashboardButtonProps) => 
         variant="contained"
         color="primary"
         fullWidth
-        sx={{ minHeight: (window.innerWidth < 570) ? "90px" : "43px" }}
+        sx={{ minHeight: "43px" }}
         onClick={onClick}
         disabled={disabled}
       >
@@ -46,6 +46,34 @@ interface DashboardCardProps {
   bottomText: String;
   onClick?: () => void;
   navigate?: () => void;
+}
+
+const MobileDashboardCard = ({
+  topText,
+  middleText,
+  bottomText,
+  onClick,
+  navigate,
+}: DashboardCardProps) => {
+  return(
+      <Card
+        variant="outlined"
+        sx={{
+          borderRadius: 4,
+          boxShadow: 3,
+          height:"100%",
+        }}>
+      <CardActionArea onClick={ (topText === "Recommended Exercise") ? navigate : onClick}>
+        <Box padding={2}>
+          <Typography fontWeight={"bold"}>{topText}</Typography>
+          <Typography>{middleText}</Typography>
+          <Box display="flex" textAlign="right" justifyContent="right">
+            <Typography>{bottomText}</Typography>
+          </Box>
+        </Box>
+      </CardActionArea>
+    </Card>
+  )
 }
 
 const DashboardCard = ({
@@ -167,9 +195,34 @@ function Dashboard() {
         </Typography>
       </Box>
       <Box display="flex" justifyContent="center" width="70%" flexDirection="row" alignItems="center">
-        <DashboardButton  title={"Edit Dashboard"} onClick={() => navigate("edit", {state: {addedModals: addedModals}})}/>
-        <DashboardButton title={"Sync Device Data"} onClick={handleSyncDeviceDataClick}/>
+        <DashboardButton title={(window.innerWidth < 570) ? "Edit" : "Edit Dashboard"} onClick={() => navigate("edit", {state: {addedModals: addedModals}})}/>
+        <DashboardButton title={(window.innerWidth < 570) ? "Sync" : "Sync Device Data"} onClick={handleSyncDeviceDataClick}/>
       </Box>
+
+      {(window.innerWidth < 570) ?
+      <Box>
+        {(addedModals.length === 0) ?
+          <Box display="flex" justifyContent="center" padding={10} flexDirection="column">
+            <Typography padding={2} variant="h5">No widgets to display!</Typography>
+          </Box>
+        : <Grid container spacing={{xs: 2}} columns={{xs: 1}} padding={4}>
+            {addedModals.map((data) => {
+              return(
+                <Grid item xs={1}>
+                  <MobileDashboardCard
+                    topText={data}
+                    middleText={getMiddleText(data)}
+                    bottomText={getBottomText(data)}
+                    onClick={() => handleOpenUncondensedView(data)}
+                    navigate={() => navigate("/burpees", {state:{from:"/Dashboard"}})}
+                  />
+                </Grid>
+              )
+            })}
+        </Grid>  
+        }
+      </Box>
+      :
       <Box sx={{ mt: 4, width:"62%", height:(window.innerWidth < 570) ? "350px" : "500px" }} display="flex" justifyContent="center" textAlign="center">
         <IconButton disabled={index < 4} onClick={() => handleChevronClick(-1)}>
           <ChevronLeft/>
@@ -199,6 +252,8 @@ function Dashboard() {
           <ChevronRight />
         </IconButton>
       </Box>
+
+      }
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={"success"}>
           Device Data Synced Successfully!
