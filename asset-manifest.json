@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/EZFit/static/css/main.5e663582.css",
-    "main.js": "/EZFit/static/js/main.eace24e4.js",
+    "main.js": "/EZFit/static/js/main.282f677c.js",
     "index.html": "/EZFit/index.html",
     "main.5e663582.css.map": "/EZFit/static/css/main.5e663582.css.map",
-    "main.eace24e4.js.map": "/EZFit/static/js/main.eace24e4.js.map"
+    "main.282f677c.js.map": "/EZFit/static/js/main.282f677c.js.map"
   },
   "entrypoints": [
     "static/css/main.5e663582.css",
-    "static/js/main.eace24e4.js"
+    "static/js/main.282f677c.js"
   ]
 }
