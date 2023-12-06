@@ -23,6 +23,7 @@ import ExerciseView from "./components/workouts/ExerciseLibrary/ExerciseView";
 import WorkoutsHistory from "./components/workouts/WorkoutsHistory/WorkoutsHistory";
 import EditDashboard from "./components/dashboard/EditDashboard";
 import AccountConnectDevice from "./components/account/AccountConnectDevice";
+import { useRoutes } from "react-router-dom";
 
 const generatePath = (name: string) => {
   return `/${name.replace(" ", "-")}`;
@@ -57,11 +58,56 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const exerciseRoutes = (exerciseLibraryMockData as any).map(
+    (exercise: Exercise) => {
+      return {
+        path: generatePath(exercise.name),
+        element: <ExerciseView exercise={exercise} />,
+      };
+    }
+  );
+
+  const routes = useRoutes([
+    { path: "/", element: <Landing isMobile={isMobile} /> },
+    { path: "/Login", element: <Login isMobile={isMobile} /> },
+    { path: "/ForgotPassword", element: <ForgotPassword /> },
+    { path: "/SignUp", element: <SignUp isMobile={isMobile} /> },
+    { path: "/Dashboard", element: <Dashboard /> },
+    { path: "/Dashboard/Edit", element: <EditDashboard /> },
+    { path: "/Workouts", element: <WorkoutsDashboard isMobile={isMobile} /> },
+    {
+      path: "/Exercise-Library",
+      element: <ExerciseLibrary isMobile={isMobile} />,
+    },
+    { path: "/RunWorkout", element: <RunWorkout /> },
+    {
+      path: "/Nutrition",
+      element: <Nutrition isMobile={isMobile} />,
+    },
+    { path: "/Account", element: <AccountManagementPage /> },
+    {
+      path: "/Account/PersonalInformation",
+      element: <PersonalInformationPage />,
+    },
+    { path: "/Account/Preferences", element: <PreferencesPage /> },
+
+    {
+      path: "/Account/ConnectedDevices",
+      element: <AccountConnectDevice />,
+    },
+    {
+      path: "/Workouts/History",
+      element: <WorkoutsHistory isMobile={isMobile} />,
+    },
+
+    ...exerciseRoutes,
+  ]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Grid height={"100vh"} sx={{ overflowX: "hidden", marginBottom: "54px" }}>
-        <Routes>
-          {""}
+        {routes}
+        {/* <Routes>
           <Route path="/" element={<Landing isMobile={isMobile} />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Login" element={<Login isMobile={isMobile} />} />
@@ -102,7 +148,7 @@ const App: React.FC = () => {
             path="/Workouts/History"
             element={<WorkoutsHistory isMobile={isMobile} />}
           />
-        </Routes>
+        </Routes> */}
         {shouldRenderNavigationBar && <NavigationBar />}
       </Grid>
     </LocalizationProvider>

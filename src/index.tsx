@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Router basename="/EZFit">
+    <Router>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
